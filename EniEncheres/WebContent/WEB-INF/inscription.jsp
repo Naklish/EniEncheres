@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Inscription</h1>
-<form action="accueil" method="post">
+<form action="inscription" method="post">
 	<table>
 		<tbody>
 			<tr>
@@ -54,11 +54,11 @@
 			<tr>
 				<td>
 					<label for="motDePasse">Mot de passe :</label>
-					<input type="text" id="motDePasse" name="motDePasse">
+					<input type="password" id="motDePasse" name="motDePasse">
 				</td>
 				<td>
 					<label for="confirmation">Confirmation:</label>
-					<input type="text" id="confirmation" name="confirmation">
+					<input type="password" id="confirmation" name="confirmation">
 				</td>
 			</tr>
 		</tbody>

@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.eniencheres.bo.Utilisateur;
 
@@ -13,6 +15,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String INSERT = "INSERT INTO UTILISATEURS "
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String SELECT = "SELECT * FROM UTILISATEURS";
 			
 	
 	@Override
@@ -68,4 +71,42 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	} 
 	
 }
+	@Override
+	public List<Utilisateur> selectAll() {
+		List<Utilisateur> utilisateurs = new ArrayList<>();
+		Utilisateur utilisateur = new Utilisateur();
+		Connection cnx = null;
+		Statement stmt = null;
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			stmt = cnx.createStatement();
+
+			ResultSet rs = stmt.executeQuery(SELECT);
+			if(rs == null) {
+				throw new SQLException("Erreur d'exécution");
+			}
+			while(rs.next()) {
+				utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setTelephone(rs.getString("telephone"));
+				utilisateur.setAdresse(rs.getString("rue"));
+				utilisateur.setCodePostal(rs.getString("code_postal"));
+				utilisateur.setVille(rs.getString("ville"));
+				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+				utilisateur.setCredit(rs.getInt("credit"));
+				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+
+				utilisateurs.add(utilisateur);
+			}
+
+
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return utilisateurs;
+	}
 }
