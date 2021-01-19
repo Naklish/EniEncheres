@@ -30,18 +30,23 @@ public class Accueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
-		Utilisateur utilisateur = new Utilisateur("Flooz", "Tonton", "toto", "mon@email.com", "0666666666", "maRue", "35656", "MaVille", "Password", false);
-		utilisateurDAO.insert(utilisateur);
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
+		//Utilisateur utilisateur = new Utilisateur("Flooz", "Tonton", "toto", "mon@email.com", "0666666666", "maRue", "35656", "MaVille", "Password", false);
+		//utilisateurDAO.insert(utilisateur);
+		request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		if(request.getParameter("moDePasse") == request.getParameter("confirmation")) {
+			
+		}else {
+			String message = "La confirmation ne correspond pas au mot de passe";
+			request.setAttribute("message", message);
+			request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
+		}
 	}
 
 }

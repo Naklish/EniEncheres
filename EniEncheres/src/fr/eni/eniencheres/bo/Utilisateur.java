@@ -24,7 +24,6 @@ public class Utilisateur {
 				String adresse, String codePostal, String ville, String motDePasse,
 				boolean administrateur) {
 			super();
-			this.noUtilisateur = noUtilisateur;
 			this.pseudo = pseudo;
 			this.nom = nom;
 			this.prenom = prenom;
