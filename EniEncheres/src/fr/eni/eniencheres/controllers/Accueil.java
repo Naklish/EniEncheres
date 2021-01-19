@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.eniencheres.bll.UtilisateurManager;
 import fr.eni.eniencheres.bo.Utilisateur;
 import fr.eni.eniencheres.dal.DAOFactory;
 import fr.eni.eniencheres.dal.UtilisateurDAO;
@@ -40,8 +41,14 @@ public class Accueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("moDePasse") == request.getParameter("confirmation")) {
-			
+		if(request.getParameter("motDePasse").equals(request.getParameter("confirmation"))) {
+			Utilisateur utilisateur = new Utilisateur(request.getParameter("pseudo"), request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("email"),
+					request.getParameter("telephone"), request.getParameter("adresse"), request.getParameter("codePostal"), request.getParameter("ville"), request.getParameter("motDePasse"), false);
+			UtilisateurManager utilisateurManager = new UtilisateurManager();
+			String message = "Utilisateur créé";
+			utilisateurManager.enregistrer(utilisateur);
+			request.setAttribute("message", message);
+			request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
 		}else {
 			String message = "La confirmation ne correspond pas au mot de passe";
 			request.setAttribute("message", message);
