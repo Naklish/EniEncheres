@@ -74,7 +74,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	@Override
 	public List<Utilisateur> selectAll() {
 		List<Utilisateur> utilisateurs = new ArrayList<>();
-		Utilisateur utilisateur = new Utilisateur();
+		Utilisateur utilisateur = null;
 		Connection cnx = null;
 		Statement stmt = null;
 
@@ -87,18 +87,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				throw new SQLException("Erreur d'exécution");
 			}
 			while(rs.next()) {
-				utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
-				utilisateur.setPseudo(rs.getString("pseudo"));
-				utilisateur.setNom(rs.getString("nom"));
-				utilisateur.setPrenom(rs.getString("prenom"));
-				utilisateur.setEmail(rs.getString("email"));
-				utilisateur.setTelephone(rs.getString("telephone"));
-				utilisateur.setAdresse(rs.getString("rue"));
-				utilisateur.setCodePostal(rs.getString("code_postal"));
-				utilisateur.setVille(rs.getString("ville"));
-				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
-				utilisateur.setCredit(rs.getInt("credit"));
-				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+				utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
+						rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
+						rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
 
 				utilisateurs.add(utilisateur);
 			}

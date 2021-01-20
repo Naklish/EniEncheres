@@ -20,9 +20,10 @@ public class Connexion extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UtilisateurManager utilisateurManager = new UtilisateurManager();
+       
         Utilisateur utilisateurConnecte = utilisateurManager.connecter(request.getParameter("login"), request.getParameter("motdepasse"));
 
-        if(utilisateurConnecte != null) {
+        if(utilisateurConnecte.getPseudo() != null) {
             request.getSession().setAttribute("utilisateurConnecte", utilisateurConnecte);
             System.out.println(utilisateurConnecte.toString());
             request.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request,response);

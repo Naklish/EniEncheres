@@ -13,10 +13,10 @@
 </head>
 <body>
 <h3>ENI-Encheres</h3>
-<c:if test="${ not empty utilisateurConnecte }">
+<c:if test="${ not empty utilisateurConnecte.pseudo }">
     <a href="deconnexion">Déconnexion</a>
 </c:if>
-<c:if test="${ empty utilisateurConnecte }">
+<c:if test="${ empty utilisateurConnecte.pseudo }">
     <a href="connexion">S'inscrire - Se connecter</a>
 </c:if>
 
