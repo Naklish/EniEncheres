@@ -29,7 +29,7 @@ public class Connexion extends HttpServlet {
             request.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request,response);
 
         } else {
-            String message = "Vous n'êtes pas enregistré.";
+            String message = "Identifiant ou mot de passe incorrect.";
             request.setAttribute("message", message);
             request.getServletContext().getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request,response);
         }

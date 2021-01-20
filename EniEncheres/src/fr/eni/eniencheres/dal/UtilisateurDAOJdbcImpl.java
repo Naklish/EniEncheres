@@ -16,6 +16,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SELECT = "SELECT * FROM UTILISATEURS";
+	private static final String SELECT_MAIL = "SELECT no_utilisateur FROM UTILISATEURS WHERE email = ?";
+	private static final String SELECT_PSEUDO = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ?";
 			
 	
 	@Override
@@ -99,5 +101,49 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throwables.printStackTrace();
 		}
 		return utilisateurs;
+	}
+
+	@Override
+	public boolean selectByEmail(String email) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+		boolean isExists = false;
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SELECT_MAIL);
+			pstmt.setString(1, email);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				isExists = true;
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return isExists;
+	}
+
+	@Override
+	public boolean selectByPseudo(String pseudo) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+		boolean isExists = false;
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SELECT_PSEUDO);
+			pstmt.setString(1, pseudo);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				isExists = true;
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return isExists;
 	}
 }

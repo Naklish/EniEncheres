@@ -13,19 +13,18 @@
 <body>
     <h1>Page de connexion</h1>
 
-    <p>${message}</p>
+    <p class="err">${message}</p>
     <form action="connexion" method="post">
         <fieldset>
-        <label for="login">Identifiant :</label>
-        <input type="text" id="login" name="login">
+        <label for="login">Identifiant ou adresse e-mail :</label>
+        <input type="text" id="login" name="login" required>
         <br/>
         <label for="motdepasse">Mot de passe :</label>
         <input type="password" id="motdepasse" name="motdepasse">
         <br/>
-        <input type="submit" value="Connexion"/>
+        <input type="submit" value="Connexion" required>
         </fieldset>
     </form>
-
 <a href="inscription">Créer un compte</a>
 </body>
 </html>
