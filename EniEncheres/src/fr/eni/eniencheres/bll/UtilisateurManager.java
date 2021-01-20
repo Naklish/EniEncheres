@@ -26,31 +26,35 @@ public class UtilisateurManager {
         } return message;
     }
 
-    public Utilisateur connecter(String identifiant, String motDePasse) {
-        Utilisateur utilisateurConnecte = new Utilisateur();
-        List<Utilisateur> listeUtilisateurs = this.utilisateurDAO.selectAll();
-        for (Utilisateur utilisateur : listeUtilisateurs) {
-            System.out.println(utilisateur.getPseudo());
-            System.out.println(utilisateur.getMotDePasse());
+	public Utilisateur connecter(String identifiant, String motDePasse) {
+		Utilisateur utilisateurConnecte = new Utilisateur();
+		List<Utilisateur> listeUtilisateurs = this.utilisateurDAO.selectAll();
+		for (Utilisateur utilisateur : listeUtilisateurs) {
 
-            if (utilisateur.getPseudo().equals(identifiant) && utilisateur.getMotDePasse().equals(motDePasse)
-                    || utilisateur.getEmail().equals(identifiant) && utilisateur.getMotDePasse().equals(motDePasse)) {
-                utilisateurConnecte.setNoUtilisateur(utilisateur.getNoUtilisateur());
-                utilisateurConnecte.setPseudo(utilisateur.getPseudo());
-                utilisateurConnecte.setNom(utilisateur.getNom());
-                utilisateurConnecte.setPrenom(utilisateur.getPrenom());
-                utilisateurConnecte.setEmail(utilisateur.getEmail());
-                utilisateurConnecte.setTelephone(utilisateur.getTelephone());
-                utilisateurConnecte.setAdresse(utilisateur.getAdresse());
-                utilisateurConnecte.setCodePostal(utilisateur.getCodePostal());
-                utilisateurConnecte.setVille(utilisateur.getVille());
-                utilisateurConnecte.setMotDePasse(utilisateur.getMotDePasse());
-                utilisateurConnecte.setCredit(utilisateur.getCredit());
-                utilisateurConnecte.setAdministrateur(utilisateur.isAdministrateur());
+			if (utilisateur.getPseudo().equals(identifiant) && utilisateur.getMotDePasse().equals(motDePasse)
+					|| utilisateur.getEmail().equals(identifiant) && utilisateur.getMotDePasse().equals(motDePasse)) {
+				utilisateurConnecte.setNoUtilisateur(utilisateur.getNoUtilisateur());
+				utilisateurConnecte.setPseudo(utilisateur.getPseudo());
+				utilisateurConnecte.setNom(utilisateur.getNom());
+				utilisateurConnecte.setPrenom(utilisateur.getPrenom());
+				utilisateurConnecte.setEmail(utilisateur.getEmail());
+				utilisateurConnecte.setTelephone(utilisateur.getTelephone());
+				utilisateurConnecte.setAdresse(utilisateur.getAdresse());
+				utilisateurConnecte.setCodePostal(utilisateur.getCodePostal());
+				utilisateurConnecte.setVille(utilisateur.getVille());
+				utilisateurConnecte.setMotDePasse(utilisateur.getMotDePasse());
+				utilisateurConnecte.setCredit(utilisateur.getCredit());
+				utilisateurConnecte.setAdministrateur(utilisateur.isAdministrateur());
 
-            }
-        }
-
-        return utilisateurConnecte;
-    }
+			}
+		}
+		return utilisateurConnecte;
+	}
+	
+	
+	public Utilisateur recupererById(int noUtilisateur) {
+		return this.utilisateurDAO.selectById(noUtilisateur);
+	}
+	
+	
 }
