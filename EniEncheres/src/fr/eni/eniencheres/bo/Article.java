@@ -12,6 +12,7 @@ public class Article {
 	private int prixVente;
 	private int noUtilisateur;
 	private int noCategorie;
+	private Utilisateur vendeur;
 	
 	public Article() {
 		// TODO Auto-generated constructor stub
@@ -101,6 +102,14 @@ public class Article {
 
 	public void setNoCategorie(int noCategorie) {
 		this.noCategorie = noCategorie;
+	}
+
+	public Utilisateur getVendeur() {
+		return vendeur;
+	}
+
+	public void setVendeur(Utilisateur vendeur) {
+		this.vendeur = vendeur;
 	}
 	
 	

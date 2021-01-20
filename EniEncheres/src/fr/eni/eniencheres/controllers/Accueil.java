@@ -20,6 +20,7 @@ public class Accueil extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	ArticleManager articleManager = new ArticleManager();
     	List<Article> listArticles = articleManager.listerArticle();
+    	
     	request.setAttribute("listArticles", listArticles);
     	
         request.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request,response);

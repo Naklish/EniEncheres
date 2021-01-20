@@ -25,8 +25,14 @@
 <table>
 <c:forEach var="article" items="${ listArticles }">
 	<tr>
-		<td>${ article.nomArticle }</td>
+		<ul>
+			<li>${ article.nomArticle }</li>
+			<li>Prix : ${ article.prixVente }</li>
+			<li>Fin de l'enchère : ${ article.dateFin }</li>
+			<li>Vendeur : <a href="afficherProfil?noUtilisateur=${ article.vendeur.noUtilisateur }">${ article.vendeur.pseudo }</a></li>
+		</ul>
 	</tr>
+	
 </c:forEach>
 </table>
 </body>

@@ -13,8 +13,14 @@ public class ArticleManager {
 	public ArticleManager() {
 		this.articleDAO = DAOFactory.getArticleDAO();
 	}
+	
 	public List<Article> listerArticle(){
+		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		List<Article> listeArticles = articleDAO.selectAll();
+		
+		for(Article article : listeArticles) {
+			article.setVendeur(utilisateurManager.recupererById(article.getNoUtilisateur()));
+		}
 		
 		return listeArticles;
 	}

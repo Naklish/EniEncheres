@@ -21,8 +21,6 @@ public class UtilisateurManager {
 		Utilisateur utilisateurConnecte = new Utilisateur();
 		List<Utilisateur> listeUtilisateurs = this.utilisateurDAO.selectAll();
 		for (Utilisateur utilisateur : listeUtilisateurs) {
-			System.out.println(utilisateur.getPseudo());
-			System.out.println(utilisateur.getMotDePasse());
 			
 			if (utilisateur.getPseudo().equals(identifiant) && utilisateur.getMotDePasse().equals(motDePasse)) {
 				utilisateurConnecte.setNoUtilisateur(utilisateur.getNoUtilisateur());
@@ -42,4 +40,10 @@ public class UtilisateurManager {
 		}
 		return utilisateurConnecte;
 	}
+	
+	public Utilisateur recupererById(int noUtilisateur) {
+		return this.utilisateurDAO.selectById(noUtilisateur);
+	}
+	
+	
 }
