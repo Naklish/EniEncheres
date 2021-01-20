@@ -16,8 +16,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) "
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SELECT = "SELECT * FROM UTILISATEURS";
-	private static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";		
-	
+	private static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
+	private static final String SELECT_MAIL = "SELECT no_utilisateur FROM UTILISATEURS WHERE email = ?";
+	private static final String SELECT_PSEUDO = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ?";
+
+
 	@Override
 	public void insert(Utilisateur utilisateur) {
 		Connection cnx = null;
@@ -100,34 +103,78 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		return utilisateurs;
 	}
-	
+
 	@Override
 	public Utilisateur selectById(int noUtilisateur) {
 		Utilisateur utilisateur = new Utilisateur();
 		Connection cnx = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			cnx = ConnectionProvider.getConnection();
 			pstmt = cnx.prepareStatement(SELECT_BY_ID);
-			
+
 			pstmt.setInt(1, noUtilisateur);
 			ResultSet rs = pstmt.executeQuery();
-			
+
 			if(rs == null) {
 				throw new SQLException("Erreur d'exécution");
 			}
-			
+
 			while(rs.next()) {
 				utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
 						rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
 						rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return utilisateur;
+	}
+
+	@Override
+	public boolean selectByEmail(String email) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+		boolean isExists = false;
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SELECT_MAIL);
+			pstmt.setString(1, email);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				isExists = true;
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return isExists;
+	}
+
+	@Override
+	public boolean selectByPseudo(String pseudo) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+		boolean isExists = false;
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SELECT_PSEUDO);
+			pstmt.setString(1, pseudo);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				isExists = true;
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return isExists;
 	}
 }

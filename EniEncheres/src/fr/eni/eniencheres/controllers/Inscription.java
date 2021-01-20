@@ -46,12 +46,13 @@ public class Inscription extends HttpServlet {
 					request.getParameter("telephone"), request.getParameter("adresse"), request.getParameter("codePostal"), request.getParameter("ville"), request.getParameter("motDePasse"), false);
 			UtilisateurManager utilisateurManager = new UtilisateurManager();
 			String message = "Utilisateur créé";
-			utilisateurManager.enregistrer(utilisateur);
+			String messageErreur = utilisateurManager.enregistrer(utilisateur);
 			request.setAttribute("message", message);
+			request.setAttribute("messageErreur", messageErreur);
 			request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
 		}else {
-			String message = "La confirmation ne correspond pas au mot de passe";
-			request.setAttribute("message", message);
+			String messageMdp = "La confirmation ne correspond pas au mot de passe";
+			request.setAttribute("messageMdp", messageMdp);
 			request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
 		}
 	}

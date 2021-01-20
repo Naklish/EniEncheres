@@ -14,6 +14,7 @@
 <body>
 <h3>ENI-Encheres</h3>
 <c:if test="${ not empty utilisateurConnecte.pseudo }">
+    <p>Bonjour ${utilisateurConnecte.prenom} ${utilisateurConnecte.nom} !</p>
     <a href="deconnexion">Déconnexion</a>
 </c:if>
 <c:if test="${ empty utilisateurConnecte.pseudo }">
