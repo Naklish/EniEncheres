@@ -22,6 +22,12 @@
 
 
 <h1>Liste des enchères</h1>
-
+<table>
+<c:forEach var="article" items="${ listArticles }">
+	<tr>
+		<td>${ article.nomArticle }</td>
+	</tr>
+</c:forEach>
+</table>
 </body>
 </html>
