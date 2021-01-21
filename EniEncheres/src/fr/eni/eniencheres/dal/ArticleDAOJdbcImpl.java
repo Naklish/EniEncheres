@@ -9,8 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jdt.internal.compiler.ast.ReturnStatement;
-
 import fr.eni.eniencheres.bo.Article;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
@@ -33,7 +31,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			ResultSet rs = stmt.executeQuery(SELECT);
 			
 			if(rs == null) {
-				throw new SQLException("Erreur d'éxecution");
+				throw new SQLException("Erreur d'ï¿½xecution");
 			}
 			
 			while(rs.next()) {

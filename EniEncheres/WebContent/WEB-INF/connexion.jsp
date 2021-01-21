@@ -37,6 +37,6 @@
     </form>
     </article>
 </section>
-<a href="inscription">Créer un compte</a>
+<p><a href="inscription">Créer un compte</a></p>
 </body>
 </html>

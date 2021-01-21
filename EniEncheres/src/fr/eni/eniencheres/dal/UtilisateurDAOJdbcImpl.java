@@ -11,170 +11,168 @@ import java.util.List;
 import fr.eni.eniencheres.bo.Utilisateur;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
-	
-	private static final String INSERT = "INSERT INTO UTILISATEURS "
-			+ "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) "
-			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String SELECT = "SELECT * FROM UTILISATEURS";
-	private static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
-	private static final String SELECT_MAIL = "SELECT * FROM UTILISATEURS WHERE email = ?";
-	private static final String SELECT_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
-	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
+
+    private static final String INSERT = "INSERT INTO UTILISATEURS "
+            + "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) "
+            + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String SELECT = "SELECT * FROM UTILISATEURS";
+    private static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
+    private static final String SELECT_MAIL = "SELECT * FROM UTILISATEURS WHERE email = ?";
+    private static final String SELECT_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
+    private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 
 
+    @Override
+    public void insert(Utilisateur utilisateur) {
+        Connection cnx = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            cnx = ConnectionProvider.getConnection();
+            pstmt = cnx.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
+
+            pstmt.setString(1, utilisateur.getPseudo());
+            pstmt.setString(2, utilisateur.getNom());
+            pstmt.setString(3, utilisateur.getPrenom());
+            pstmt.setString(4, utilisateur.getEmail());
+            pstmt.setString(5, utilisateur.getTelephone());
+            pstmt.setString(6, utilisateur.getAdresse());
+            pstmt.setString(7, utilisateur.getCodePostal());
+            pstmt.setString(8, utilisateur.getVille());
+            pstmt.setString(9, utilisateur.getMotDePasse());
+            pstmt.setInt(10, utilisateur.getCredit());
+            pstmt.setBoolean(11, utilisateur.isAdministrateur());
+
+            pstmt.executeUpdate();
+
+            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    utilisateur.setNoUtilisateur(rs.getInt(1));
+                }
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+            if (cnx != null) {
+                try {
+                    cnx.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    @Override
+    public List<Utilisateur> selectAll() {
+        List<Utilisateur> utilisateurs = new ArrayList<>();
+        Utilisateur utilisateur = null;
+        Connection cnx = null;
+        Statement stmt = null;
+
+        try {
+            cnx = ConnectionProvider.getConnection();
+            stmt = cnx.createStatement();
+
+            ResultSet rs = stmt.executeQuery(SELECT);
+            if (rs == null) {
+                throw new SQLException("Erreur d'exécution");
+            }
+            while (rs.next()) {
+                utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
+                        rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
+                        rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+
+                utilisateurs.add(utilisateur);
+            }
 
 
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
 
-	@Override
-	public void insert(Utilisateur utilisateur) {
-		Connection cnx = null;
-		PreparedStatement pstmt = null;
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
 
-		try {
-			cnx = ConnectionProvider.getConnection();
-			pstmt = cnx.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-			
-			pstmt.setString(1, utilisateur.getPseudo());
-			pstmt.setString(2, utilisateur.getNom());
-			pstmt.setString(3, utilisateur.getPrenom());
-			pstmt.setString(4, utilisateur.getEmail());
-			pstmt.setString(5, utilisateur.getTelephone());
-			pstmt.setString(6, utilisateur.getAdresse());
-			pstmt.setString(7, utilisateur.getCodePostal());
-			pstmt.setString(8, utilisateur.getVille());
-			pstmt.setString(9, utilisateur.getMotDePasse());
-			pstmt.setInt(10, utilisateur.getCredit());
-			pstmt.setBoolean(11, utilisateur.isAdministrateur());
-			
-			pstmt.executeUpdate();
-			
-			try(ResultSet rs = pstmt.getGeneratedKeys()) {
-				if(rs.next()) {
-					utilisateur.setNoUtilisateur(rs.getInt(1));
-				}
-			}		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			if(cnx != null) {
-				try {
-					cnx.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-	} 
-	
-}
-	@Override
-	public List<Utilisateur> selectAll() {
-		List<Utilisateur> utilisateurs = new ArrayList<>();
-		Utilisateur utilisateur = null;
-		Connection cnx = null;
-		Statement stmt = null;
+            if (cnx != null) {
+                try {
+                    cnx.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return utilisateurs;
+    }
 
-		try {
-			cnx = ConnectionProvider.getConnection();
-			stmt = cnx.createStatement();
+    @Override
+    public Utilisateur selectById(int noUtilisateur) {
+        Utilisateur utilisateur = new Utilisateur();
+        Connection cnx = null;
+        PreparedStatement pstmt = null;
 
-			ResultSet rs = stmt.executeQuery(SELECT);
-			if(rs == null) {
-				throw new SQLException("Erreur d'exécution");
-			}
-			while(rs.next()) {
-				utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
-						rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
-						rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+        try {
+            cnx = ConnectionProvider.getConnection();
+            pstmt = cnx.prepareStatement(SELECT_BY_ID);
 
-				utilisateurs.add(utilisateur);
-			}
+            pstmt.setInt(1, noUtilisateur);
+            ResultSet rs = pstmt.executeQuery();
 
+            if (rs == null) {
+                throw new SQLException("Erreur d'exécution");
+            }
 
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}finally {
-			
-			if(stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			if(cnx != null) {
-				try {
-					cnx.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-	}
-		return utilisateurs;
-	}
+            while (rs.next()) {
+                utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
+                        rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
+                        rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+            }
 
-	@Override
-	public Utilisateur selectById(int noUtilisateur) {
-		Utilisateur utilisateur = new Utilisateur();
-		Connection cnx = null;
-		PreparedStatement pstmt = null;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
 
-		try {
-			cnx = ConnectionProvider.getConnection();
-			pstmt = cnx.prepareStatement(SELECT_BY_ID);
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
 
-			pstmt.setInt(1, noUtilisateur);
-			ResultSet rs = pstmt.executeQuery();
-
-			if(rs == null) {
-				throw new SQLException("Erreur d'exécution");
-			}
-
-			while(rs.next()) {
-				utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
-						rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
-						rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			if(cnx != null) {
-				try {
-					cnx.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-	}
-		return utilisateur;
-	}
+            if (cnx != null) {
+                try {
+                    cnx.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return utilisateur;
+    }
 
     @Override
     public Utilisateur selectByEmail(String email) {
@@ -200,26 +198,26 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }finally {
-			
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			if(cnx != null) {
-				try {
-					cnx.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-	}
+        } finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+            if (cnx != null) {
+                try {
+                    cnx.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
         return utilisateur;
     }
 
@@ -246,83 +244,84 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }finally {
-			
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			if(cnx != null) {
-				try {
-					cnx.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-	}
+        } finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+            if (cnx != null) {
+                try {
+                    cnx.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
         return utilisateur;
     }
 
     @Override
-	public void update(String colonne, String valueColonne, int noUtilisateur) {
-		String update = "UPDATE UTILISATEURS SET " + colonne + " = ? WHERE no_utilisateur = ?";
-		Connection cnx = null;
-		PreparedStatement pstmt = null;
+    public void update(String colonne, String valueColonne, int noUtilisateur) {
+        String update = "UPDATE UTILISATEURS SET " + colonne + " = ? WHERE no_utilisateur = ?";
+        Connection cnx = null;
+        PreparedStatement pstmt = null;
 
-		try {
-			cnx = ConnectionProvider.getConnection();
-			pstmt = cnx.prepareStatement(update);
+        try {
+            cnx = ConnectionProvider.getConnection();
+            pstmt = cnx.prepareStatement(update);
 
-			pstmt.setString(1, valueColonne);
-			pstmt.setInt(2, noUtilisateur);
+            pstmt.setString(1, valueColonne);
+            pstmt.setInt(2, noUtilisateur);
 
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			if(cnx != null) {
-				try {
-					cnx.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-	}
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
 
-	@Override
-	public void delete(int noUtilisateur) {
-		Connection cnx = null;
-		PreparedStatement pstmt = null;
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
 
-		try {
-			cnx = ConnectionProvider.getConnection();
-			pstmt = cnx.prepareStatement(DELETE);
+            if (cnx != null) {
+                try {
+                    cnx.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
-			pstmt.setInt(1, noUtilisateur);
+    @Override
+    public void delete(int noUtilisateur) {
+        Connection cnx = null;
+        PreparedStatement pstmt = null;
 
-			pstmt.executeUpdate();
+        try {
+            cnx = ConnectionProvider.getConnection();
+            pstmt = cnx.prepareStatement(DELETE);
 
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
-	}
+            pstmt.setInt(1, noUtilisateur);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
-}
+
