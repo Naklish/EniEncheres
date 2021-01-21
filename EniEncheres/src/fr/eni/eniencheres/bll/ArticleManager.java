@@ -24,4 +24,8 @@ public class ArticleManager {
 		
 		return listeArticles;
 	}
+	
+	public void mettreEnVente(Article article) {
+		this.articleDAO.insert(article);
+	}
 }

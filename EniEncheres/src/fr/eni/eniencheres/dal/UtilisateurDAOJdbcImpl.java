@@ -22,6 +22,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 
 
+
+
+
 	@Override
 	public void insert(Utilisateur utilisateur) {
 		Connection cnx = null;
@@ -101,7 +104,26 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
-		}
+		}finally {
+			
+			if(stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	}
 		return utilisateurs;
 	}
 
@@ -131,7 +153,26 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+			
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	}
 		return utilisateur;
 	}
 
@@ -159,7 +200,26 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
+        }finally {
+			
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	}
         return utilisateur;
     }
 
@@ -186,7 +246,26 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
+        }finally {
+			
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	}
         return utilisateur;
     }
 
@@ -207,7 +286,25 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+			
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 	}
 
 	@Override
@@ -227,4 +324,5 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throwables.printStackTrace();
 		}
 	}
+}
 }

@@ -1,16 +1,23 @@
 package fr.eni.eniencheres.dal;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jdt.internal.compiler.ast.ReturnStatement;
+
 import fr.eni.eniencheres.bo.Article;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SELECT = "SELECT * FROM ARTICLES_VENDUS";
+	private static final String INSERT = "INSERT INTO ARTICLES_VENDUS "
+			+ "(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)"
+			+ "VALUES (?,?,?,?,?,?,?,?)";
 	
 	@Override
 	public List<Article> selectAll() {
@@ -38,8 +45,78 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+			
+			if(stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	}
 		return listArticles;
 	}
 
+	@Override
+	public void insert(Article article) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
+			
+			pstmt.setString(1, article.getNomArticle());
+			pstmt.setString(2, article.getDescription());
+			pstmt.setDate(3, Date.valueOf(article.getDateDebut()));
+			pstmt.setDate(4, Date.valueOf(article.getDateFin()));
+			pstmt.setInt(5, article.getPrixInitial());
+			pstmt.setInt(6, article.getPrixVente());
+			pstmt.setInt(7, article.getNoUtilisateur());
+			pstmt.setInt(8, article.getNoCategorie());
+			
+			pstmt.executeUpdate();
+			rs = pstmt.getGeneratedKeys();
+			
+			if(rs.next()) {
+				article.setNoArticle(rs.getInt(1));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	}
+	}
+	
 }

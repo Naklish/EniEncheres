@@ -18,6 +18,21 @@ public class Article {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	public Article(String nomArticle, String description, LocalDate dateDebut, LocalDate dateFin, int prixInitial,
+			int prixVente, int noUtilisateur, int noCategorie) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.prixInitial = prixInitial;
+		this.prixVente = prixVente;
+		this.noUtilisateur = noUtilisateur;
+		this.noCategorie = noCategorie;
+	}
+
+
 	public Article(int noArticle, String nomArticle, String description, LocalDate dateDebut, LocalDate dateFin,
 			int prixInitial, int prixVente, int noUtilisateur, int noCategorie) {
 		super();
