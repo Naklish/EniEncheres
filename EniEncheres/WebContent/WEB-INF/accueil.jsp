@@ -10,8 +10,11 @@
 <html>
 <head>
     <title>Accueil</title>
+    <title>Accueil: ENI-Enchères</title>
+    <link href="<c:url value="/css/accueil.css"/>" rel="stylesheet">
 </head>
 <body>
+<<<<<<< Updated upstream
 <h3>ENI-Encheres</h3>
 <br/>
 <h4>${messageOk}</h4>
@@ -25,6 +28,8 @@
 <c:if test="${ empty utilisateurConnecte.pseudo }">
     <a href="connexion">S'inscrire - Se connecter</a>
 </c:if>
+=======
+>>>>>>> Stashed changes
 
 
 <h1>Liste des enchères</h1>
@@ -38,8 +43,62 @@
 			<li>Vendeur : <a href="afficherProfil?noUtilisateur=${ article.vendeur.noUtilisateur }">${ article.vendeur.pseudo }</a></li>
 		</ul>
 	</tr>
+<header>
+	<div class="eni">
+	<h1><a href="accueil">ENI-Encheres</a></h1>
+	</div>
+	<div class="choixUtilisateur">
+		<c:if test="${ not empty utilisateurConnecte.pseudo }">
+		    <p>Bonjour ${utilisateurConnecte.prenom} ${utilisateurConnecte.nom} !</p>
+		    <a href="deconnexion">Déconnexion</a>
+		    <a href="modifierProfil">Modifier mon profil</a>
+		</c:if>
+	</div>
+		<c:if test="${ empty utilisateurConnecte.pseudo }">
+	
+		<div class="choix">
+		    <p><a href="connexion">S'inscrire - Se connecter</a></p>
+		</div>
+		</c:if>
+	
 	
 </c:forEach>
 </table>
+	<h2>Accueil</h2>
+	<h3><strong>Liste des enchères</strong></h3>
+	
+
+</header>
+
+<nav>
+	<!-- recherche d'un article + catégorie + boutton rechercher -->
+</nav>
+
+<!-- Section qui présente les différentes enchères disponnibles -->
+<section>
+	<article>
+	<div class="titreArticle">
+	<h1>Enchères en cours:</h1>
+	</div>
+	<table>
+	<c:forEach var="article" items="${ listArticles }">
+		<tr>
+			<ul>
+				<li>${ article.nomArticle }</li>
+				<li>Prix : ${ article.prixVente }</li>
+				<li>Fin de l'enchère : ${ article.dateFin }</li>
+				<li>Vendeur : <a href="afficherProfil?noUtilisateur=${ article.vendeur.noUtilisateur }">${ article.vendeur.pseudo }</a></li>
+			</ul>
+		</tr>
+	</article>
+		
+	</c:forEach>
+	</table>
+
+</section>
+
+<footer>
+	<!-- Pied de page (à définir) -->
+</footer>
 </body>
 </html>

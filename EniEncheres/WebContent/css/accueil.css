@@ -1,0 +1,35 @@
+.eni {
+	float: left;
+	
+}
+
+h2 {
+	
+	padding-top: 100px;
+	
+	text-align: center;
+}
+
+h3 {
+	
+	margin-top: 200px;
+	text-align: center;
+	text-decoration: underline;
+}
+
+.choix {
+	float: right;
+		
+}
+
+.titreArticle {
+	
+	text-align: left;
+	margin-top: 150px;
+	text-decoration: underline;
+}
+
+.choixUtilisateur {
+	float: right;
+	
+}
