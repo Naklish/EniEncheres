@@ -19,7 +19,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 	private static final String SELECT_MAIL = "SELECT no_utilisateur FROM UTILISATEURS WHERE email = ?";
 	private static final String SELECT_PSEUDO = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ?";
-
+	//private static final String UPDATE_PSEUDO = "UPDATE UTILISATEURS SET pseudo = ? WHERE no_utilisateur = ?";
 
 	@Override
 	public void insert(Utilisateur utilisateur) {
@@ -176,5 +176,25 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throwables.printStackTrace();
 		}
 		return isExists;
+	}
+	
+	@Override
+	public void update(String colonne, String valueColonne, int noUtilisateur) {
+		String update = "UPDATE UTILISATEURS SET " + colonne + " = ? WHERE no_utilisateur = ?";
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(update);
+			
+			pstmt.setString(1, valueColonne);
+			pstmt.setInt(2, noUtilisateur);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -16,7 +16,7 @@ public class UtilisateurManager {
     public String enregistrer(Utilisateur utilisateur) {
         String message = "";
         if(this.utilisateurDAO.selectByEmail(utilisateur.getEmail()) && this.utilisateurDAO.selectByPseudo(utilisateur.getPseudo())) {
-            message = "Ces identifiants sont d√©j√† utilis√©s.";
+            message = "Ces identifiants sont dÈj‡† utilisÈs.";
         } else if(this.utilisateurDAO.selectByPseudo(utilisateur.getPseudo())) {
             message = "Ce pseudo existe d√©j√†.";
         } else if(this.utilisateurDAO.selectByEmail(utilisateur.getEmail())) {
@@ -56,5 +56,7 @@ public class UtilisateurManager {
 		return this.utilisateurDAO.selectById(noUtilisateur);
 	}
 	
-	
+	public void modifier(String colonne, String valueColonne, int noUtilisateur) {
+		this.utilisateurDAO.update(colonne, valueColonne, noUtilisateur);
+	}
 }

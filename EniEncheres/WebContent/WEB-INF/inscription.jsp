@@ -8,6 +8,7 @@
 </head>
 <body>
 <h1>Inscription</h1>
+<p>${ message }</p>
 <p>${messageErreur}</p>
 <form action="inscription" method="post">
     <table>
