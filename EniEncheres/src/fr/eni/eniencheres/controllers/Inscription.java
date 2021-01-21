@@ -45,7 +45,7 @@ public class Inscription extends HttpServlet {
 			Utilisateur utilisateur = new Utilisateur(request.getParameter("pseudo"), request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("email"),
 					request.getParameter("telephone"), request.getParameter("adresse"), request.getParameter("codePostal"), request.getParameter("ville"), request.getParameter("motDePasse"), false);
 			UtilisateurManager utilisateurManager = new UtilisateurManager();
-			String message = "Utilisateur crÃ©Ã©";
+			String message = "Utilisateur créé";
 			String messageErreur = utilisateurManager.enregistrer(utilisateur);
 			if(messageErreur == "") {
 				request.setAttribute("message", message);

@@ -17,6 +17,7 @@
     <p>Bonjour ${utilisateurConnecte.prenom} ${utilisateurConnecte.nom} !</p>
     <a href="deconnexion">Déconnexion</a>
     <a href="modifierProfil">Modifier mon profil</a>
+    <a href="nouvelleVente">Vendre un article</a>
 </c:if>
 <c:if test="${ empty utilisateurConnecte.pseudo }">
     <a href="connexion">S'inscrire - Se connecter</a>
