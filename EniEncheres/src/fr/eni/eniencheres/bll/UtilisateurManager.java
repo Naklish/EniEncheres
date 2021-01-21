@@ -15,11 +15,12 @@ public class UtilisateurManager {
 
     public String enregistrer(Utilisateur utilisateur) {
         String message = "";
-        if(this.utilisateurDAO.selectByEmail(utilisateur.getEmail()) && this.utilisateurDAO.selectByPseudo(utilisateur.getPseudo())) {
+        if(this.utilisateurDAO.selectByEmail(utilisateur.getEmail()) != null && this.utilisateurDAO.selectByPseudo(utilisateur.getPseudo()) != null) {
             message = "Ces identifiants sont déjà utilisés.";
-        } else if(this.utilisateurDAO.selectByPseudo(utilisateur.getPseudo())) {
+        } else if(this.utilisateurDAO.selectByPseudo(utilisateur.getPseudo()) != null) {
             message = "Ce pseudo existe déjà.";
-        } else if(this.utilisateurDAO.selectByEmail(utilisateur.getEmail())) {
+			System.out.println("coucou");
+        } else if(this.utilisateurDAO.selectByEmail(utilisateur.getEmail()) != null) {
             message = "Cet e-mail est déjà utilisé.";
         } else {
             this.utilisateurDAO.insert(utilisateur);
@@ -27,25 +28,24 @@ public class UtilisateurManager {
     }
 
 	public Utilisateur connecter(String identifiant, String motDePasse) {
-		Utilisateur utilisateurConnecte = new Utilisateur();
-		List<Utilisateur> listeUtilisateurs = this.utilisateurDAO.selectAll();
-		for (Utilisateur utilisateur : listeUtilisateurs) {
-
-			if (utilisateur.getPseudo().equals(identifiant) && utilisateur.getMotDePasse().equals(motDePasse)
-					|| utilisateur.getEmail().equals(identifiant) && utilisateur.getMotDePasse().equals(motDePasse)) {
-				utilisateurConnecte.setNoUtilisateur(utilisateur.getNoUtilisateur());
-				utilisateurConnecte.setPseudo(utilisateur.getPseudo());
-				utilisateurConnecte.setNom(utilisateur.getNom());
-				utilisateurConnecte.setPrenom(utilisateur.getPrenom());
-				utilisateurConnecte.setEmail(utilisateur.getEmail());
-				utilisateurConnecte.setTelephone(utilisateur.getTelephone());
-				utilisateurConnecte.setAdresse(utilisateur.getAdresse());
-				utilisateurConnecte.setCodePostal(utilisateur.getCodePostal());
-				utilisateurConnecte.setVille(utilisateur.getVille());
-				utilisateurConnecte.setMotDePasse(utilisateur.getMotDePasse());
-				utilisateurConnecte.setCredit(utilisateur.getCredit());
-				utilisateurConnecte.setAdministrateur(utilisateur.isAdministrateur());
-
+		Utilisateur utilisateurConnecte = null;
+		if(this.utilisateurDAO.selectByPseudo(identifiant) != null) {
+			utilisateurConnecte = utilisateurDAO.selectByPseudo(identifiant);
+			if(utilisateurConnecte.getMotDePasse().equals(motDePasse)) {
+				utilisateurConnecte.setNoUtilisateur(utilisateurConnecte.getNoUtilisateur());
+				utilisateurConnecte.setPseudo(utilisateurConnecte.getPseudo());
+				utilisateurConnecte.setNom(utilisateurConnecte.getNom());
+				utilisateurConnecte.setPrenom(utilisateurConnecte.getPrenom());
+				utilisateurConnecte.setEmail(utilisateurConnecte.getEmail());
+			}
+		} else if(this.utilisateurDAO.selectByEmail(identifiant) != null) {
+			utilisateurConnecte = utilisateurDAO.selectByEmail(identifiant);
+			if (utilisateurConnecte.getMotDePasse().equals(motDePasse)) {
+				utilisateurConnecte.setNoUtilisateur(utilisateurConnecte.getNoUtilisateur());
+				utilisateurConnecte.setPseudo(utilisateurConnecte.getPseudo());
+				utilisateurConnecte.setNom(utilisateurConnecte.getNom());
+				utilisateurConnecte.setPrenom(utilisateurConnecte.getPrenom());
+				utilisateurConnecte.setEmail(utilisateurConnecte.getEmail());
 			}
 		}
 		return utilisateurConnecte;
