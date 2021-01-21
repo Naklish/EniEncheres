@@ -19,7 +19,6 @@ public class UtilisateurManager {
             message = "Ces identifiants sont déjà utilisés.";
         } else if(this.utilisateurDAO.selectByPseudo(utilisateur.getPseudo()) != null) {
             message = "Ce pseudo existe déjà.";
-			System.out.println("coucou");
         } else if(this.utilisateurDAO.selectByEmail(utilisateur.getEmail()) != null) {
             message = "Cet e-mail est déjà utilisé.";
         } else {
@@ -56,5 +55,7 @@ public class UtilisateurManager {
 		return this.utilisateurDAO.selectById(noUtilisateur);
 	}
 	
-	
+	public void modifier(String colonne, String valueColonne, int noUtilisateur) {
+		this.utilisateurDAO.update(colonne, valueColonne, noUtilisateur);
+	}
 }

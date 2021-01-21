@@ -13,4 +13,6 @@ public interface UtilisateurDAO {
 	public Utilisateur selectByPseudo(String pseudo);
 
 	public Utilisateur selectById(int noUtilisateur);
+	
+	public void update(String colonne, String valueColonne, int noUtilisateur);
 }

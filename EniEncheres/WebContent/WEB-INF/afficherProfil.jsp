@@ -7,6 +7,7 @@
 <title>ENI Encheres</title>
 </head>
 <body>
+<a href="accueil">Accueil</a>
 <h1>Profil</h1>
 <ul>
 	<li>Pseudo : ${ profil.pseudo }</li>
