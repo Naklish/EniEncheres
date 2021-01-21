@@ -17,8 +17,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SELECT = "SELECT * FROM UTILISATEURS";
 	private static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
-	private static final String SELECT_MAIL = "SELECT no_utilisateur FROM UTILISATEURS WHERE email = ?";
-	private static final String SELECT_PSEUDO = "SELECT no_utilisateur FROM UTILISATEURS WHERE pseudo = ?";
+	private static final String SELECT_MAIL = "SELECT * FROM UTILISATEURS WHERE email = ?";
+	private static final String SELECT_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
 	//private static final String UPDATE_PSEUDO = "UPDATE UTILISATEURS SET pseudo = ? WHERE no_utilisateur = ?";
 
 
