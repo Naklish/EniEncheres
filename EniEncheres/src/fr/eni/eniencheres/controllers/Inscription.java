@@ -17,8 +17,8 @@ import fr.eni.eniencheres.dal.UtilisateurDAO;
  */
 @WebServlet("/inscription")
 public class Inscription extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -27,37 +27,37 @@ public class Inscription extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
-		//Utilisateur utilisateur = new Utilisateur("Flooz", "Tonton", "toto", "mon@email.com", "0666666666", "maRue", "35656", "MaVille", "Password", false);
-		//utilisateurDAO.insert(utilisateur);
-		request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
+        //Utilisateur utilisateur = new Utilisateur("Flooz", "Tonton", "toto", "mon@email.com", "0666666666", "maRue", "35656", "MaVille", "Password", false);
+        //utilisateurDAO.insert(utilisateur);
+        request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("motDePasse").equals(request.getParameter("confirmation"))) {
-			Utilisateur utilisateur = new Utilisateur(request.getParameter("pseudo"), request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("email"),
-					request.getParameter("telephone"), request.getParameter("adresse"), request.getParameter("codePostal"), request.getParameter("ville"), request.getParameter("motDePasse"), false);
-			UtilisateurManager utilisateurManager = new UtilisateurManager();
-			String message = "Utilisateur créé";
-			String messageErreur = utilisateurManager.enregistrer(utilisateur);
-			if(messageErreur == "") {
-				request.setAttribute("message", message);
-			} else {
-				request.setAttribute("messageErreur", messageErreur);
-			}
-			request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
-		}else {
-			String messageMdp = "La confirmation ne correspond pas au mot de passe";
-			request.setAttribute("messageMdp", messageMdp);
-			request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
-		}
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("motDePasse").equals(request.getParameter("confirmation"))) {
+            Utilisateur utilisateur = new Utilisateur(request.getParameter("pseudo"), request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("email"),
+                    request.getParameter("telephone"), request.getParameter("adresse"), request.getParameter("codePostal"), request.getParameter("ville"), request.getParameter("motDePasse"), false);
+            UtilisateurManager utilisateurManager = new UtilisateurManager();
+            String messageOk = "Votre compte a bien été créé !\nConnectez vous :";
+            String messageErreur = utilisateurManager.enregistrer(utilisateur);
+            if (messageErreur == "") {
+                request.setAttribute("messageOk", messageOk);
+            } else {
+                request.setAttribute("messageErreur", messageErreur);
+            }
+            request.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+        } else {
+            String messageMdp = "La confirmation ne correspond pas au mot de passe";
+            request.setAttribute("messageMdp", messageMdp);
+            request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
+        }
+    }
 
 }

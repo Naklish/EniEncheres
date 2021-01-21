@@ -36,6 +36,8 @@ public class UtilisateurManager {
 				utilisateurConnecte.setNom(utilisateurConnecte.getNom());
 				utilisateurConnecte.setPrenom(utilisateurConnecte.getPrenom());
 				utilisateurConnecte.setEmail(utilisateurConnecte.getEmail());
+			} else {
+				utilisateurConnecte = null;
 			}
 		} else if(this.utilisateurDAO.selectByEmail(identifiant) != null) {
 			utilisateurConnecte = utilisateurDAO.selectByEmail(identifiant);
@@ -45,6 +47,8 @@ public class UtilisateurManager {
 				utilisateurConnecte.setNom(utilisateurConnecte.getNom());
 				utilisateurConnecte.setPrenom(utilisateurConnecte.getPrenom());
 				utilisateurConnecte.setEmail(utilisateurConnecte.getEmail());
+			} else {
+				utilisateurConnecte = null;
 			}
 		}
 		return utilisateurConnecte;
@@ -57,5 +61,9 @@ public class UtilisateurManager {
 	
 	public void modifier(String colonne, String valueColonne, int noUtilisateur) {
 		this.utilisateurDAO.update(colonne, valueColonne, noUtilisateur);
+	}
+
+	public void supprimer(int noUtilisateur) {
+    	this.utilisateurDAO.delete(noUtilisateur);
 	}
 }

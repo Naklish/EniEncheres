@@ -28,15 +28,16 @@ public class Connexion extends HttpServlet {
         ArticleManager articleManager = new ArticleManager();
     	List<Article> listArticles = articleManager.listerArticle();
     	request.setAttribute("listArticles", listArticles);
-    	
-        if(utilisateurConnecte.getPseudo() != null) {
-            request.getSession().setAttribute("utilisateurConnecte", utilisateurConnecte);
-            request.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request,response);
 
-        } else {
+        if(utilisateurConnecte == null) {
             String message = "Identifiant ou mot de passe incorrect.";
             request.setAttribute("message", message);
             request.getServletContext().getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request,response);
+
+
+        } else if (utilisateurConnecte.getPseudo() != null){
+            request.getSession().setAttribute("utilisateurConnecte", utilisateurConnecte);
+            request.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request,response);
         }
     }
 }

@@ -1,7 +1,9 @@
 package fr.eni.eniencheres.controllers;
 
 import fr.eni.eniencheres.bll.ArticleManager;
+import fr.eni.eniencheres.bll.UtilisateurManager;
 import fr.eni.eniencheres.bo.Article;
+import fr.eni.eniencheres.bo.Utilisateur;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,15 +13,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/deconnexion")
-public class Deconnexion extends HttpServlet {
+@WebServlet("/supprimerCompte")
+public class SupprimerCompte extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UtilisateurManager utilisateurManager = new UtilisateurManager();
+        Utilisateur utilisateurConnecte = (Utilisateur) request.getSession().getAttribute("utilisateurConnecte");
+        utilisateurManager.supprimer(utilisateurConnecte.getNoUtilisateur());
         request.getSession().invalidate();
+        String messageSuppr = "Votre profil a bien été supprimé.";
+        request.setAttribute("messageSuppr", messageSuppr);
+
         ArticleManager articleManager = new ArticleManager();
         List<Article> listArticles = articleManager.listerArticle();
         request.setAttribute("listArticles", listArticles);
-        request.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request,response);
+
+        request.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
     }
 
 

@@ -13,6 +13,9 @@
 </head>
 <body>
 <h3>ENI-Encheres</h3>
+<br/>
+<h4>${messageOk}</h4>
+<h4>${messageSuppr}</h4>
 <c:if test="${ not empty utilisateurConnecte.pseudo }">
     <p>Bonjour ${utilisateurConnecte.prenom} ${utilisateurConnecte.nom} !</p>
     <a href="deconnexion">Déconnexion</a>

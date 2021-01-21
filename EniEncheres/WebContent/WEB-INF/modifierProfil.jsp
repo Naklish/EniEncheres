@@ -77,11 +77,12 @@
 		</tr>
 		<tr>
 			<td>
-				<input type="submit" value="Modifier">	
+				<input type="submit" value="Modifier">
 			</td>
 		</tr>
 	</tbody>
 </table>
 </form>
+	<a href="supprimerCompte">Supprimer mon compte</a>
 </body>
 </html>
