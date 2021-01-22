@@ -12,4 +12,6 @@ public interface ArticleDAO {
 	public void insert(Article article);
 
 	public Article selectById(int noArticle);
+
+	public List<Article> selectByCategorie(int categorie);
 }

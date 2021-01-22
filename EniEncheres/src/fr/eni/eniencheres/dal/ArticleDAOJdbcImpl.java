@@ -18,56 +18,56 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
             + "(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)"
             + "VALUES (?,?,?,?,?,?,?,?)";
     private static final String SELECT_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?";
+	private static final String SELECT_BY_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ?";
 
+	@Override
+	public List<Article> selectAll() {
+		List<Article> listArticles = new ArrayList<Article>();
+		Article article = null;
+		Connection cnx = null;
+		Statement stmt = null;
 
-    @Override
-    public List<Article> selectAll() {
-        List<Article> listArticles = new ArrayList<Article>();
-        Article article = null;
-        Connection cnx = null;
-        Statement stmt = null;
+		try {
+			cnx = ConnectionProvider.getConnection();
+			stmt = cnx.createStatement();
 
-        try {
-            cnx = ConnectionProvider.getConnection();
-            stmt = cnx.createStatement();
+			ResultSet rs = stmt.executeQuery(SELECT);
 
-            ResultSet rs = stmt.executeQuery(SELECT);
+			if(rs == null) {
+				throw new SQLException("Erreur d'�xecution");
+			}
 
-            if (rs == null) {
-                throw new SQLException("Erreur d'�xecution");
-            }
+			while(rs.next()) {
+				article = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),
+						rs.getDate("date_debut_encheres").toLocalDate(), rs.getDate("date_fin_encheres").toLocalDate(),
+						rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+				listArticles.add(article);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
 
-            while (rs.next()) {
-                article = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),
-                        rs.getDate("date_debut_encheres").toLocalDate(), rs.getDate("date_fin_encheres").toLocalDate(),
-                        rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
-                listArticles.add(article);
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } finally {
+			if(stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-
-            if (cnx != null) {
-                try {
-                    cnx.close();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        }
-        return listArticles;
-    }
+			if(cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	}
+		return listArticles;
+	}
 
 
     @Override
@@ -168,5 +168,40 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
         }
         return article;
     }
+
+
+	@Override
+	public List<Article> selectByCategorie(int categorie) {
+		List<Article> listArticles = new ArrayList<Article>();
+		Article article = null;
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SELECT_BY_CATEGORIE);
+
+			pstmt.setInt(1, categorie);
+			ResultSet rs = pstmt.executeQuery();
+
+			 if (rs == null) {
+	                throw new SQLException("Erreur d'exécution");
+	            }
+
+	            while (rs.next()) {
+	            	article = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),
+							rs.getDate("date_debut_encheres").toLocalDate(), rs.getDate("date_fin_encheres").toLocalDate(),
+							rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+					listArticles.add(article);
+	            }
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listArticles;
+	}
+
+
 
 }
