@@ -10,4 +10,6 @@ public interface ArticleDAO {
 	public List<Article> selectAll();
 	
 	public void insert(Article article);
+	
+	public List<Article> selectByCategorie(int categorie);
 }

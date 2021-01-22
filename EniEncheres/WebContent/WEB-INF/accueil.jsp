@@ -41,6 +41,37 @@
 
 <nav>
     <!-- recherche d'un article + catégorie + boutton rechercher -->
+    <div>
+    	<form action="accueil" method="post" id="accueil">
+    		<table>
+    			<thead>
+    				<tr>
+    					<th><label for="recherche">Filtres :</label></th>
+    				</tr>
+    			</thead>
+    			<tbody>	
+    			
+    				<tr>
+    					<td><input type="search" id="recherche" name="recherche"></td>
+    					<td><input type="submit" value="Rechercher"></td>
+   					</tr>	
+   					<tr>
+   						<td>
+   							<label for="categorie">Categorie :</label>
+	 						<select id="categorie" name="categorie" form="accueil" required>
+	 							<option value="0">Toutes</option> 
+	  							<option value="2">Livre</option>
+	  							<option value="3">DVD</option>
+	  							<option value="4">High-tech</option>
+	  							<option value="5">Jeux/jouet</option>
+	  						</select>
+   						</td>
+   					</tr>
+    			</tbody>
+    		
+    	</table>
+    	</form>
+    </div>
 </nav>
 
 <!-- Section qui présente les différentes enchères disponnibles -->
@@ -54,7 +85,7 @@
             <tr>
                 <ul>
                     <li>${ article.nomArticle }</li>
-                    <li>Prix : ${ article.prixVente }</li>
+                    <li>Prix : ${ article.prixVente } points</li>
                     <li>Fin de l'enchère : ${ article.dateFin }</li>
                     <li>Vendeur : <a
                             href="afficherProfil?noUtilisateur=${ article.vendeur.noUtilisateur }">${ article.vendeur.pseudo }</a>
