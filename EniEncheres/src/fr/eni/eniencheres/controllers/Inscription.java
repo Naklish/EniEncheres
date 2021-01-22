@@ -1,13 +1,16 @@
 package fr.eni.eniencheres.controllers;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.eniencheres.bll.ArticleManager;
 import fr.eni.eniencheres.bll.UtilisateurManager;
+import fr.eni.eniencheres.bo.Article;
 import fr.eni.eniencheres.bo.Utilisateur;
 import fr.eni.eniencheres.dal.DAOFactory;
 import fr.eni.eniencheres.dal.UtilisateurDAO;
@@ -34,6 +37,9 @@ public class Inscription extends HttpServlet {
         //UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
         //Utilisateur utilisateur = new Utilisateur("Flooz", "Tonton", "toto", "mon@email.com", "0666666666", "maRue", "35656", "MaVille", "Password", false);
         //utilisateurDAO.insert(utilisateur);
+        ArticleManager articleManager = new ArticleManager();
+        List<Article> listArticles = articleManager.listerArticle();
+        request.setAttribute("listArticles", listArticles);
         request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
     }
 
@@ -49,15 +55,15 @@ public class Inscription extends HttpServlet {
             String messageErreur = utilisateurManager.enregistrer(utilisateur);
             if (messageErreur == "") {
                 request.setAttribute("messageOk", messageOk);
-            } else {
+                request.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+            } else if (messageErreur != "") {
                 request.setAttribute("messageErreur", messageErreur);
+                request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
             }
-            request.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
         } else {
             String messageMdp = "La confirmation ne correspond pas au mot de passe";
             request.setAttribute("messageMdp", messageMdp);
             request.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
         }
     }
-
 }

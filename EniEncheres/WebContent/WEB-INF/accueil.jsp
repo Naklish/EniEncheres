@@ -24,7 +24,7 @@
         <c:if test="${ not empty utilisateurConnecte.pseudo }">
             <p>Bonjour ${utilisateurConnecte.prenom} ${utilisateurConnecte.nom} !</p>
             <a href="deconnexion">Déconnexion</a>
-            <a href="modifierProfil">Modifier mon profil</a>
+            <a href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon profil</a>
             <a href="nouvelleVente">Vendre un article</a>
         </c:if>
     </div>
@@ -53,7 +53,8 @@
             <c:forEach var="article" items="${ listArticles }">
             <tr>
                 <ul>
-                    <li>${ article.nomArticle }</li>
+                    <li>
+                        <a href="afficherVente?noArticle=${ article.noArticle }">${ article.nomArticle }</a></li>
                     <li>Prix : ${ article.prixVente }</li>
                     <li>Fin de l'enchère : ${ article.dateFin }</li>
                     <li>Vendeur : <a

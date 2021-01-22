@@ -13,7 +13,9 @@ public class Article {
 	private int noUtilisateur;
 	private int noCategorie;
 	private Utilisateur vendeur;
-	
+	private Retrait retrait;
+
+
 	public Article() {
 		// TODO Auto-generated constructor stub
 	}
@@ -125,6 +127,14 @@ public class Article {
 
 	public void setVendeur(Utilisateur vendeur) {
 		this.vendeur = vendeur;
+	}
+
+	public void setRetrait(Retrait retrait) {
+		this.retrait = retrait;
+	}
+
+	public Retrait getRetrait() {
+		return retrait;
 	}
 	
 	

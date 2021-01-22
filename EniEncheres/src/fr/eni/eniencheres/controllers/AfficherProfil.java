@@ -24,6 +24,9 @@ public class AfficherProfil extends HttpServlet {
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = utilisateurManager.recupererById(Integer.parseInt(request.getParameter("noUtilisateur")));
 		request.setAttribute("profil", utilisateur);
+
+
+
 		request.getServletContext().getRequestDispatcher("/WEB-INF/afficherProfil.jsp").forward(request,response);
 	}
 

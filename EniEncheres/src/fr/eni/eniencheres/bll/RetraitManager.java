@@ -14,4 +14,8 @@ public class RetraitManager {
 	public void enregistrerRetrait(Retrait retrait) {
 		this.retraitDAO.insert(retrait);
 	}
+
+	public Retrait recupererById(int noArticle) {
+		return this.retraitDAO.selectById(noArticle);
+	}
 }
