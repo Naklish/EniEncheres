@@ -22,7 +22,10 @@ public class AfficherProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
-		Utilisateur utilisateur = utilisateurManager.recupererById(Integer.parseInt(request.getParameter("noUtilisateur")));
+		Utilisateur utilisateur = new Utilisateur();
+		
+		// On récupère le profil de l'utilisateur à afficher
+		utilisateur = utilisateurManager.recupererById(Integer.parseInt(request.getParameter("noUtilisateur")));
 		request.setAttribute("profil", utilisateur);
 
 		request.getServletContext().getRequestDispatcher("/WEB-INF/afficherProfil.jsp").forward(request,response);

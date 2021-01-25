@@ -17,4 +17,6 @@ public interface UtilisateurDAO {
 	public void update(String colonne, String valueColonne, int noUtilisateur);
 
 	public void delete(int noUtilisateur);
+	
+	public void updateCredit(int credit, int noUtilisateur);
 }

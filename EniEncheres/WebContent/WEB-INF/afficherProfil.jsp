@@ -19,7 +19,11 @@
 	<li>Adresse : ${ profil.adresse }</li>
 	<li>Code postal : ${ profil.codePostal }</li>
 	<li>Ville : ${ profil.ville }</li>
-
+	
+		<c:if test="${ profil.noUtilisateur == utilisateurConnecte.noUtilisateur }">
+			<p>Crédit : ${ profil.credit }<p>
+		</c:if>
+	
 	<c:if test="${ profil.noUtilisateur == utilisateurConnecte.noUtilisateur }">
 		<a href="modifierProfil">Modifier</a>
 	</c:if>

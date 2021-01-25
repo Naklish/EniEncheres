@@ -4,6 +4,8 @@ import fr.eni.eniencheres.bo.Utilisateur;
 import fr.eni.eniencheres.dal.DAOFactory;
 import fr.eni.eniencheres.dal.UtilisateurDAO;
 
+import java.util.List;
+
 public class UtilisateurManager {
     private UtilisateurDAO utilisateurDAO;
 
@@ -75,4 +77,8 @@ public class UtilisateurManager {
 		}
 	}
 
+
+	public void majCredit(int credit, int noUtilisateur) {
+		this.utilisateurDAO.updateCredit(credit, noUtilisateur);
+	}
 }

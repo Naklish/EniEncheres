@@ -52,7 +52,7 @@ public class Utilisateur {
 			this.codePostal = codePostal;
 			this.ville = ville;
 			this.motDePasse = motDePasse;
-			this.credit = 0;
+			this.credit = 100;
 			this.administrateur = administrateur;
 		}
 

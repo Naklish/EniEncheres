@@ -77,5 +77,10 @@ public class ArticleManager {
 			listArticlesRecherche = articleDAO.selectByCategorie(categorie);
 		}
 		return listArticlesRecherche;
+
+	}
+
+	public void updatePrixVente(Enchere enchere) {
+		articleDAO.updatePrixVente(enchere.getNoArticle(), enchere.getMontantEnchere());
 	}
 }
