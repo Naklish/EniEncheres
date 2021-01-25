@@ -14,6 +14,7 @@ public class Article {
 	private int noCategorie;
 	private Utilisateur vendeur;
 	private Retrait retrait;
+	private Categorie categorie;
 
 
 	public Article() {
@@ -136,6 +137,12 @@ public class Article {
 	public Retrait getRetrait() {
 		return retrait;
 	}
-	
-	
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
 }

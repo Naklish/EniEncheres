@@ -11,6 +11,7 @@ import fr.eni.eniencheres.bo.Enchere;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SELECT = "SELECT * FROM ENCHERES";
+
 	
 	@Override
 	public List<Enchere> selectAll() {

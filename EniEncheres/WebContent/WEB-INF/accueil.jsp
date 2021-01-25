@@ -5,6 +5,7 @@
   Time: 16:06
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -60,10 +61,9 @@
    							<label for="categorie">Categorie :</label>
 	 						<select id="categorie" name="categorie" form="accueil" required>
 	 							<option value="0">Toutes</option>
-	  							<option value="2">Livre</option>
-	  							<option value="3">DVD</option>
-	  							<option value="4">High-tech</option>
-	  							<option value="5">Jeux/jouet</option>
+	  							<c:forEach var="categorie" items="${ listeCategories }">
+                                    <option value="${ categorie.noCategorie }">${ categorie.libelle }</option>
+                                </c:forEach>
 	  						</select>
    						</td>
    					</tr>

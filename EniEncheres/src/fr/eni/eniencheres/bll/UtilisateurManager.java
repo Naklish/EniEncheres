@@ -4,8 +4,6 @@ import fr.eni.eniencheres.bo.Utilisateur;
 import fr.eni.eniencheres.dal.DAOFactory;
 import fr.eni.eniencheres.dal.UtilisateurDAO;
 
-import java.util.List;
-
 public class UtilisateurManager {
     private UtilisateurDAO utilisateurDAO;
 
@@ -30,27 +28,21 @@ public class UtilisateurManager {
 		Utilisateur utilisateurConnecte = null;
 		if(this.utilisateurDAO.selectByPseudo(identifiant) != null) {
 			utilisateurConnecte = utilisateurDAO.selectByPseudo(identifiant);
-			if(utilisateurConnecte.getMotDePasse().equals(motDePasse)) {
-				utilisateurConnecte.setNoUtilisateur(utilisateurConnecte.getNoUtilisateur());
-				utilisateurConnecte.setPseudo(utilisateurConnecte.getPseudo());
-				utilisateurConnecte.setNom(utilisateurConnecte.getNom());
-				utilisateurConnecte.setPrenom(utilisateurConnecte.getPrenom());
-				utilisateurConnecte.setEmail(utilisateurConnecte.getEmail());
-			} else {
-				utilisateurConnecte = null;
+			if(!utilisateurConnecte.getMotDePasse().equals(motDePasse)) {
+				return null;
 			}
 		} else if(this.utilisateurDAO.selectByEmail(identifiant) != null) {
 			utilisateurConnecte = utilisateurDAO.selectByEmail(identifiant);
-			if (utilisateurConnecte.getMotDePasse().equals(motDePasse)) {
-				utilisateurConnecte.setNoUtilisateur(utilisateurConnecte.getNoUtilisateur());
-				utilisateurConnecte.setPseudo(utilisateurConnecte.getPseudo());
-				utilisateurConnecte.setNom(utilisateurConnecte.getNom());
-				utilisateurConnecte.setPrenom(utilisateurConnecte.getPrenom());
-				utilisateurConnecte.setEmail(utilisateurConnecte.getEmail());
-			} else {
-				utilisateurConnecte = null;
+			if (!utilisateurConnecte.getMotDePasse().equals(motDePasse)) {
+				return null;
 			}
+		} else {
+			return null;
 		}
+		utilisateurConnecte.setNoUtilisateur(utilisateurConnecte.getNoUtilisateur());
+		utilisateurConnecte.setPseudo(utilisateurConnecte.getPseudo());
+		utilisateurConnecte.setNom(utilisateurConnecte.getNom());
+		utilisateurConnecte.setPrenom(utilisateurConnecte.getPrenom());
 		return utilisateurConnecte;
 	}
 	
@@ -66,4 +58,21 @@ public class UtilisateurManager {
 	public void supprimer(int noUtilisateur) {
     	this.utilisateurDAO.delete(noUtilisateur);
 	}
+
+	public boolean verifPseudoExistant(String nouveauPseudo) {
+    	if(this.utilisateurDAO.selectByPseudo(nouveauPseudo) != null) {
+    		return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean verifMailExistant(String nouveauMail) {
+		if(this.utilisateurDAO.selectByEmail(nouveauMail) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

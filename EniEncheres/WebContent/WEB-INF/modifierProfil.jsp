@@ -12,6 +12,8 @@
 <form action="modifierProfil" method="post">
 <p>${ message }</p>
 <p>${ messageErreur }</p>
+<p>${ messageErrPseudo }</p>
+	<p>${ messageErrMail }</p>
 <table>
 	<tbody>
 		<tr>

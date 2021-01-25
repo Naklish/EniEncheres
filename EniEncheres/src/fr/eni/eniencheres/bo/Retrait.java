@@ -24,9 +24,7 @@ public class Retrait {
 	public void setNoArticle(int noArticle) {
 		this.noArticle = noArticle;
 	}
-	public String getAdresse() {
-		return adresse;
-	}
+	public String getAdresse() { return adresse; }
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
@@ -36,8 +34,7 @@ public class Retrait {
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
-	public String getVille() { return ville;
-	}
+	public String getVille() { return ville; }
 	public void setVille(String ville) {
 		this.ville = ville;
 	}

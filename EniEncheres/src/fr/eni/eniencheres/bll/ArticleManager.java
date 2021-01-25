@@ -1,12 +1,11 @@
 package fr.eni.eniencheres.bll;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import fr.eni.eniencheres.bo.Article;
-import fr.eni.eniencheres.bo.Utilisateur;
 import fr.eni.eniencheres.dal.ArticleDAO;
 import fr.eni.eniencheres.dal.DAOFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArticleManager {
 	private ArticleDAO articleDAO;
@@ -35,10 +34,12 @@ public class ArticleManager {
 	public Article recupererById(int noArticle) {
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		RetraitManager retraitManager = new RetraitManager();
+		CategorieManager categorieManager = new CategorieManager();
 		Article article = articleDAO.selectById(noArticle);
 
 		article.setVendeur(utilisateurManager.recupererById(article.getNoUtilisateur()));
 		article.setRetrait(retraitManager.recupererById(article.getNoArticle()));
+		article.setCategorie(categorieManager.recupererById(article.getNoCategorie()));
 
 		return article;
 	}
@@ -76,6 +77,5 @@ public class ArticleManager {
 			listArticlesRecherche = articleDAO.selectByCategorie(categorie);
 		}
 		return listArticlesRecherche;
-
 	}
 }

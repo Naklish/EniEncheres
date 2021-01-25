@@ -1,9 +1,7 @@
 package fr.eni.eniencheres.controllers;
 
 import fr.eni.eniencheres.bll.ArticleManager;
-import fr.eni.eniencheres.bll.RetraitManager;
 import fr.eni.eniencheres.bo.Article;
-import fr.eni.eniencheres.bo.Retrait;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/afficherVente")
 public class AfficherVente extends HttpServlet {

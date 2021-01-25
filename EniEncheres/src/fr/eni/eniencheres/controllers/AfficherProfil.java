@@ -1,14 +1,14 @@
 package fr.eni.eniencheres.controllers;
 
-import java.io.IOException;
+import fr.eni.eniencheres.bll.UtilisateurManager;
+import fr.eni.eniencheres.bo.Utilisateur;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import fr.eni.eniencheres.bll.UtilisateurManager;
-import fr.eni.eniencheres.bo.Utilisateur;
+import java.io.IOException;
 
 /**
  * Servlet implementation class AfficherProfil
@@ -24,8 +24,6 @@ public class AfficherProfil extends HttpServlet {
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = utilisateurManager.recupererById(Integer.parseInt(request.getParameter("noUtilisateur")));
 		request.setAttribute("profil", utilisateur);
-
-
 
 		request.getServletContext().getRequestDispatcher("/WEB-INF/afficherProfil.jsp").forward(request,response);
 	}

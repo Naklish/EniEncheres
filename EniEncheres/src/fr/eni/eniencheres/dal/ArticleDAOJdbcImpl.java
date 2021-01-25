@@ -1,16 +1,10 @@
 package fr.eni.eniencheres.dal;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import fr.eni.eniencheres.bo.Article;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import fr.eni.eniencheres.bo.Article;
-import fr.eni.eniencheres.bo.Utilisateur;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
     private static final String SELECT = "SELECT * FROM ARTICLES_VENDUS";
@@ -34,7 +28,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			ResultSet rs = stmt.executeQuery(SELECT);
 
 			if(rs == null) {
-				throw new SQLException("Erreur d'�xecution");
+				throw new SQLException("Erreur d'éxecution");
 			}
 
 			while(rs.next()) {

@@ -1,6 +1,7 @@
 package fr.eni.eniencheres.controllers;
 
 import fr.eni.eniencheres.bll.ArticleManager;
+import fr.eni.eniencheres.bll.CategorieManager;
 import fr.eni.eniencheres.bll.UtilisateurManager;
 import fr.eni.eniencheres.bo.Article;
 import fr.eni.eniencheres.bo.Utilisateur;
@@ -15,8 +16,10 @@ import java.util.List;
 
 @WebServlet("/connexion")
 public class Connexion extends HttpServlet {
-
+    CategorieManager categorieManager = new CategorieManager();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        request.setAttribute("listeCategories", categorieManager.listerCategories());
         request.getServletContext().getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request,response);
     }
 
@@ -24,6 +27,8 @@ public class Connexion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UtilisateurManager utilisateurManager = new UtilisateurManager();
         Utilisateur utilisateurConnecte = utilisateurManager.connecter(request.getParameter("login"), request.getParameter("motdepasse"));
+
+        request.setAttribute("listeCategories", categorieManager.listerCategories());
 
         ArticleManager articleManager = new ArticleManager();
     	List<Article> listArticles = articleManager.listerArticle();
@@ -33,7 +38,6 @@ public class Connexion extends HttpServlet {
             String message = "Identifiant ou mot de passe incorrect.";
             request.setAttribute("message", message);
             request.getServletContext().getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request,response);
-
 
         } else if (utilisateurConnecte.getPseudo() != null){
             request.getSession().setAttribute("utilisateurConnecte", utilisateurConnecte);
