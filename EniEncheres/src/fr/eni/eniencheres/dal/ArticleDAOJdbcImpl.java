@@ -19,7 +19,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
             + "VALUES (?,?,?,?,?,?,?,?)";
     private static final String SELECT_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?";
 	private static final String SELECT_BY_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ?";
-
+	private static final String UPDATE_PRIX_VENTE ="UPDATE ARTICLES_VENDUS SET prix_vente = ? WHERE no_article = ?";
+	
 	@Override
 	public List<Article> selectAll() {
 		List<Article> listArticles = new ArrayList<Article>();
@@ -202,6 +203,24 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		return listArticles;
 	}
 
-
+	@Override
+	public void updatePrixVente(int noArticle, int prixVente) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(UPDATE_PRIX_VENTE);
+			
+			pstmt.setInt(1, prixVente);
+			pstmt.setInt(2, noArticle);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 }

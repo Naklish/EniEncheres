@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.eniencheres.bo.Article;
+import fr.eni.eniencheres.bo.Enchere;
 import fr.eni.eniencheres.bo.Utilisateur;
 import fr.eni.eniencheres.dal.ArticleDAO;
 import fr.eni.eniencheres.dal.DAOFactory;
@@ -77,5 +78,9 @@ public class ArticleManager {
 		}
 		return listArticlesRecherche;
 
+	}
+	
+	public void updatePrixVente(Enchere enchere) {
+		articleDAO.updatePrixVente(enchere.getNoArticle(), enchere.getMontantEnchere());
 	}
 }

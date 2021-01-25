@@ -66,4 +66,8 @@ public class UtilisateurManager {
 	public void supprimer(int noUtilisateur) {
     	this.utilisateurDAO.delete(noUtilisateur);
 	}
+	
+	public void majCredit(int credit, int noUtilisateur) {
+		this.utilisateurDAO.updateCredit(credit, noUtilisateur);
+	}
 }

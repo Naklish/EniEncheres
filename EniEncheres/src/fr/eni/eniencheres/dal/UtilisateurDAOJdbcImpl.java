@@ -20,6 +20,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
     private static final String SELECT_MAIL = "SELECT * FROM UTILISATEURS WHERE email = ?";
     private static final String SELECT_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
     private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
+    private static final String UPDATE_CREDIT = "UPDATE UTILISATEURS SET credit = ? WHERE no_utilisateur = ?";
 
 
     @Override
@@ -323,5 +324,26 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             throwables.printStackTrace();
         }
     }
+
+	@Override
+	public void updateCredit(int credit, int noUtilisateur) {
+		Connection cnx = null;
+        PreparedStatement pstmt = null;
+        
+        try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(UPDATE_CREDIT);
+			
+			pstmt.setInt(1, credit);
+			pstmt.setInt(2, noUtilisateur);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }
 

@@ -6,13 +6,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.net.httpserver.HttpContext;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+
 import fr.eni.eniencheres.bll.ArticleManager;
 import fr.eni.eniencheres.bll.EnchereManager;
 import fr.eni.eniencheres.bo.Article;
 import fr.eni.eniencheres.bo.Enchere;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 @WebServlet("/accueil")
 public class Accueil extends HttpServlet {
@@ -43,4 +49,6 @@ public class Accueil extends HttpServlet {
     	request.setAttribute("listArticles", listArticles);
     	request.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
     }
+
+
 }
