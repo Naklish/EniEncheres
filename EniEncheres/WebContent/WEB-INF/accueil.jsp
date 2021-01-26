@@ -78,17 +78,17 @@
                                     <label class="form-check-label" for="achats">Achats</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="choixAchat" id="encheresOuvertes">
+                                    <input class="form-check-input" type="checkbox" name="encheresOuvertes" value="choixAchat" id="encheresOuvertes">
                                     <label class="form-check-label" for="encheresOuvertes">enchères ouvertes</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="choixAchat" id="encheresEnCours">
+                                    <input class="form-check-input" type="checkbox" name="encheresEnCours" value="choixAchat" id="encheresEnCours">
                                     <label class="form-check-label" for="encheresEnCours">mes enchères en
                                         cours</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="choixAchat" id="encheresRemportees">
-                                    <label class="form-check-label" for="encheresRemportees">mes enchères
+                                    <input class="form-check-input" type="checkbox" name="mesEncheresRemportees" value="choixAchat" id="mesEncheresRemportees">
+                                    <label class="form-check-label" for="mesEncheresRemportees">mes enchères
                                         remportées</label>
                                 </div>
                             </div>
@@ -98,15 +98,15 @@
                                 <label class="form-check-label" for="ventes">Mes ventes</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="choixVente" id="ventesEnCours" disabled>
+                                <input class="form-check-input" type="checkbox" name="ventesEnCours" value="choixVente" id="ventesEnCours" disabled>
                                 <label class="form-check-label" for="ventesEnCours">mes ventes en cours</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="choixVente" id="ventesNonDebutees" disabled>
-                                <label class="form-check-label" for="ventesNonDebutees">ventes non débutées</label>
+                                <input class="form-check-input" type="checkbox" name="ventesNonDebutee" value="choixVente" id="ventesNonDebutee" disabled>
+                                <label class="form-check-label" for="ventesNonDebutee">ventes non débutées</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="choixVente" id="ventesTerminees" disabled>
+                                <input class="form-check-input" type="checkbox" name="ventesTerminees" value="choixVente" id="ventesTerminees" disabled>
                                 <label class="form-check-label" for="ventesTerminees">ventes terminées</label>
                             </div>
                         </div>
@@ -162,16 +162,16 @@
 <script>
     // Activer checkboxs partie Achats
     $("input[value='value1']").change(function() {
-        $("input[name='choixAchat']").prop('disabled', false);
-        $("input[name='choixVente']").prop('checked', false);
-        $("input[name='choixVente']").prop('disabled', true);
+        $("input[value='choixAchat']").prop('disabled', false);
+        $("input[value='choixVente']").prop('checked', false);
+        $("input[value='choixVente']").prop('disabled', true);
     });
 
     // Activer checkboxs partie Mes Ventes
     $("input[value='value2']").change(function() {
-        $("input[name='choixVente']").prop('disabled', false);
-        $("input[name='choixAchat']").prop('checked', false);
-        $("input[name='choixAchat']").prop('disabled', true);
+        $("input[value='choixVente']").prop('disabled', false);
+        $("input[value='choixAchat']").prop('checked', false);
+        $("input[value='choixAchat']").prop('disabled', true);
     });
 </script>
 </body>
