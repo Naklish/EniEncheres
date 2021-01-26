@@ -1,21 +1,28 @@
-.navbar-expand-md {
-    justify-content: space-between;
-    margin-bottom: 40px;
+
+/******** Style navbar ********/
+
+.navbar-expand-md .navbar-collapse {
+    justify-content: right;
 }
 
-.nav-link {
+.navbar-dark .navbar-text {
     color: white;
 }
-
 
 .linear-gradient {
     background: linear-gradient(to right, #026FE3, darkcyan);
 }
 
-.navbar-text {
+.navbar-dark .navbar-nav .nav-link {
     color: white;
-    size: 0.8rem;
 }
+
+.navbar-text {
+    margin-right: 50px;
+    font-size: 0.9em;
+}
+
+/******** Style formulaire ********/
 
 form {
     margin-top: 30px;
