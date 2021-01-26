@@ -1,6 +1,7 @@
 package fr.eni.eniencheres.bll;
 
 import fr.eni.eniencheres.bo.Article;
+import fr.eni.eniencheres.bo.Enchere;
 import fr.eni.eniencheres.dal.ArticleDAO;
 import fr.eni.eniencheres.dal.DAOFactory;
 

@@ -10,98 +10,169 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Accueil</title>
     <title>Accueil: ENI-Enchères</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="<c:url value="/css/accueil.css"/>" rel="stylesheet">
 </head>
+
 <body>
-<h4>${messageOk}</h4>
-<h4>${messageSuppr}</h4>
-<header>
-    <div class="eni">
-        <h1><a href="accueil">ENI-Encheres</a></h1>
-    </div>
-    <div class="choixUtilisateur">
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-md linear-gradient">
+        <a class="navbar-brand col-sm-2" href="accueil">ENI-Encheres</a>
         <c:if test="${ not empty utilisateurConnecte.pseudo }">
-            <p>Bonjour ${utilisateurConnecte.prenom} ${utilisateurConnecte.nom} !</p>
-            <a href="deconnexion">Déconnexion</a>
-            <a href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon profil</a>
-            <a href="nouvelleVente">Vendre un article</a>
+            <ul class="navbar-nav">
+                <span class="navbar-text text-center">Bonjour ${ utilisateurConnecte.pseudo } !</span>
+                <li class="nav-item"><a class="nav-link" href="deconnexion">Déconnexion</a></li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
+                    profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="nouvelleVente">Vendre un article</a></li>
+            </ul>
         </c:if>
-    </div>
-    <c:if test="${ empty utilisateurConnecte.pseudo }">
+        <c:if test="${ empty utilisateurConnecte.pseudo }">
 
-        <div class="choix">
-            <p><a href="connexion">S'inscrire - Se connecter</a></p>
-        </div>
-    </c:if>
-    <h2>Accueil</h2>
-    <h3><strong>Liste des enchères</strong></h3>
-</header>
+            <a class="nav-link" href="connexion">S'inscrire - Se connecter</a>
+        </c:if>
+    </nav>
+    <header class="text-center">
+        <h3><strong>Liste des enchères</strong></h3>
+    </header>
 
+    <h4>${messageOk}</h4>
+    <h4>${messageSuppr}</h4>
 
-<nav>
     <!-- recherche d'un article + catégorie + boutton rechercher -->
-    <div>
-    	<form action="accueil" method="post" id="accueil">
-    		<table>
-    			<thead>
-    				<tr>
-    					<th><label for="recherche">Filtres :</label></th>
-    				</tr>
-    			</thead>
-    			<tbody>
+    <div class="row">
+        <div class="offset-sm-1 col-sm-4">
+            <form action="accueil" method="post" id="accueil">
+                <div classe="form-group">
+                    <div class="choixFiltre">
+                        <label for="recherche">Filtres :</label>
+                        <div class="loupe">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </div>
 
-    				<tr>
-    					<td><input type="search" id="recherche" name="recherche"></td>
-    					<td><input type="submit" value="Rechercher"></td>
-   					</tr>
-   					<tr>
-   						<td>
-   							<label for="categorie">Categorie :</label>
-	 						<select id="categorie" name="categorie" form="accueil" required>
-	 							<option value="0">Toutes</option>
-	  							<c:forEach var="categorie" items="${ listeCategories }">
-                                    <option value="${ categorie.noCategorie }">${ categorie.libelle }</option>
-                                </c:forEach>
-	  						</select>
-   						</td>
-   					</tr>
-    			</tbody>
-
-    	</table>
-    	</form>
-    </div>
-</nav>
-
-<!-- Section qui présente les différentes enchères disponnibles -->
-<section>
-    <article>
-        <div class="titreArticle">
-            <h1>Enchères en cours:</h1>
+                        <input type="search" id="recherche" name="recherche"
+                               placeholder="Le nom de l'article contient">
+                    </div>
+                    <br/>
+                    <div class="choixCategorie">
+                        <label for="categorie">Categorie :</label>
+                        <select id="categorie" name="categorie" form="accueil" class="browser-default custom-select "
+                                required>
+                            <option value="0">Toutes</option>
+                            <c:forEach var="categorie" items="${ listeCategories }">
+                                <option value="${ categorie.noCategorie }">${ categorie.libelle }</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <c:if test="${ not empty utilisateurConnecte.pseudo }">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="choixAchatsVentes" id="achats" value="value1" checked>
+                                    <label class="form-check-label" for="achats">Achats</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="choixAchat" id="encheresOuvertes">
+                                    <label class="form-check-label" for="encheresOuvertes">enchères ouvertes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="choixAchat" id="encheresEnCours">
+                                    <label class="form-check-label" for="encheresEnCours">mes enchères en
+                                        cours</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="choixAchat" id="encheresRemportees">
+                                    <label class="form-check-label" for="encheresRemportees">mes enchères
+                                        remportées</label>
+                                </div>
+                            </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="choixAchatsVentes" id="ventes" value="value2">
+                                <label class="form-check-label" for="ventes">Mes ventes</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="choixVente" id="ventesEnCours" disabled>
+                                <label class="form-check-label" for="ventesEnCours">mes ventes en cours</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="choixVente" id="ventesNonDebutees" disabled>
+                                <label class="form-check-label" for="ventesNonDebutees">ventes non débutées</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="choixVente" id="ventesTerminees" disabled>
+                                <label class="form-check-label" for="ventesTerminees">ventes terminées</label>
+                            </div>
+                        </div>
+                    </div>
+                    </c:if>
+                </div>
+            </form>
         </div>
-        <table>
-            <c:forEach var="article" items="${ listArticles }">
-            <tr>
-                <ul>
-                    <li>
-                        <a href="afficherVente?noArticle=${ article.noArticle }">${ article.nomArticle }</a></li>
-                    <li>Prix : ${ article.prixVente } points</li>
-                    <li>Fin de l'enchère : ${ article.dateFin }</li>
-                    <li>Vendeur : <a
-                            href="afficherProfil?noUtilisateur=${ article.vendeur.noUtilisateur }">${ article.vendeur.pseudo }</a>
-                    </li>
-                </ul>
-            </tr>
-    </article>
+        <div class="offset-sm-1 col-sm-5">
+            <input class="btn btn-outline-info search-btn" type="submit" form="accueil" value="Rechercher">
+        </div>
+    </div>
 
-    </c:forEach>
-    </table>
+    <!-- Section qui présente les différentes enchères disponnibles -->
+    <section>
+        <article>
+            <div class="titreArticle">
+                <h5>Enchères en cours:</h5>
+            </div>
+            <div class="row liste-encheres">
+                <c:forEach var="article" items="${ listArticles }">
+                    <div class="col-sm-5 mb-4 ml-4">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="" alt="..." class="img-fluid"/>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><a
+                                                href="afficherVente?noArticle=${ article.noArticle }">${ article.nomArticle }</a>
+                                        </h5>
+                                        <p class="card-text">Prix : ${ article.prixVente } points</p>
+                                        <p class="card-text">Fin de l'enchère : ${ article.dateFin }</p>
+                                        <p class="card-text"> Vendeur : <a
+                                                href="afficherProfil?noUtilisateur=${ article.vendeur.noUtilisateur }">${ article.vendeur.pseudo }</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </article>
+    </section>
 
-</section>
+    <footer>
+        <!-- Pied de page (à définir) -->
+    </footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+<script>
+    // Activer checkboxs partie Achats
+    $("input[value='value1']").change(function() {
+        $("input[name='choixAchat']").prop('disabled', false);
+        $("input[name='choixVente']").prop('checked', false);
+        $("input[name='choixVente']").prop('disabled', true);
+    });
 
-<footer>
-    <!-- Pied de page (à définir) -->
-</footer>
+    // Activer checkboxs partie Mes Ventes
+    $("input[value='value2']").change(function() {
+        $("input[name='choixVente']").prop('disabled', false);
+        $("input[name='choixAchat']").prop('checked', false);
+        $("input[name='choixAchat']").prop('disabled', true);
+    });
+</script>
 </body>
 </html>

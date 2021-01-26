@@ -18,7 +18,7 @@
         </li>
         <li>
             <label for="description">Description :</label>
-            <input type="textarea" id="description" name="description" required>
+            <textarea id="description" name="description"></textarea>
         </li>
         <li>
             <label for="categorie">Categorie :</label>

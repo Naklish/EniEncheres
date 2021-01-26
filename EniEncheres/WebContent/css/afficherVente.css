@@ -1,0 +1,13 @@
+.list-group-item {
+    display: inline list-item;
+    list-style: inside;
+}
+
+.list-form {
+    display: inline;
+}
+
+#hidden_form {
+    display: none;
+}
+

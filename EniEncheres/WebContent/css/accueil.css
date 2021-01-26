@@ -1,35 +1,64 @@
-.eni {
-	float: left;
-	
+.navbar-expand-md {
+    justify-content: space-between;
 }
 
-h2 {
-	
-	padding-top: 100px;
-	
-	text-align: center;
+.linear-gradient {
+    background: linear-gradient(to right, #026FE3, darkcyan);
 }
 
-h3 {
-	
-	margin-top: 200px;
-	text-align: center;
-	text-decoration: underline;
+.navbar-brand, .nav-link {
+    color: white;
 }
 
-.choix {
-	float: right;
-		
+.navbar-text {
+    margin-right: 30px;
+    color:white;
+    font-size: 0.9em;
 }
 
-.titreArticle {
-	
-	text-align: left;
-	margin-top: 150px;
-	text-decoration: underline;
+header {
+    padding: 40px 0 10px 0;
 }
 
-.choixUtilisateur {
-	float: right;
-	
+
+input#recherche {
+    width: 100%;
+    height: 40px;
+    padding-left: 30px;
+    border: 1px solid black;
+    border-radius: 20px;
 }
+
+div.choixCategorie {
+    display: flex;
+    justify-content: space-between;
+}
+
+#categorie {
+    width: 70%;
+    height: 35px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.search-btn {
+    margin-top: 40px;
+    width: 350px;
+    height: 100px;
+    box-shadow: 5px 5px 5px darkcyan;
+}
+
+.loupe {
+    position: absolute;
+    margin-top: 12px;
+    margin-left: 7px;
+}
+
+section {
+    margin-top: 50px;
+}
+
+div.liste-encheres {
+    margin-top: 50px;
+}
+
