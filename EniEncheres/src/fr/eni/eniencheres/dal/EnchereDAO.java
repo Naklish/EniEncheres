@@ -17,4 +17,6 @@ public interface EnchereDAO {
 	public Enchere selectByUtilisateurArticle(int noUtilisateur, int noArticle);
 	
 	public void update(Enchere enchere, Utilisateur utilisateur);
+	
+	public List<Enchere> selectByUtilisateur(int noUtilisateur);
 }

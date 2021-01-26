@@ -47,6 +47,10 @@ public class Inscription extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	ArticleManager articleManager = new ArticleManager();
+        List<Article> listArticles = articleManager.listerArticle();
+        request.setAttribute("listArticles", listArticles);
+        
         if (request.getParameter("motDePasse").equals(request.getParameter("confirmation"))) {
             Utilisateur utilisateur = new Utilisateur(request.getParameter("pseudo"), request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("email"),
                     request.getParameter("telephone"), request.getParameter("adresse"), request.getParameter("codePostal"), request.getParameter("ville"), request.getParameter("motDePasse"), false);

@@ -19,7 +19,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SELECT_BY_ARTICLE = "SELECT * FROM ENCHERES WHERE no_article = ?";
 	private static final String SELECT_BY_UTILISATEUR_ARTICLE = "SELECT * FROM ENCHERES WHERE no_article = ? AND no_utilisateur = ?";
 	private static final String UPDATE = "UPDATE ENCHERES SET montant_enchere = ?, date_enchere = ? WHERE no_utilisateur = ? AND no_article = ?";
-
+	private static final String SELECT_BY_UTILISATEUR = "SELECT * FROM ENCHERES WHERE no_utilisateur = ?";
 
 	@Override
 	public List<Enchere> selectAll() {
@@ -35,7 +35,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs = stmt.executeQuery(SELECT);
 			
 			if(rs == null) {
-				throw new SQLException("Erreur d'éxecution");
+				throw new SQLException("Erreur d'ï¿½xecution");
 			}
 			
 			while(rs.next()) {
@@ -163,5 +163,32 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		}
 	}
 
+	@Override
+	public List<Enchere> selectByUtilisateur(int noUtilisateur) {
+		List<Enchere> listEnchere = new ArrayList<Enchere>();
+		Enchere enchere = null;
+		Connection cnx = null;
+        PreparedStatement pstmt = null;
+		
+        try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SELECT_BY_UTILISATEUR);
+			
+			pstmt.setInt(1, noUtilisateur);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				enchere = new Enchere(rs.getInt("no_utilisateur"), rs.getInt("no_article"), rs.getDate("date_enchere").toLocalDate(), rs.getInt("montant_enchere"));
+				listEnchere.add(enchere);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listEnchere;
+	}
 
+	
 }

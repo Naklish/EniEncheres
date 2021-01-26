@@ -16,4 +16,6 @@ public interface ArticleDAO {
 	public List<Article> selectByCategorie(int categorie);
 	
 	public void updatePrixVente(int noArticle, int prixVente);
+	
+	public List<Article> selectByUtilisateur(int noUtilisateur);
 }

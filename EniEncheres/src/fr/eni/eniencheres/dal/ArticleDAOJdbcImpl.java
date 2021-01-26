@@ -14,6 +14,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
     private static final String SELECT_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?";
 	private static final String SELECT_BY_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ?";
 	private static final String UPDATE_PRIX_VENTE ="UPDATE ARTICLES_VENDUS SET prix_vente = ? WHERE no_article = ?";
+	private static final String SELECT_BY_UTILISATEUR = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur = ?";
 	
 	@Override
 	public List<Article> selectAll() {
@@ -196,7 +197,38 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		}
 		return listArticles;
 	}
-
+	
+	@Override
+	public List<Article> selectByUtilisateur(int noUtilisateur){
+		List<Article> listArticle = new ArrayList<Article>();
+		Article article = null;
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SELECT_BY_UTILISATEUR);
+			
+			pstmt.setInt(1, noUtilisateur);
+			ResultSet rs = pstmt.executeQuery();
+			
+			 if (rs == null) {
+	                throw new SQLException("Erreur d'exécution");
+	         }
+			 while (rs.next()) {
+	            	article = new Article(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"),
+							rs.getDate("date_debut_encheres").toLocalDate(), rs.getDate("date_fin_encheres").toLocalDate(),
+							rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+					listArticle.add(article);
+	            }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listArticle;
+	}
+	
 	@Override
 	public void updatePrixVente(int noArticle, int prixVente) {
 		Connection cnx = null;

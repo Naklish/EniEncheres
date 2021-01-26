@@ -15,17 +15,17 @@
 <a href="accueil">Accueil</a>
 <h1>Détail vente</h1>
 <p>${ message }</p>
+<p>${ messageVente }</p>
 <ul>
     <h3>${ vente.nomArticle }</h3>
     <li>Description : ${ vente.description }</li>
     <li>Catégorie : ${ vente.categorie.libelle }</li>
-    <li>Meilleure offre : </li>
-    <li>Meilleur offre : ${ meilleurEnchere.montantEnchere } par ${ acheteur.pseudo }
+    <li>Meilleure offre : ${ meilleurEnchere.montantEnchere } par ${ acheteur.pseudo }
     <li>Mise à prix : ${ vente.prixInitial }</li>
     <li>Fin de l'enchère : ${ vente.dateFin }</li>
     <li>Retrait : ${ vente.retrait.adresse }<br/>${ vente.retrait.codePostal } ${ vente.retrait.ville }</li>
     <li>Vendeur : ${ vente.vendeur.pseudo }</li>
-    <c:if test="${ not empty utilisateurConnecte.pseudo }">
+    <c:if test="${ not empty utilisateurConnecte.pseudo && !venteFinie }">
     	<li>
     		<form action="encherir"	method="get">
     			<label for="enchere">Ma proposition :</label>
@@ -34,6 +34,12 @@
     			<input type="submit" value="Enchérir">
     		</form>
     	</li>
+    </c:if>
+    <c:if test="${ not empty utilisateurConnecte.pseudo && venteRemporte }">
+    	<li>Téléphone : ${ vendeur.telephone }</li>
+    	<form action="accueil" method="get">
+    		<input type="submit" value="Retour">
+    	</form>
     </c:if>
 </ul>
 
