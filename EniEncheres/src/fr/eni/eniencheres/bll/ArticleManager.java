@@ -100,7 +100,7 @@ public class ArticleManager {
 
 
 		for(Article article : listArticle) {
-			if(article.getDateFin().isAfter(LocalDate.now())) {
+			if(LocalDate.now().isAfter(article.getDateDebut()) &&  LocalDate.now().isBefore(article.getDateFin())) {
 				article.setVendeur(utilisateurManager.recupererById(article.getNoUtilisateur()));
 				listArticleEnCours.add(article);
 			}
@@ -115,7 +115,7 @@ public class ArticleManager {
 		List<Article> listArticleEnCours = new ArrayList<Article>();
 
 		for(Article article : listArticle) {
-			if(article.getDateFin().isAfter(LocalDate.now())) {
+			if(LocalDate.now().isAfter(article.getDateDebut()) && LocalDate.now().isBefore(article.getDateFin())) {
 				article.setVendeur(utilisateurManager.recupererById(article.getNoUtilisateur()));
 				listArticleEnCours.add(article);
 			}
@@ -176,7 +176,6 @@ public class ArticleManager {
 			if(LocalDate.now().isAfter(article.getDateFin())) {
 				article.setVendeur(utilisateurManager.recupererById(article.getNoUtilisateur()));
 				listArticleEnCours.add(article);
-				System.out.println(article.getNomArticle());
 			}
 		}
 
@@ -186,33 +185,33 @@ public class ArticleManager {
 
 	public List<Article> listerArticlesNonDebute(String recherche){
 		List<Article> listArticle = this.rechercherArticle(recherche);
-		List<Article> listArticleEnCours = new ArrayList<Article>();
+		List<Article> listArticleNonDebute = new ArrayList<Article>();
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 
 		for(Article article : listArticle) {
-			if(LocalDate.now().isAfter(article.getDateDebut()) && LocalDate.now().isBefore(article.getDateFin())) {
+			if(LocalDate.now().isBefore(article.getDateDebut())) {
 				article.setVendeur(utilisateurManager.recupererById(article.getNoUtilisateur()));
-				listArticleEnCours.add(article);
+				listArticleNonDebute.add(article);
 			}
 		}
 
-		return listArticleEnCours;
+		return listArticleNonDebute;
 	}
 
 
 	public List<Article> listerArticlesNonDebuteByCategorie(String recherche, int categorie){
 		List<Article> listArticle = this.rechercherArticleByCategorie(recherche, categorie);
-		List<Article> listArticleEnCours = new ArrayList<Article>();
+		List<Article> listArticleNonDebute = new ArrayList<Article>();
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 
 		for(Article article : listArticle) {
-			if(LocalDate.now().isAfter(article.getDateDebut()) && LocalDate.now().isBefore(article.getDateFin())) {
+			if(LocalDate.now().isBefore(article.getDateDebut())) {
 				article.setVendeur(utilisateurManager.recupererById(article.getNoUtilisateur()));
-				listArticleEnCours.add(article);
+				listArticleNonDebute.add(article);
 			}
 		}
 
-		return listArticleEnCours;
+		return listArticleNonDebute;
 
 	}
 	public List<Article> listerArticlesFiniByCategorie(String recherche, int categorie){
