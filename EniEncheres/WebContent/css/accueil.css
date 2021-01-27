@@ -1,5 +1,13 @@
 .navbar-expand-md {
     justify-content: space-between;
+/******** Style navbar ********/
+
+.navbar-expand-md .navbar-collapse {
+    justify-content: right;
+}
+
+.navbar-dark .navbar-text {
+    color: white;
 }
 
 .linear-gradient {
@@ -7,19 +15,29 @@
 }
 
 .navbar-brand, .nav-link {
+.nav-link {
+    color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link {
     color: white;
 }
 
 .navbar-text {
     margin-right: 30px;
-    color:white;
+    margin-right: 50px;
     font-size: 0.9em;
 }
+
+
+/******** Style header ********/
 
 header {
     padding: 40px 0 10px 0;
 }
 
+
+/******** Style fonction recherche ********/
 
 input#recherche {
     width: 100%;
@@ -44,6 +62,8 @@ div.choixCategorie {
 .search-btn {
     margin-top: 40px;
     width: 350px;
+    margin-left: 30px;
+    width: 250px;
     height: 100px;
     box-shadow: 5px 5px 5px darkcyan;
 }
@@ -53,6 +73,9 @@ div.choixCategorie {
     margin-top: 12px;
     margin-left: 7px;
 }
+
+
+/******** Style liste enchères (cards) ********/
 
 section {
     margin-top: 50px;

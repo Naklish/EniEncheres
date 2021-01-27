@@ -19,6 +19,8 @@
 <body>
 <div class="container-fluid">
     <nav class="navbar navbar-expand-md linear-gradient">
+
+    <nav class="navbar navbar-expand-md navbar-dark linear-gradient">
         <a class="navbar-brand col-sm-2" href="accueil">ENI-Encheres</a>
         <c:if test="${ not empty utilisateurConnecte.pseudo }">
             <ul class="navbar-nav">
@@ -31,10 +33,31 @@
             </ul>
         </c:if>
         <c:if test="${ empty utilisateurConnecte.pseudo }">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <c:if test="${ not empty utilisateurConnecte.pseudo }">
+                <ul class="navbar-nav">
+                    <span class="navbar-text d-none d-md-block">Bonjour ${ utilisateurConnecte.pseudo } !</span>
+                    <li class="nav-item"><a class="nav-link" href="deconnexion">Déconnexion</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
+                        profil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="nouvelleVente">Vendre un article</a></li>
+                </ul>
+            </c:if>
+            <c:if test="${ empty utilisateurConnecte.pseudo }">
 
             <a class="nav-link" href="connexion">S'inscrire - Se connecter</a>
         </c:if>
+                <a class="nav-link" href="connexion">S'inscrire - Se connecter</a>
+            </c:if>
+        </div>
     </nav>
+
+
     <header class="text-center">
         <h3><strong>Liste des enchères</strong></h3>
     </header>
@@ -75,19 +98,27 @@
                             <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="choixAchatsVentes" id="achats" value="value1" checked>
+                                    <input class="form-check-input" type="radio" name="choixAchatsVentes" id="achats"
+                                           value="value1" checked>
                                     <label class="form-check-label" for="achats">Achats</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="encheresOuvertes" value="choixAchat" id="encheresOuvertes">
+                                    <input class="form-check-input" type="checkbox" name="encheresOuvertes"
+                                           value="choixAchat" id="encheresOuvertes">
                                     <label class="form-check-label" for="encheresOuvertes">enchères ouvertes</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="encheresEnCours" value="choixAchat" id="encheresEnCours">
+                                    <input class="form-check-input" type="checkbox" name="encheresEnCours"
+                                           value="choixAchat" id="encheresEnCours">
                                     <label class="form-check-label" for="encheresEnCours">mes enchères en
                                         cours</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="mesEncheresRemportees" value="choixAchat" id="mesEncheresRemportees">
+                                    <input class="form-check-input" type="checkbox" name="mesEncheresRemportees"
+                                           value="choixAchat" id="mesEncheresRemportees">
                                     <label class="form-check-label" for="mesEncheresRemportees">mes enchères
                                         remportées</label>
                                 </div>
@@ -108,9 +139,29 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="ventesTerminees" value="choixVente" id="ventesTerminees" disabled>
                                 <label class="form-check-label" for="ventesTerminees">ventes terminées</label>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="choixAchatsVentes" id="ventes"
+                                           value="value2">
+                                    <label class="form-check-label" for="ventes">Mes ventes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="ventesEnCours"
+                                           value="choixVente" id="ventesEnCours" disabled>
+                                    <label class="form-check-label" for="ventesEnCours">mes ventes en cours</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="ventesNonDebutee"
+                                           value="choixVente" id="ventesNonDebutee" disabled>
+                                    <label class="form-check-label" for="ventesNonDebutee">ventes non débutées</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="ventesTerminees"
+                                           value="choixVente" id="ventesTerminees" disabled>
+                                    <label class="form-check-label" for="ventesTerminees">ventes terminées</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </c:if>
                 </div>
             </form>
@@ -158,17 +209,20 @@
         <!-- Pied de page (à définir) -->
     </footer>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
 <script>
     // Activer checkboxs partie Achats
-    $("input[value='value1']").change(function() {
+    $("input[value='value1']").change(function () {
         $("input[value='choixAchat']").prop('disabled', false);
         $("input[value='choixVente']").prop('checked', false);
         $("input[value='choixVente']").prop('disabled', true);
     });
 
     // Activer checkboxs partie Mes Ventes
-    $("input[value='value2']").change(function() {
+    $("input[value='value2']").change(function () {
         $("input[value='choixVente']").prop('disabled', false);
         $("input[value='choixAchat']").prop('checked', false);
         $("input[value='choixAchat']").prop('disabled', true);

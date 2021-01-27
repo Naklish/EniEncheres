@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 .navbar-expand-md .navbar-collapse {
     justify-content: right;
@@ -5,10 +6,13 @@
 
 .navbar-dark .navbar-text {
     color: white;
+=======
+>>>>>>> 4fd2ebeefc270b679196c06f384442d20d1daf9d
 }
 
 .linear-gradient {
     background: linear-gradient(to right, #026FE3, darkcyan);
+<<<<<<< HEAD
 }
 
 .nav-link {
@@ -28,3 +32,5 @@
 	margin-top: 20px;
 }
 
+=======
+>>>>>>> 4fd2ebeefc270b679196c06f384442d20d1daf9d
