@@ -17,33 +17,31 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-md navbar-dark linear-gradient">
+    <a class="navbar-brand col-sm-2" href="accueil">ENI-Encheres</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <c:if test="${ not empty utilisateurConnecte.pseudo }">
+            <ul class="navbar-nav">
+                <span class="navbar-text d-none d-md-block">Bonjour ${ utilisateurConnecte.pseudo } !</span>
+                <li class="nav-item"><a class="nav-link" href="deconnexion">Déconnexion</a></li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
+                    profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="nouvelleVente">Vendre un article</a></li>
+            </ul>
+        </c:if>
+        <c:if test="${ empty utilisateurConnecte.pseudo }">
+
+            <a class="nav-link" href="connexion">S'inscrire - Se connecter</a>
+        </c:if>
+    </div>
+</nav>
+
 <div class="container-fluid">
-
-    <nav class="navbar navbar-expand-md navbar-dark linear-gradient">
-        <a class="navbar-brand col-sm-2" href="accueil">ENI-Encheres</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <c:if test="${ not empty utilisateurConnecte.pseudo }">
-                <ul class="navbar-nav">
-                    <span class="navbar-text d-none d-md-block">Bonjour ${ utilisateurConnecte.pseudo } !</span>
-                    <li class="nav-item"><a class="nav-link" href="deconnexion">Déconnexion</a></li>
-                    <li class="nav-item"><a class="nav-link"
-                                            href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
-                        profil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="nouvelleVente">Vendre un article</a></li>
-                </ul>
-            </c:if>
-            <c:if test="${ empty utilisateurConnecte.pseudo }">
-
-                <a class="nav-link" href="connexion">S'inscrire - Se connecter</a>
-            </c:if>
-        </div>
-    </nav>
-
-
     <header class="text-center">
         <h3><strong>Liste des enchères</strong></h3>
     </header>
@@ -71,7 +69,7 @@
                     <br/>
                     <div class="choixCategorie">
                         <label for="categorie">Categorie :</label>
-                        <select id="categorie" name="categorie" form="accueil" class="browser-default custom-select "
+                        <select id="categorie" name="categorie" form="accueil" class="browser-default custom-select"
                                 required>
                             <option value="0">Toutes</option>
                             <c:forEach var="categorie" items="${ listeCategories }">
@@ -176,8 +174,12 @@
     </footer>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
 
 <script>
     // Activer checkboxs partie Achats

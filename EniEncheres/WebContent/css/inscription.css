@@ -13,6 +13,10 @@
     background: linear-gradient(to right, #026FE3, darkcyan);
 }
 
+.nav-link {
+    color: white;
+}
+
 .navbar-dark .navbar-nav .nav-link {
     color: white;
 }
@@ -24,8 +28,12 @@
 
 /******** Style formulaire ********/
 
+section {
+    margin-top: 40px;
+}
+
 form {
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .btn {
@@ -33,6 +41,7 @@ form {
     padding: 12px;
     width: 200px;
     height: 50px;
+    box-shadow: 5px 5px 5px darkcyan;
 }
 
 input.btn-creer {
