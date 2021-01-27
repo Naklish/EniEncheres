@@ -1,0 +1,30 @@
+
+.navbar-expand-md .navbar-collapse {
+    justify-content: right;
+}
+
+.navbar-dark .navbar-text {
+    color: white;
+}
+
+.linear-gradient {
+    background: linear-gradient(to right, #026FE3, darkcyan);
+}
+
+.nav-link {
+    color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-text {
+    margin-right: 50px;
+    font-size: 0.9em;
+}
+
+.formulaire {
+	margin-top: 20px;
+}
+

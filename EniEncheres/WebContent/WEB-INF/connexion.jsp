@@ -27,12 +27,14 @@
     <form action="connexion" method="post">
         <fieldset>
         <label for="login">Identifiant ou adresse e-mail :</label>
-        <input type="text" id="login" name="login" required>
+        <input type="text" id="login" name="login" value="${ utilisateurSouvenir.pseudo }" required>
         <br/>
         <label for="motdepasse">Mot de passe :</label>
-        <input type="password" id="motdepasse" name="motdepasse">
+        <input type="password" id="motdepasse" value="${ utilisateurSouvenir.motDePasse }"name="motdepasse">
         <br/>
         <input type="submit" value="Connexion" required>
+        <input type="checkbox" id="souvenir" name="souvenir" value="souvenir">
+        <label for="souvenir">Se souvenir de moi</label>
         </fieldset>
     </form>
     </article>

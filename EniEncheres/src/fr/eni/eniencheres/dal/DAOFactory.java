@@ -20,4 +20,7 @@ public abstract class DAOFactory {
 
 	public static CategorieDAO getCategorieDAO() { return new CategorieDAOJdbcImpl(); };
 	
+	public static CookieIDDAO getCookieIDDAO() {
+		return new CookieIDDAOJdbcImpl();
+	}
 }
