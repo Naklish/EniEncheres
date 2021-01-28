@@ -15,6 +15,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SELECT_BY_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ?";
 	private static final String UPDATE_PRIX_VENTE ="UPDATE ARTICLES_VENDUS SET prix_vente = ? WHERE no_article = ?";
 	private static final String SELECT_BY_UTILISATEUR = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur = ?";
+	private static final String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 	
 	@Override
 	public List<Article> selectAll() {
@@ -194,6 +195,25 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		return listArticles;
 	}
@@ -224,6 +244,25 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		return listArticle;
@@ -245,8 +284,109 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
-		
+	}
+
+	@Override
+	public void update(Article article) {
+		String update = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, no_utilisateur = ?, no_categorie = ? WHERE no_article = ?";
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(update);
+
+			pstmt.setString(1, article.getNomArticle());
+			pstmt.setString(2, article.getDescription());
+			pstmt.setDate(3, Date.valueOf(article.getDateDebut()));
+			pstmt.setDate(4, Date.valueOf(article.getDateFin()));
+			pstmt.setInt(5, article.getPrixInitial());
+			pstmt.setInt(6, article.getPrixVente());
+			pstmt.setInt(7, article.getNoUtilisateur());
+			pstmt.setInt(8, article.getNoCategorie());
+			pstmt.setInt(9, article.getNoArticle());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void delete(int noArticle) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(DELETE);
+
+			pstmt.setInt(1, noArticle);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 }

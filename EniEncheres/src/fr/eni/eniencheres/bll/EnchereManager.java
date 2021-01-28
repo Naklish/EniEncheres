@@ -1,13 +1,11 @@
 package fr.eni.eniencheres.bll;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import fr.eni.eniencheres.bo.Enchere;
 import fr.eni.eniencheres.bo.Utilisateur;
 import fr.eni.eniencheres.dal.DAOFactory;
 import fr.eni.eniencheres.dal.EnchereDAO;
+
+import java.util.List;
 
 public class EnchereManager {
 	private EnchereDAO enchereDAO;
@@ -93,6 +91,8 @@ public class EnchereManager {
 	}
 		return enchere;
 	}
+
+	public void deleteEnchere(int noArticle) { this.enchereDAO.delete(noArticle); }
 	
 }
 

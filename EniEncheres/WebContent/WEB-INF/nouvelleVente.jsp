@@ -36,14 +36,12 @@
     </div>
 </nav>
 
-<section class="container-fluid">
+<section class="container">
     <h3 class="text-center">Nouvelle vente</h3>
     <p>${ message }</p>
     <form action="nouvelleVente" method="post" id="nouvelleVente">
         <div class="row">
-            <div class="col-sm-2 offset-sm-1 photo-article">
-
-            </div>
+            <div class="col-sm-2 offset-sm-1 photo-article"></div>
             <div class="col-sm-6">
                 <div class="form-group row">
                     <label for="nomArticle" class="col-sm-3 col-form-label">Article :</label>
@@ -95,11 +93,18 @@
                                value="${ utilisateurConnecte.ville }" required>
                     </div>
                 </fieldset>
-                <input type="submit" value="Enregistrer">
+                <div class="boutons">
+                    <input class="btn btn-outline-info" type="submit" value="Enregistrer">
+                    <a href="accueil" class="btn btn-outline-info">Annuler</a>
+                </div>
             </div>
         </div>
     </form>
 </section>
+
+<footer>
+
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

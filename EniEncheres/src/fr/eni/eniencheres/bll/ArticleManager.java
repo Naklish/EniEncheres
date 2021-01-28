@@ -369,4 +369,21 @@ public class ArticleManager {
 		return listArticleMesVentesTerminee;
 
 	}
+
+	public void updateVente(Article article) { this.articleDAO.update(article); }
+
+	public void deleteArticle(int noArticle) {
+		EnchereManager enchereManager = new EnchereManager();
+		RetraitManager retraitManager = new RetraitManager();
+
+		// Si une enchère a été faite sur l'article à supprimer, on la supprime
+		if(enchereManager.meilleurEnchereByArticle(noArticle) != null) {
+			enchereManager.deleteEnchere(noArticle);
+		}
+
+		// On supprime également l'adresse de retrait
+			retraitManager.deleteRetrait(noArticle);
+
+		this.articleDAO.delete(noArticle);
+	}
 }

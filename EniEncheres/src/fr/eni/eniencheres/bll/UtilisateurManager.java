@@ -4,8 +4,6 @@ import fr.eni.eniencheres.bo.Utilisateur;
 import fr.eni.eniencheres.dal.DAOFactory;
 import fr.eni.eniencheres.dal.UtilisateurDAO;
 
-import java.util.List;
-
 public class UtilisateurManager {
     private UtilisateurDAO utilisateurDAO;
 
@@ -59,7 +57,7 @@ public class UtilisateurManager {
 
 	public void supprimer(int noUtilisateur) {
     	this.utilisateurDAO.delete(noUtilisateur);
-	}
+    }
 
 	public boolean verifPseudoExistant(String nouveauPseudo) {
     	if(this.utilisateurDAO.selectByPseudo(nouveauPseudo) != null) {

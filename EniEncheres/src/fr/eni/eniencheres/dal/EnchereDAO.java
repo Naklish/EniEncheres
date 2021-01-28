@@ -1,10 +1,9 @@
 package fr.eni.eniencheres.dal;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import fr.eni.eniencheres.bo.Enchere;
 import fr.eni.eniencheres.bo.Utilisateur;
+
+import java.util.List;
 
 public interface EnchereDAO {
 	
@@ -19,4 +18,6 @@ public interface EnchereDAO {
 	public void update(Enchere enchere, Utilisateur utilisateur);
 	
 	public List<Enchere> selectByUtilisateur(int noUtilisateur);
+
+	public void delete(int noArticle);
 }

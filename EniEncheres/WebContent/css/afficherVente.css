@@ -1,13 +1,96 @@
-.list-group-item {
-    display: inline list-item;
-    list-style: inside;
+/******** Style navbar ********/
+
+.navbar-expand-md .navbar-collapse {
+    justify-content: right;
 }
 
-.list-form {
-    display: inline;
+.navbar-dark .navbar-text {
+    color: white;
+}
+
+.linear-gradient {
+    background: linear-gradient(to right, #026FE3, darkcyan);
+}
+
+.nav-link {
+    color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-text {
+    margin-right: 50px;
+    font-size: 0.9em;
+}
+
+.text-detail {
+    margin: 40px 0 40px 0;
+}
+
+.list-group-item {
+    border: none;
+}
+
+.list-item {
+    margin: 10px 0 10px 0;
+}
+
+#btn-modif {
+    margin-top: 40px;
+    margin-left: 40px;
+    padding: 12px;
+    width: 180px;
+    height: 70px;
 }
 
 #hidden_form {
     display: none;
 }
 
+.modif-vente {
+    margin: 60px 0 40px 0;
+}
+
+/*#form-enchere {*/
+/*    margin-left: 28px;*/
+/*}*/
+
+fieldset.scheduler-border {
+    border: 1px solid black !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 1.5em 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+    box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width:auto;
+    padding:0 10px;
+    border-bottom:none;
+}
+
+.btn-group .btn, #btn-encherir {
+    margin-left: 40px;
+    padding: 12px;
+    width: 150px;
+    height: 70px;
+    box-shadow: 5px 5px 5px darkcyan;
+    z-index: 1;
+}
+
+#btn-annuler {
+    padding-top: 22px;
+    margin-left: 60px;
+}
+
+#btn-annuler-vente {
+    padding: 12px;
+    width: 150px;
+    height: 70px;
+    box-shadow: 5px 5px 5px darkcyan;
+}

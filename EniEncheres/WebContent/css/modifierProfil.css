@@ -23,7 +23,37 @@
     font-size: 0.9em;
 }
 
-.formulaire {
-    margin-top: 20px;
+h3 {
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
+
+.confirmation {
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px;
+    width: 150px;
+    height: 70px;
+    box-shadow: 5px 5px 5px darkcyan;
+}
+
+.btn-modifier {
+    float: right;
+    margin-right: 44px;
+}
+
+.btn-annuler {
+    margin-top: 23px;
+    padding-top: 23px;
+}
+
+.btn-outline-danger {
+    width: 200px;
+    padding-top: 22px;
+    margin-top: 50px;
+    box-shadow: 2px 2px 2px 2px darkred;
+}
+
 

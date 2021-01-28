@@ -48,6 +48,7 @@
 
     <h4>${messageOk}</h4>
     <h4>${messageSuppr}</h4>
+    <h4>${messageSupprArticle}</h4>
 
     <!-- recherche d'un article + catégorie + boutton rechercher -->
     <div class="row">
@@ -87,18 +88,18 @@
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="encheresOuvertes"
-                                           value="choixAchat" id="encheresOuvertes">
+                                           value="choixAchat" id="encheresOuvertes" onclick='decocher("encheresEnCours", "mesEncheresRemportees")'>
                                     <label class="form-check-label" for="encheresOuvertes">enchères ouvertes</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="encheresEnCours"
-                                           value="choixAchat" id="encheresEnCours">
+                                           value="choixAchat" id="encheresEnCours" onclick='decocher("encheresOuvertes", "mesEncheresRemportees")'>
                                     <label class="form-check-label" for="encheresEnCours">mes enchères en
                                         cours</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="mesEncheresRemportees"
-                                           value="choixAchat" id="mesEncheresRemportees">
+                                           value="choixAchat" id="mesEncheresRemportees" onclick='decocher("encheresOuvertes", "encheresEnCours")'>
                                     <label class="form-check-label" for="mesEncheresRemportees">mes enchères
                                         remportées</label>
                                 </div>
@@ -111,17 +112,17 @@
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="ventesEnCours"
-                                           value="choixVente" id="ventesEnCours" disabled>
+                                           value="choixVente" id="ventesEnCours" onclick='decocher("ventesNonDebutee", "ventesTerminees")' disabled>
                                     <label class="form-check-label" for="ventesEnCours">mes ventes en cours</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="ventesNonDebutee"
-                                           value="choixVente" id="ventesNonDebutee" disabled>
+                                           value="choixVente" id="ventesNonDebutee" onclick='decocher("ventesEnCours", "ventesTerminees")' disabled>
                                     <label class="form-check-label" for="ventesNonDebutee">ventes non débutées</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="ventesTerminees"
-                                           value="choixVente" id="ventesTerminees" disabled>
+                                           value="choixVente" id="ventesTerminees" onclick='decocher("ventesEnCours", "ventesNonDebutee")' disabled>
                                     <label class="form-check-label" for="ventesTerminees">ventes terminées</label>
                                 </div>
                             </div>
@@ -147,7 +148,7 @@
                         <div class="card">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <img src="" alt="..." class="img-fluid"/>
+                                    <img src="img/default-img.png" alt="no-image" class="img-fluid"/>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -195,6 +196,12 @@
         $("input[value='choixAchat']").prop('checked', false);
         $("input[value='choixAchat']").prop('disabled', true);
     });
+
+    // Décocher les autres cases lorsqu'une est sélectionnée
+    function decocher(a,b) {
+        document.getElementById(a).checked=false;
+        document.getElementById(b).checked=false;
+    }
 </script>
 </body>
 </html>

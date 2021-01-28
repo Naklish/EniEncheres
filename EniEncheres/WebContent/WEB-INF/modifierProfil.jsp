@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
     <title>Eni Encheres</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -27,7 +27,7 @@
             <c:if test="${ not empty utilisateurConnecte.pseudo }">
                 <ul class="navbar-nav">
                     <span class="navbar-text d-none d-md-block">Bonjour ${ utilisateurConnecte.pseudo } !</span>
-                    <li class="nav-item"><a class="nav-link" href="deconnexion">Déconnexion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="deconnexion">DÃ©connexion</a></li>
                     <li class="nav-item"><a class="nav-link"
                                             href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
                         profil</a></li>
@@ -43,7 +43,8 @@
 
     <!-- Formulaire de modification du profil -->
 
-    <div class="formulaire">
+    <section class="formulaire container">
+        <h3 class="text-center">Modifier profil</h3>
         <form action="modifierProfil" method="post">
             <p class="green">${ message }</p>
             <p class="red">${ messageErreur }</p>
@@ -61,7 +62,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="prenom" class="col-sm-3 col-form-label">Prénom
+                        <label for="prenom" class="col-sm-3 col-form-label">PrÃ©nom
                             :</label>
                         <div class="col-sm-8">
                             <input type="text" id="prenom" class="form-control"
@@ -69,7 +70,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="telephone" class="col-sm-3 col-form-label">Téléphone
+                        <label for="telephone" class="col-sm-3 col-form-label">TÃ©lÃ©phone
                             :</label>
                         <div class="col-sm-8">
                             <input type="tel" id="telephone" class="form-control"
@@ -100,8 +101,9 @@
                             <input type="password" id="nouveauMotDePasse"
                                    class="form-control" name="nouveauMotDePasse">
                         </div>
-
                     </div>
+                    <input class="btn btn-outline-info btn-modifier" type="submit"
+                           value="Modifier">
                 </div>
                 <div class="col">
                     <div class="form-group row">
@@ -134,29 +136,22 @@
                         </div>
                     </div>
                     <br/> <br/>
-                    <div class="form-group row">
+                    <div class="form-group row confirmation">
                         <label for="confirmation" class="col-sm-3 col-form-label">Confirmez
                             :</label>
                         <div class="col-sm-8">
                             <input type="password" id="confirmation" class="form-control"
                                    name="confirmation">
                         </div>
-
-
                     </div>
+                    <a href="accueil" class="btn btn-outline-info btn-annuler">Annuler</a>
                 </div>
             </div>
-            <input class="btn btn-outline-info btn-creer" type="submit"
-                   value="Modifier">
+            <a href="supprimerCompte" class="btn btn-outline-danger">Supprimer
+                mon compte</a>
         </form>
-    </div>
+    </section>
     <br/>
-    <div class="selection">
-
-        <a href="accueil" class="btn btn-outline-info btn-annuler">Annuler</a>
-        <a href="supprimerCompte" class="btn btn-outline-danger">Supprimer
-            mon compte</a>
-    </div>
 </div>
 
 

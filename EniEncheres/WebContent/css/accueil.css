@@ -1,5 +1,4 @@
-.navbar-expand-md {
-    justify-content: space-between;
+
 /******** Style navbar ********/
 
 .navbar-expand-md .navbar-collapse {
@@ -14,7 +13,6 @@
     background: linear-gradient(to right, #026FE3, darkcyan);
 }
 
-.navbar-brand, .nav-link {
 .nav-link {
     color: white;
 }
@@ -85,3 +83,6 @@ div.liste-encheres {
     margin-top: 50px;
 }
 
+img.img-fluid {
+    height: 100%;
+}

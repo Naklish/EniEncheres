@@ -46,6 +46,10 @@ body {
     margin-bottom: 30px
 }
 
+img.img-radius {
+    width: 50%;
+}
+
 .m-r-0 {
     margin-right: 0px
 }

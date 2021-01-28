@@ -1,8 +1,8 @@
 package fr.eni.eniencheres.dal;
 
-import java.util.List;
-
 import fr.eni.eniencheres.bo.Article;
+
+import java.util.List;
 
 public interface ArticleDAO {
 
@@ -18,5 +18,9 @@ public interface ArticleDAO {
 	public void updatePrixVente(int noArticle, int prixVente);
 	
 	public List<Article> selectByUtilisateur(int noUtilisateur);
+
+	public void update(Article article);
+
+	public void delete(int noArticle);
 	
 }

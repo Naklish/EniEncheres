@@ -1,14 +1,10 @@
 package fr.eni.eniencheres.dal;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import fr.eni.eniencheres.bo.Utilisateur;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import fr.eni.eniencheres.bo.Utilisateur;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
@@ -322,6 +318,25 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+            if (cnx != null) {
+                try {
+                    cnx.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -342,8 +357,26 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		} finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+            if (cnx != null) {
+                try {
+                    cnx.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
 	}
 }
 

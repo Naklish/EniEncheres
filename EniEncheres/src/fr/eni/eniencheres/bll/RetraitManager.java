@@ -18,4 +18,8 @@ public class RetraitManager {
 	public Retrait recupererById(int noArticle) {
 		return this.retraitDAO.selectById(noArticle);
 	}
+
+	public void updateRetrait(Retrait retrait) { this.retraitDAO.update(retrait); }
+
+	public void deleteRetrait(int noArticle) { this.retraitDAO.delete(noArticle); }
 }

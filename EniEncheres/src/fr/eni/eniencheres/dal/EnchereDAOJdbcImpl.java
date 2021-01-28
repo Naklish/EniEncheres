@@ -1,17 +1,11 @@
 package fr.eni.eniencheres.dal;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import fr.eni.eniencheres.bo.Enchere;
 import fr.eni.eniencheres.bo.Utilisateur;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SELECT = "SELECT * FROM ENCHERES";
@@ -20,6 +14,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SELECT_BY_UTILISATEUR_ARTICLE = "SELECT * FROM ENCHERES WHERE no_article = ? AND no_utilisateur = ?";
 	private static final String UPDATE = "UPDATE ENCHERES SET montant_enchere = ?, date_enchere = ? WHERE no_utilisateur = ? AND no_article = ?";
 	private static final String SELECT_BY_UTILISATEUR = "SELECT * FROM ENCHERES WHERE no_utilisateur = ?";
+	private static final String DELETE = "DELETE FROM ENCHERES WHERE no_article = ?";
 
 	@Override
 	public List<Enchere> selectAll() {
@@ -46,7 +41,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			
 			if(stmt != null) {
 				try {
@@ -87,6 +82,25 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
@@ -112,6 +126,25 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		return enchere;
 	}
@@ -136,8 +169,26 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} finally {
 
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 		return listEnchere;
 	}
 
@@ -160,6 +211,25 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
         }catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
@@ -186,8 +256,64 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		return listEnchere;
+	}
+
+	@Override
+	public void delete(int noArticle) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(DELETE);
+
+			pstmt.setInt(1, noArticle);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (cnx != null) {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	

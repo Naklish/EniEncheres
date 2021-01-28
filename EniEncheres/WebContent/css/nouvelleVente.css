@@ -59,3 +59,16 @@ legend.scheduler-border {
     border-bottom:none;
 }
 
+.btn {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    padding: 12px;
+    width: 150px;
+    height: 70px;
+    box-shadow: 5px 5px 5px darkcyan;
+}
+
+a.btn {
+    margin-left: 30px;
+    padding-top: 22px;
+}

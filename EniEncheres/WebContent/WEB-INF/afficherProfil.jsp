@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
     <title>ENI Encheres</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -21,7 +21,7 @@
         <c:if test="${ not empty utilisateurConnecte.pseudo }">
             <ul class="navbar-nav">
                 <span class="navbar-text d-none d-md-block">Bonjour ${ utilisateurConnecte.pseudo } !</span>
-                <li class="nav-item"><a class="nav-link" href="deconnexion">Déconnexion</a></li>
+                <li class="nav-item"><a class="nav-link" href="deconnexion">DÃ©connexion</a></li>
                 <li class="nav-item"><a class="nav-link"
                                         href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
                     profil</a></li>
@@ -36,9 +36,7 @@
 </nav>
 
 <div class="container-fluid">
-    <br/>
     <h1 class="text-center">Profil</h1>
-
 
     <div class="page-content page-container" id="page-content">
         <div class="padding">
@@ -48,7 +46,7 @@
                         <div class="row m-l-0 m-r-0">
                             <div class="col-sm-4 bg-c-lite-green user-profile">
                                 <div class="card-block text-center text-white">
-                                    <div class="m-b-25"><img src="#" class="img-radius" alt="photo-profil"></div>
+                                    <img src="img/default-avatar.jpg" class="img-radius" alt="photo-profil">
                                     <h3 class="f-w-600"> ${ profil.prenom } ${ profil.nom }</h3>
                                     <p>${ profil.pseudo }</p>
                                 </div>
@@ -62,7 +60,7 @@
                                             <h6 class="text-muted f-w-400">${ profil.email }</h6>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">Téléphone</p>
+                                            <p class="m-b-10 f-w-600">TÃ©lÃ©phone</p>
                                             <h6 class="text-muted f-w-400">${ profil.telephone }</h6>
                                         </div>
                                     </div>
@@ -81,7 +79,7 @@
                                         <div class="col-sm-6">
                                             <h6 class="text-muted f-w-400"><c:if
                                                     test="${ profil.noUtilisateur == utilisateurConnecte.noUtilisateur }">
-                                                <p>Crédit : ${ profil.credit }<p></c:if></h6>
+                                                <p>CrÃ©dit : ${ profil.credit }<p></c:if></h6>
                                         </div>
 
                                     </div>

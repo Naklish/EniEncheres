@@ -77,7 +77,7 @@ public class ModifierProfil extends HttpServlet {
             if (request.getParameter("nouveauMotDePasse") != "" && request.getParameter("confirmation").equals(request.getParameter("nouveauMotDePasse"))) {
                 utilisateurManager.modifier("mot_de_passe", request.getParameter("nouveauMotDePasse"), utilisateurConnecte.getNoUtilisateur());
                 request.setAttribute("message", "Compte utilisateur modifié");
-            } else {
+            } else if(request.getParameter("confirmation") != ""){
                 request.setAttribute("messageErreurConfirmation", "La confirmation n'est pas identique au nouveau mot de passe.");
             }
 

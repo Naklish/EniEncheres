@@ -54,18 +54,18 @@
                     <h3 class="text-center text-info connexion">Connexion</h3>
                     <div class="form-group row">
                         <label for="login" class="col-sm-4 col-form-label">Identifiant</label>
-                        <input type="text" id="login" class="col-sm-7 form-control" name="login" required>
+                        <input type="text" id="login" class="col-sm-7 form-control" name="login" value="${ utilisateurSouvenir.pseudo }" required>
                     </div>
                     <div class="form-group row">
                         <label for="motdepasse" class="col-sm-4 col-form-label">Mot de passe</label>
-                        <input type="password" id="motdepasse" class="col-sm-7 form-control" name="motdepasse">
+                        <input type="password" id="motdepasse" class="col-sm-7 form-control" name="motdepasse" value="${ utilisateurSouvenir.motDePasse }">
                     </div>
                     <div class="form-group row">
                         <div class="col">
                             <input class="btn btn-outline-info connexion" type="submit" value="Connexion" required>
                         </div>
                         <div class="col">
-                        <input class="form-check-input" id="souvenir" name="souvenir" type="checkbox" value="souvenir">
+                        <input class="form-check-input" id="souvenir" name="souvenir" type="checkbox" value="souvenir" checked>
                         <label for="souvenir" class="form-check-label">Se souvenir de moi</label>
                             <br/>
                             <a href="#">Mot de passe oublié</a>
