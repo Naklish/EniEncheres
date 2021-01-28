@@ -1,10 +1,14 @@
 package fr.eni.eniencheres.dal;
 
-import fr.eni.eniencheres.bo.Utilisateur;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.eni.eniencheres.bo.Utilisateur;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
@@ -17,7 +21,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
     private static final String SELECT_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
     private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
     private static final String UPDATE_CREDIT = "UPDATE UTILISATEURS SET credit = ? WHERE no_utilisateur = ?";
-
+    private static final String UPDATE_DESACTIVATION ="UPDATE UTILISATEURS SET desactivation = ? WHERE no_utilisateur = ?";
+    private static final String UPDATE_MDP = "UPDATE UTILISATEURS SET mot_de_passe = ? WHERE no_utilisateur = ?";
 
     @Override
     public void insert(Utilisateur utilisateur) {
@@ -91,7 +96,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             while (rs.next()) {
                 utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
                         rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
-                        rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+                        rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"), rs.getBoolean("desactivation"));
 
                 utilisateurs.add(utilisateur);
             }
@@ -142,7 +147,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             while (rs.next()) {
                 utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
                         rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
-                        rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+                        rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"), rs.getBoolean("desactivation"));
             }
 
         } catch (SQLException e) {
@@ -191,7 +196,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             while (rs.next()) {
                 utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
                         rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
-                        rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+                        rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"), rs.getBoolean("desactivation"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -237,7 +242,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             while (rs.next()) {
                 utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
                         rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
-                        rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+                        rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"), rs.getBoolean("desactivation"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -358,6 +363,84 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+            if (cnx != null) {
+                try {
+                    cnx.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+		}
+
+
+	@Override
+	public void updateDesactivation(boolean desactivation, int noUtilisateur) {
+		Connection cnx = null;
+        PreparedStatement pstmt = null;
+
+        try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(UPDATE_DESACTIVATION);
+
+			pstmt.setBoolean(1, desactivation);
+			pstmt.setInt(2, noUtilisateur);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+            if (cnx != null) {
+                try {
+                    cnx.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+	}
+
+	@Override
+	public void updateMDP(String motDePasse, int noUtilisateur) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(UPDATE_MDP);
+
+			pstmt.setString(1, motDePasse);
+			pstmt.setInt(2, noUtilisateur);
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
 
             if (pstmt != null) {
                 try {

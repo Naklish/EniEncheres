@@ -20,4 +20,8 @@ public interface EnchereDAO {
 	public List<Enchere> selectByUtilisateur(int noUtilisateur);
 
 	public void delete(int noArticle);
+
+	public void deleteByArticle(int noArticle);
+
+	public void deleteByUtilisateur(int noUtilisateur);
 }

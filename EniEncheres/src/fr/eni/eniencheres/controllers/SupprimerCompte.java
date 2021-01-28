@@ -15,10 +15,12 @@ import java.util.List;
 
 @WebServlet("/supprimerCompte")
 public class SupprimerCompte extends HttpServlet {
-
+	private UtilisateurManager utilisateurManager = new UtilisateurManager();
+	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UtilisateurManager utilisateurManager = new UtilisateurManager();
+        utilisateurManager = new UtilisateurManager();
         Utilisateur utilisateurConnecte = (Utilisateur) request.getSession().getAttribute("utilisateurConnecte");
+        
         utilisateurManager.supprimer(utilisateurConnecte.getNoUtilisateur());
         request.getSession().invalidate();
         String messageSuppr = "Votre profil a bien été supprimé.";
@@ -33,6 +35,12 @@ public class SupprimerCompte extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    	utilisateurManager.supprimer(Integer.valueOf(request.getParameter("utilisateurSuppr")));
+    	
+    	List<Utilisateur> listeUtilisateur =  this.utilisateurManager.listerUtilisateurs();
+    	
+    	request.setAttribute("listeUtilisateur", listeUtilisateur);
+    	request.setAttribute("message", "Compte utilisateur supprimer");
+    	request.getServletContext().getRequestDispatcher("/WEB-INF/listeProfil.jsp").forward(request, response);
     }
 }

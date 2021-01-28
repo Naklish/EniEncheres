@@ -1,11 +1,17 @@
 package fr.eni.eniencheres.dal;
 
-import fr.eni.eniencheres.bo.Enchere;
-import fr.eni.eniencheres.bo.Utilisateur;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.eni.eniencheres.bo.Enchere;
+import fr.eni.eniencheres.bo.Utilisateur;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SELECT = "SELECT * FROM ENCHERES";
@@ -15,6 +21,45 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String UPDATE = "UPDATE ENCHERES SET montant_enchere = ?, date_enchere = ? WHERE no_utilisateur = ? AND no_article = ?";
 	private static final String SELECT_BY_UTILISATEUR = "SELECT * FROM ENCHERES WHERE no_utilisateur = ?";
 	private static final String DELETE = "DELETE FROM ENCHERES WHERE no_article = ?";
+
+	private static final String DELETE_BY_UTILISATEUR ="DELETE FROM ENCHERES WHERE no_utilisateur = ?";
+	private static final String DELETE_BY_ARTICLE = "DELETE FROM ENCHERES WHERE no_article = ?";
+
+
+	@Override
+	public void deleteByArticle(int noArticle) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(DELETE_BY_UTILISATEUR);
+
+			pstmt.setInt(1, noArticle);
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Override
+	public void deleteByUtilisateur(int noUtilisateur) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(DELETE_BY_UTILISATEUR);
+
+			pstmt.setInt(1, noUtilisateur);
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public List<Enchere> selectAll() {
@@ -316,5 +361,5 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		}
 	}
 
-	
+
 }

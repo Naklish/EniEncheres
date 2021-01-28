@@ -22,6 +22,13 @@ public class EnchereManager {
 		
 	}
 	
+	public void supprimerByArticle(int noArticle) {
+		this.enchereDAO.deleteByArticle(noArticle);
+	}
+	
+	public void supprimerByUtilisateur(int noUtilisateur) {
+		this.enchereDAO.deleteByUtilisateur(noUtilisateur);
+	}
 	public boolean encherir(Enchere enchere, Utilisateur utilisateur) {
 
 		ArticleManager articleManager = new ArticleManager();

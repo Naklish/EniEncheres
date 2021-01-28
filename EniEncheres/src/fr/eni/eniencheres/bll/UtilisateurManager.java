@@ -9,7 +9,9 @@ public class UtilisateurManager {
 
     public UtilisateurManager() {
         this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
+
     }
+
 
     public String enregistrer(Utilisateur utilisateur) {
         String message = "";
@@ -56,8 +58,17 @@ public class UtilisateurManager {
 	}
 
 	public void supprimer(int noUtilisateur) {
-    	this.utilisateurDAO.delete(noUtilisateur);
-    }
+		ArticleManager articleManager = new ArticleManager();
+		EnchereManager enchereManager = new EnchereManager();
+
+		List<Article> listArticleSuppr = articleManager.listerByUtilisateur(noUtilisateur);
+		for(Article article : listArticleSuppr) {
+			enchereManager.supprimerByArticle(article.getNoArticle());
+		}
+		enchereManager.supprimerByUtilisateur(noUtilisateur);
+		articleManager.supprimerByUtilisateur(noUtilisateur);
+		this.utilisateurDAO.delete(noUtilisateur);
+	}
 
 	public boolean verifPseudoExistant(String nouveauPseudo) {
     	if(this.utilisateurDAO.selectByPseudo(nouveauPseudo) != null) {
@@ -78,5 +89,35 @@ public class UtilisateurManager {
 
 	public void majCredit(int credit, int noUtilisateur) {
 		this.utilisateurDAO.updateCredit(credit, noUtilisateur);
+	}
+
+	public List<Utilisateur> listerUtilisateurs(){
+		return this.utilisateurDAO.selectAll();
+	}
+
+	public void reactiverCompte(int noUtilisateur) {
+		this.utilisateurDAO.updateDesactivation(false, noUtilisateur);
+	}
+
+	public void desactiverCompte(int noUtilisateur) {
+		ArticleManager articleManager = new ArticleManager();
+		EnchereManager enchereManager = new EnchereManager();
+
+		List<Article> listArticleSuppr = articleManager.listerByUtilisateur(noUtilisateur);
+		for(Article article : listArticleSuppr) {
+			enchereManager.supprimerByArticle(article.getNoArticle());
+		}
+		enchereManager.supprimerByUtilisateur(noUtilisateur);
+		articleManager.supprimerByUtilisateur(noUtilisateur);
+
+		this.utilisateurDAO.updateDesactivation(true, noUtilisateur);
+	}
+
+	public Utilisateur recupererByEmail(String email) {
+		return this.utilisateurDAO.selectByEmail(email);
+	}
+
+	public void majMDP(String motDePasse, int noUtilisateur) {
+		this.utilisateurDAO.updateMDP(motDePasse, noUtilisateur);
 	}
 }

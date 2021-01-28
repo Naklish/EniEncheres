@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+         pageEncoding="ISO-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -27,11 +27,14 @@
             <c:if test="${ not empty utilisateurConnecte.pseudo }">
                 <ul class="navbar-nav">
                     <span class="navbar-text d-none d-md-block">Bonjour ${ utilisateurConnecte.pseudo } !</span>
-                    <li class="nav-item"><a class="nav-link" href="deconnexion">DÃ©connexion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="deconnexion">Déconnexion</a></li>
                     <li class="nav-item"><a class="nav-link"
                                             href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
                         profil</a></li>
                     <li class="nav-item"><a class="nav-link" href="nouvelleVente">Vendre un article</a></li>
+                    <c:if test="${ utilisateurConnecte.administrateur == true }">
+               			  <li class="nav-item"><a class="nav-link" href="listeProfil">Lister les utilisateurs</a></li>
+                	</c:if>
                 </ul>
             </c:if>
             <c:if test="${ empty utilisateurConnecte.pseudo }">
@@ -62,7 +65,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="prenom" class="col-sm-3 col-form-label">PrÃ©nom
+                        <label for="prenom" class="col-sm-3 col-form-label">Prénom
                             :</label>
                         <div class="col-sm-8">
                             <input type="text" id="prenom" class="form-control"
@@ -70,7 +73,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="telephone" class="col-sm-3 col-form-label">TÃ©lÃ©phone
+                        <label for="telephone" class="col-sm-3 col-form-label">Téléphone
                             :</label>
                         <div class="col-sm-8">
                             <input type="tel" id="telephone" class="form-control"

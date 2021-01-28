@@ -1,0 +1,56 @@
+
+/******** Style navbar ********/
+
+.navbar-expand-md .navbar-collapse {
+    justify-content: right;
+}
+
+.navbar-dark .navbar-text {
+    color: white;
+}
+
+.linear-gradient {
+    background: linear-gradient(to right, #026FE3, darkcyan);
+}
+
+.nav-link {
+    color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-text {
+    margin-right: 30px;
+    margin-right: 50px;
+    font-size: 0.9em;
+}
+
+/******** Style header ********/
+
+header {
+    padding: 40px 0 10px 0;
+}
+
+.connexion {
+    margin-bottom: 50px;
+}
+
+div#motDePasse-column {
+    margin-top: 120px;
+    max-width: 600px;
+    height: 320px;
+
+}
+
+.btn {
+    box-shadow: 5px 5px 5px darkcyan;
+}
+
+.btn.recuperer-motDePasse {
+    margin-top: 10px;
+    padding-top: 40px;
+    width: 100%;
+    height: 100px;
+}

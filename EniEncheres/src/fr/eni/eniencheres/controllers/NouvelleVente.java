@@ -37,19 +37,23 @@ public class NouvelleVente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utilisateur utilisateurConnecte = (Utilisateur) request.getSession().getAttribute("utilisateurConnecte");
 		ArticleManager articleManager = new ArticleManager();
-
-		
-		Article article = new Article(request.getParameter("nomArticle"), request.getParameter("description"), 
-				LocalDate.parse(request.getParameter("dateDebut")), LocalDate.parse(request.getParameter("dateFin")), Integer.parseInt(request.getParameter("prixInitial")), 
-				Integer.parseInt(request.getParameter("prixInitial")), utilisateurConnecte.getNoUtilisateur(),  Integer.parseInt(request.getParameter("categorie")));
-		
-		articleManager.mettreEnVente(article);
-		
-		RetraitManager retraitManager = new RetraitManager();
-		Retrait retrait = new Retrait(article.getNoArticle(), utilisateurConnecte.getAdresse(), utilisateurConnecte.getCodePostal(), utilisateurConnecte.getVille());
-		retraitManager.enregistrerRetrait(retrait);
-		
-		String message = "Votre article est mis en vente.";
+		String message = null;
+		if(!LocalDate.parse(request.getParameter("dateDebut")).isBefore(LocalDate.now())) {
+			
+			Article article = new Article(request.getParameter("nomArticle"), request.getParameter("description"), 
+					LocalDate.parse(request.getParameter("dateDebut")), LocalDate.parse(request.getParameter("dateFin")), Integer.parseInt(request.getParameter("prixInitial")), 
+					Integer.parseInt(request.getParameter("prixInitial")), utilisateurConnecte.getNoUtilisateur(),  Integer.parseInt(request.getParameter("categorie")));
+			
+			articleManager.mettreEnVente(article);
+			
+			RetraitManager retraitManager = new RetraitManager();
+			Retrait retrait = new Retrait(article.getNoArticle(), utilisateurConnecte.getAdresse(), utilisateurConnecte.getCodePostal(), utilisateurConnecte.getVille());
+			retraitManager.enregistrerRetrait(retrait);
+			
+			 message = "Votre article est mis en vente.";
+		}else {
+			message ="La date de début n'est pas valide.";
+		}
 		request.setAttribute("message", message);
 		request.setAttribute("listeCategories", categorieManager.listerCategories());
 		request.getServletContext().getRequestDispatcher("/WEB-INF/nouvelleVente.jsp").forward(request, response);

@@ -14,6 +14,7 @@ public class Utilisateur {
 		private String motDePasse;
 		private int credit;
 		private boolean administrateur;
+		private boolean desactivation;
 		
 		public Utilisateur() {
 			// TODO Auto-generated constructor stub
@@ -36,6 +37,27 @@ public class Utilisateur {
 			this.motDePasse = motDePasse;
 			this.credit = credit;
 			this.administrateur = administrateur;
+			this.desactivation = false;
+		}
+		
+
+		public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+				String adresse, String codePostal, String ville, String motDePasse, int credit, boolean administrateur,
+				boolean desactivation) {
+			super();
+			this.noUtilisateur = noUtilisateur;
+			this.pseudo = pseudo;
+			this.nom = nom;
+			this.prenom = prenom;
+			this.email = email;
+			this.telephone = telephone;
+			this.adresse = adresse;
+			this.codePostal = codePostal;
+			this.ville = ville;
+			this.motDePasse = motDePasse;
+			this.credit = credit;
+			this.administrateur = administrateur;
+			this.desactivation = desactivation;
 		}
 
 
@@ -54,6 +76,17 @@ public class Utilisateur {
 			this.motDePasse = motDePasse;
 			this.credit = 100;
 			this.administrateur = administrateur;
+			this.desactivation = false;
+		}
+
+		
+		public boolean isDesactivation() {
+			return desactivation;
+		}
+
+
+		public void setDesactivation(boolean desactivation) {
+			this.desactivation = desactivation;
 		}
 
 

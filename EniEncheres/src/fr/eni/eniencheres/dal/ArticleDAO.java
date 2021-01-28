@@ -23,4 +23,6 @@ public interface ArticleDAO {
 
 	public void delete(int noArticle);
 	
+	public void deleteByUtilisateur(int noUtilisateur);
+	
 }
