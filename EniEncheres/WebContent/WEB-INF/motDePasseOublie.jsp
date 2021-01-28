@@ -9,12 +9,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Connexion</title>
+    <title>Récupération mot de passe</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
-    <link href="<c:url value="/css/connexion.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/motDePasseOublie.css"/>" rel="stylesheet">
 </head>
 <body>
 
@@ -46,36 +46,28 @@
         </c:if>
     </div>
 </nav>
-
+ <header class="text-center">
+        <h3><strong>Récupération du mot de passe</strong></h3>
+</header>
 
 <section id="connexion">
     <div class="container">
-        <div id="login-row" class="row justify-content-center align-items-center">
-            <p class="err">${message}</p>
-            <div id="login-column" class="col-md-5">
-                <form id="login-form" class="form" action="connexion" method="post">
-                    <h3 class="text-center text-info connexion">Connexion</h3>
+        <div id="motDePasse-row" class="row justify-content-center align-items-center">
+            <div id="motDepasse-column" class="col-md-5">
+                <form id="motDePasse-form" class="form" action="motDePasseOublie" method="post">
                     <div class="form-group row">
-                        <label for="login" class="col-sm-4 col-form-label">Identifiant</label>
-                        <input type="text" id="login" class="col-sm-7 form-control" name="login"  value="${ utilisateurSouvenir.pseudo }" required>
-                    </div>
-                    <div class="form-group row">
-                        <label for="motdepasse" class="col-sm-4 col-form-label">Mot de passe</label>
-                        <input type="password" id="motdepasse" class="col-sm-7 form-control" name="motdepasse" value="${ utilisateurSouvenir.motDePasse }">
-                    </div>
-                    <div class="form-group row">
-                        <div class="col">
-                            <input class="btn btn-outline-info connexion" type="submit" value="Connexion" required>
-                        </div>
-                        <div class="col">
-                        <input class="form-check-input" id="souvenir" name="souvenir" type="checkbox" value="souvenir" checked>
-                        <label for="souvenir" class="form-check-label">Se souvenir de moi</label>
-                            <br/>
-                            <a href="motDePasseOublie">Mot de passe oublié</a>
-                        </div>
+                        <label for="email" class="col-sm-4 col-form-label">E-mail :</label>
+                        <input type="text" id="email" class="col-sm-7 form-control" name="email" required>
                     </div>
                     <div class="col-12">
-                        <a class="btn btn-outline-info creer-compte" href="inscription">Créer un compte</a>
+                           <input class="btn btn-outline-primary" type="submit" value="Réinitialiser  mot de passe">
+                    </div>
+                    <div class="col-12">
+                    <br>
+                    <c:if test="${ not empty message  }">
+                    	<p>${ message }</p>
+                    	<p><a href="${ url }">Nouveau mot de passe</a></p>
+                    </c:if>
                     </div>
                 </form>
             </div>
@@ -83,13 +75,5 @@
     </div>
 </section>
 
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-        crossorigin="anonymous"></script>
 </body>
 </html>

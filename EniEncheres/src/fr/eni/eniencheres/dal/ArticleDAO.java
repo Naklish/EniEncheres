@@ -19,4 +19,6 @@ public interface ArticleDAO {
 	
 	public List<Article> selectByUtilisateur(int noUtilisateur);
 	
+	public void deleteByUtilisateur(int noUtilisateur);
+	
 }

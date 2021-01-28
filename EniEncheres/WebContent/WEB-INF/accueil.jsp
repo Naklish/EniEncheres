@@ -31,7 +31,12 @@
                 <li class="nav-item"><a class="nav-link"
                                         href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
                     profil</a></li>
-                <li class="nav-item"><a class="nav-link" href="nouvelleVente">Vendre un article</a></li>
+                <c:if test="${ utilisateurConnecte.desactivation == false }">
+                	<li class="nav-item"><a class="nav-link" href="nouvelleVente">Vendre un article</a></li>
+                </c:if>
+                <c:if test="${ utilisateurConnecte.administrateur == true }">
+              	   <li class="nav-item"><a class="nav-link" href="listeProfil">Lister les utilisateurs</a></li>
+                </c:if>
             </ul>
         </c:if>
         <c:if test="${ empty utilisateurConnecte.pseudo }">

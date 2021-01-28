@@ -17,7 +17,15 @@ public class ArticleManager {
 	public ArticleManager() {
 		this.articleDAO = DAOFactory.getArticleDAO();
 	}
-
+	
+	public void supprimerByUtilisateur(int noUtilisateur) {
+		this.articleDAO.deleteByUtilisateur(noUtilisateur);
+	}
+	
+	public List<Article> listerByUtilisateur(int noUtilisateur){
+		return articleDAO.selectByUtilisateur(noUtilisateur);
+	}
+	
 	//Recupération de la liste d'articles en BDD
 	public List<Article> listerArticle() {
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
@@ -131,17 +139,13 @@ public class ArticleManager {
 		List<Article> listArticleRecherche = this.listerArticleEnCours(recherche);
 		List<Enchere> listEnchere = enchereDAO.selectByUtilisateur(noUtilisateur);
 
-		//Pour chaque article on regarde pour quel article l'utilisateur a fait une enchère
-		for(Article article : listArticleRecherche) {
-			for(Enchere enchere : listEnchere) {
-				if(enchere.getNoArticle() == article.getNoArticle()) {
-					listArticleMesEncheres.add(article);
-				}
-			}
+		for(Enchere enchere : listEnchere) {
+			listArticleMesEncheres.add(this.recupererById(enchere.getNoArticle()));
 		}
 		//Pour chaque article on associe le vendeur
 		for (Article article : listArticleMesEncheres) {
 			article.setVendeur(utilisateurManager.recupererById(article.getNoUtilisateur()));
+			System.out.println(article.getNomArticle());
 		}
 		return listArticleMesEncheres;
 	}

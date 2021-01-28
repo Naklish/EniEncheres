@@ -33,7 +33,7 @@
             <li class="list-group-item">Retrait
                 : ${ vente.retrait.adresse }<br/>${ vente.retrait.codePostal } ${ vente.retrait.ville }</li>
             <li class="list-group-item">Vendeur : ${ vente.vendeur.pseudo }</li>
-            <c:if test="${ not empty utilisateurConnecte.pseudo }">
+            <c:if test="${ not empty utilisateurConnecte.pseudo && utilisateurConnecte.desactivation != true }">
                 <li class="list-group-item list-form">
                     <form action="encherir" method="get">
                         <label for="enchere">Ma proposition :</label>

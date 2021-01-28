@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="ISO-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -32,6 +32,9 @@
                                             href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
                         profil</a></li>
                     <li class="nav-item"><a class="nav-link" href="nouvelleVente">Vendre un article</a></li>
+                    <c:if test="${ utilisateurConnecte.administrateur == true }">
+               			  <li class="nav-item"><a class="nav-link" href="listeProfil">Lister les utilisateurs</a></li>
+                	</c:if>
                 </ul>
             </c:if>
             <c:if test="${ empty utilisateurConnecte.pseudo }">

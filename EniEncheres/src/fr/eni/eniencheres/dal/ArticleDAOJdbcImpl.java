@@ -15,6 +15,27 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SELECT_BY_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ?";
 	private static final String UPDATE_PRIX_VENTE ="UPDATE ARTICLES_VENDUS SET prix_vente = ? WHERE no_article = ?";
 	private static final String SELECT_BY_UTILISATEUR = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur = ?";
+	private static final String DELETE_BY_UTILISATEUR = "DELETE FROM ARTICLES_VENDUS WHERE no_utilisateur = ?";
+	
+	
+	@Override
+	public void deleteByUtilisateur(int noUtilisateur) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(DELETE_BY_UTILISATEUR);
+			
+			pstmt.setInt(1, noUtilisateur);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	@Override
 	public List<Article> selectAll() {

@@ -1,5 +1,6 @@
 package fr.eni.eniencheres.bll;
 
+import fr.eni.eniencheres.bo.Article;
 import fr.eni.eniencheres.bo.Utilisateur;
 import fr.eni.eniencheres.dal.DAOFactory;
 import fr.eni.eniencheres.dal.UtilisateurDAO;
@@ -8,11 +9,13 @@ import java.util.List;
 
 public class UtilisateurManager {
     private UtilisateurDAO utilisateurDAO;
-
+   
     public UtilisateurManager() {
         this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
+        
     }
-
+    
+    
     public String enregistrer(Utilisateur utilisateur) {
         String message = "";
         if(this.utilisateurDAO.selectByEmail(utilisateur.getEmail()) != null && this.utilisateurDAO.selectByPseudo(utilisateur.getPseudo()) != null) {
@@ -58,7 +61,16 @@ public class UtilisateurManager {
 	}
 
 	public void supprimer(int noUtilisateur) {
-    	this.utilisateurDAO.delete(noUtilisateur);
+		ArticleManager articleManager = new ArticleManager();
+		EnchereManager enchereManager = new EnchereManager();
+		
+		List<Article> listArticleSuppr = articleManager.listerByUtilisateur(noUtilisateur);
+		for(Article article : listArticleSuppr) {
+			enchereManager.supprimerByArticle(article.getNoArticle());
+		}
+		enchereManager.supprimerByUtilisateur(noUtilisateur);
+		articleManager.supprimerByUtilisateur(noUtilisateur);
+		this.utilisateurDAO.delete(noUtilisateur);
 	}
 
 	public boolean verifPseudoExistant(String nouveauPseudo) {
@@ -80,5 +92,35 @@ public class UtilisateurManager {
 
 	public void majCredit(int credit, int noUtilisateur) {
 		this.utilisateurDAO.updateCredit(credit, noUtilisateur);
+	}
+	
+	public List<Utilisateur> listerUtilisateurs(){
+		return this.utilisateurDAO.selectAll();
+	}
+	
+	public void reactiverCompte(int noUtilisateur) {
+		this.utilisateurDAO.updateDesactivation(false, noUtilisateur);
+	}
+	
+	public void desactiverCompte(int noUtilisateur) {
+		ArticleManager articleManager = new ArticleManager();
+		EnchereManager enchereManager = new EnchereManager();
+		
+		List<Article> listArticleSuppr = articleManager.listerByUtilisateur(noUtilisateur);
+		for(Article article : listArticleSuppr) {
+			enchereManager.supprimerByArticle(article.getNoArticle());
+		}
+		enchereManager.supprimerByUtilisateur(noUtilisateur);
+		articleManager.supprimerByUtilisateur(noUtilisateur);
+		
+		this.utilisateurDAO.updateDesactivation(true, noUtilisateur);
+	}
+	
+	public Utilisateur recupererByEmail(String email) {
+		return this.utilisateurDAO.selectByEmail(email);
+	}
+	
+	public void majMDP(String motDePasse, int noUtilisateur) {
+		this.utilisateurDAO.updateMDP(motDePasse, noUtilisateur);
 	}
 }

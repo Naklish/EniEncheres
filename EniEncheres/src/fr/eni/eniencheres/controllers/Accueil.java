@@ -32,7 +32,7 @@ public class Accueil extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int categorie = Integer.parseInt(request.getParameter("categorie"));
-		String mesEncheresEnCours = request.getParameter("mesEncheresEnCours"); //A revoir
+		String mesEncheresEnCours = request.getParameter("encheresEnCours"); //A revoir
 		String encheresOuvertes = request.getParameter("encheresOuvertes");
 		String mesEncheresRemportees = request.getParameter("mesEncheresRemportees");
 		String mesVentesEncours = request.getParameter("ventesEnCours");

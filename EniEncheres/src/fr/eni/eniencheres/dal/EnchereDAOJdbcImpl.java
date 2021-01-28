@@ -20,7 +20,45 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SELECT_BY_UTILISATEUR_ARTICLE = "SELECT * FROM ENCHERES WHERE no_article = ? AND no_utilisateur = ?";
 	private static final String UPDATE = "UPDATE ENCHERES SET montant_enchere = ?, date_enchere = ? WHERE no_utilisateur = ? AND no_article = ?";
 	private static final String SELECT_BY_UTILISATEUR = "SELECT * FROM ENCHERES WHERE no_utilisateur = ?";
-
+	private static final String DELETE_BY_UTILISATEUR ="DELETE FROM ENCHERES WHERE no_utilisateur = ?";
+	private static final String DELETE_BY_ARTICLE = "DELETE FROM ENCHERES WHERE no_article = ?";
+	
+	
+	@Override
+	public void deleteByArticle(int noArticle) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(DELETE_BY_UTILISATEUR);
+			
+			pstmt.setInt(1, noArticle);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Override
+	public void deleteByUtilisateur(int noUtilisateur) {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(DELETE_BY_UTILISATEUR);
+			
+			pstmt.setInt(1, noUtilisateur);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public List<Enchere> selectAll() {
 		List<Enchere> listEncheres = new ArrayList<Enchere>();
