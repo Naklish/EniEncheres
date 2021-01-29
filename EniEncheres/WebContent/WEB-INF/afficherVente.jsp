@@ -102,7 +102,7 @@
 
                             </div>
                         </form>
-                        <c:if test="${ utilisateurConnecte.noUtilisateur == acheteur.noUtilisateur && venteFinie }">
+                        <c:if test="${ utilisateurConnecte.noUtilisateur == acheteur.noUtilisateur && venteRemporte }">
                             <li>Téléphone : ${ vendeur.telephone }</li>
                             <form action="accueil" method="get">
                                 <input id="btn-retour" class="btn btn-outline-info" type="submit" value="Retour">
