@@ -51,10 +51,11 @@ public class NouvelleVente extends HttpServlet {
 			retraitManager.enregistrerRetrait(retrait);
 			
 			 message = "Votre article est mis en vente.";
+			request.setAttribute("messageOk", message);
 		}else {
 			message ="La date de début n'est pas valide.";
+			request.setAttribute("messageEchec", message);
 		}
-		request.setAttribute("message", message);
 		request.setAttribute("listeCategories", categorieManager.listerCategories());
 		request.getServletContext().getRequestDispatcher("/WEB-INF/nouvelleVente.jsp").forward(request, response);
 	}

@@ -1,14 +1,14 @@
 package fr.eni.eniencheres.controllers;
 
-import java.io.IOException;
+import fr.eni.eniencheres.bll.UtilisateurManager;
+import fr.eni.eniencheres.bo.Utilisateur;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import fr.eni.eniencheres.bll.UtilisateurManager;
-import fr.eni.eniencheres.bo.Utilisateur;
+import java.io.IOException;
 
 /**
  * Servlet implementation class MotDePasseOublie
@@ -33,7 +33,7 @@ public class MotDePasseOublie extends HttpServlet {
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = utilisateurManager.recupererByEmail(email);
 		
-		String url = "http://localhost:8080/EniEncheres/nouveauMotDePasse?ID=" + utilisateur.getNoUtilisateur() +"\"";
+		String url = "http://localhost:8080/EniEncheres_Web_exploded/nouveauMotDePasse?ID=" + utilisateur.getNoUtilisateur() +"\"";
 		
 		request.setAttribute("message", "Veuillez cliquez sur ce lien :");
 		request.setAttribute("url", url);

@@ -99,7 +99,16 @@ public class EnchereManager {
 		return enchere;
 	}
 
-	public void deleteEnchere(int noArticle) { this.enchereDAO.delete(noArticle); }
+	public void deleteEnchere(int noArticle) {
+		UtilisateurManager utilisateurManager = new UtilisateurManager();
+		Enchere enchere = this.meilleurEnchereByArticle(noArticle);
+		Utilisateur utilisateur = utilisateurManager.recupererById(enchere.getNoUtilisateur());
+
+		utilisateurManager.majCredit(enchere.getMontantEnchere() + utilisateur.getCredit(), utilisateur.getNoUtilisateur());
+
+		this.enchereDAO.delete(noArticle);
+
+	}
 	
 }
 

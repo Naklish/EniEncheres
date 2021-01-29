@@ -1,19 +1,17 @@
 package fr.eni.eniencheres.controllers;
 
-import java.io.IOException;
-import java.util.List;
+import fr.eni.eniencheres.bll.ArticleManager;
+import fr.eni.eniencheres.bll.UtilisateurManager;
+import fr.eni.eniencheres.bo.Article;
+import fr.eni.eniencheres.bo.Utilisateur;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import fr.eni.eniencheres.bll.ArticleManager;
-import fr.eni.eniencheres.bll.UtilisateurManager;
-import fr.eni.eniencheres.bo.Article;
-import fr.eni.eniencheres.bo.Utilisateur;
-import fr.eni.eniencheres.dal.DAOFactory;
-import fr.eni.eniencheres.dal.UtilisateurDAO;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Servlet implementation class Inscription
@@ -55,7 +53,7 @@ public class Inscription extends HttpServlet {
             Utilisateur utilisateur = new Utilisateur(request.getParameter("pseudo"), request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("email"),
                     request.getParameter("telephone"), request.getParameter("adresse"), request.getParameter("codePostal"), request.getParameter("ville"), request.getParameter("motDePasse"), false);
             UtilisateurManager utilisateurManager = new UtilisateurManager();
-            String messageOk = "Votre compte a bien été créé !\nConnectez vous :";
+            String messageOk = "Votre compte a bien été créé !";
             String messageErreur = utilisateurManager.enregistrer(utilisateur);
             if (messageErreur == "") {
                 request.setAttribute("messageOk", messageOk);

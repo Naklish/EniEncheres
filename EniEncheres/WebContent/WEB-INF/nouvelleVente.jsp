@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="ISO-8859-1" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
     <title>Eni Encheres</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -13,7 +11,7 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark linear-gradient">
-    <a class="navbar-brand col-sm-2" href="accueil">ENI-Encheres</a>
+    <a class="navbar-brand col-sm-2" href="accueil"><img src="img/logoEni.png" alt="logo" width="170"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,7 +20,7 @@
         <c:if test="${ not empty utilisateurConnecte.pseudo }">
             <ul class="navbar-nav">
                 <span class="navbar-text d-none d-md-block">Bonjour ${ utilisateurConnecte.pseudo } !</span>
-                <li class="nav-item"><a class="nav-link" href="deconnexion">Déconnexion</a></li>
+                <li class="nav-item"><a class="nav-link" href="deconnexion">DÃ©connexion</a></li>
                 <li class="nav-item"><a class="nav-link"
                                         href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
                     profil</a></li>
@@ -41,7 +39,8 @@
 
 <section class="container">
     <h3 class="text-center">Nouvelle vente</h3>
-    <p>${ message }</p>
+    <p class="green">${ messageOk }</p>
+    <p class="red">${ messageEchec }</p>
     <form action="nouvelleVente" method="post" id="nouvelleVente">
         <div class="row">
             <div class="col-sm-2 offset-sm-1 photo-article"></div>
@@ -66,15 +65,15 @@
                     <label class="col-sm-3 col-form-label">Photo de l'article :</label>
                 </div>
                 <div class="form-group row">
-                    <label for="prixInitial" class="col-sm-3 col-form-label">Mise à prix :</label>
+                    <label for="prixInitial" class="col-sm-3 col-form-label">Mise Ã  prix :</label>
                     <input type="number" id="prixInitial" class="col-sm-7 form-control" name="prixInitial" required>
                 </div>
                 <div class="form-group row">
-                    <label for="dateDebut" class="col-sm-3 col-form-label">Début de l'enchère :</label>
+                    <label for="dateDebut" class="col-sm-3 col-form-label">DÃ©but de l'enchÃ¨re :</label>
                     <input type="date" id="dateDebut" class="col-sm-7 form-control" name="dateDebut" required>
                 </div>
                 <div class="form-group row">
-                    <label for="dateFin" class="col-sm-3 col-form-label">Fin de l'enchère : </label>
+                    <label for="dateFin" class="col-sm-3 col-form-label">Fin de l'enchÃ¨re : </label>
                     <input type="date" id="dateFin" class="col-sm-7 form-control" name="dateFin" required>
                 </div>
                 <fieldset class="scheduler-border">

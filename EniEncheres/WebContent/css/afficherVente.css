@@ -4,6 +4,10 @@
     justify-content: right;
 }
 
+.navbar-brand {
+    padding: 0 0 0 25px;
+}
+
 .navbar-dark .navbar-text {
     color: white;
 }
@@ -83,6 +87,14 @@ legend.scheduler-border {
     z-index: 1;
 }
 
+#btn-retour {
+    margin-left: 40px;
+    padding: 12px;
+    width: 100px;
+    height: 50px;
+    box-shadow: 5px 5px 5px darkcyan;
+}
+
 #btn-annuler {
     padding-top: 22px;
     margin-left: 60px;
@@ -93,4 +105,12 @@ legend.scheduler-border {
     width: 150px;
     height: 70px;
     box-shadow: 5px 5px 5px darkcyan;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
 }

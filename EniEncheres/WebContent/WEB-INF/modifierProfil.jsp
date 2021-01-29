@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="ISO-8859-1" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
     <title>Eni Encheres</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -13,45 +11,44 @@
     <link rel="stylesheet" href="<c:url value="/css/modifierProfil.css"/>">
 </head>
 <body>
+
+<!-- Barre de navigation -->
+
+<nav class="navbar navbar-expand-md navbar-dark linear-gradient">
+    <a class="navbar-brand col-sm-2" href="accueil"><img src="img/logoEni.png" alt="logo" width="170"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <c:if test="${ not empty utilisateurConnecte.pseudo }">
+            <ul class="navbar-nav">
+                <span class="navbar-text d-none d-md-block">Bonjour ${ utilisateurConnecte.pseudo } !</span>
+                <li class="nav-item"><a class="nav-link" href="deconnexion">DÃ©connexion</a></li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
+                    profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="nouvelleVente">Vendre un article</a></li>
+                <c:if test="${ utilisateurConnecte.administrateur == true }">
+                    <li class="nav-item"><a class="nav-link" href="listeProfil">Lister les utilisateurs</a></li>
+                </c:if>
+            </ul>
+        </c:if>
+        <c:if test="${ empty utilisateurConnecte.pseudo }">
+
+            <a class="nav-link" href="connexion">S'inscrire - Se connecter</a>
+        </c:if>
+    </div>
+</nav>
+
+<!-- Formulaire de modification du profil -->
 <div class="container-fluid">
-
-    <!-- Barre de navigation -->
-
-    <nav class="navbar navbar-expand-md navbar-dark linear-gradient">
-        <a class="navbar-brand col-sm-2" href="accueil">ENI-Encheres</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <c:if test="${ not empty utilisateurConnecte.pseudo }">
-                <ul class="navbar-nav">
-                    <span class="navbar-text d-none d-md-block">Bonjour ${ utilisateurConnecte.pseudo } !</span>
-                    <li class="nav-item"><a class="nav-link" href="deconnexion">Déconnexion</a></li>
-                    <li class="nav-item"><a class="nav-link"
-                                            href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
-                        profil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="nouvelleVente">Vendre un article</a></li>
-                    <c:if test="${ utilisateurConnecte.administrateur == true }">
-               			  <li class="nav-item"><a class="nav-link" href="listeProfil">Lister les utilisateurs</a></li>
-                	</c:if>
-                </ul>
-            </c:if>
-            <c:if test="${ empty utilisateurConnecte.pseudo }">
-
-                <a class="nav-link" href="connexion">S'inscrire - Se connecter</a>
-            </c:if>
-        </div>
-    </nav>
-
-    <!-- Formulaire de modification du profil -->
-
     <section class="formulaire container">
         <h3 class="text-center">Modifier profil</h3>
         <form action="modifierProfil" method="post">
             <p class="green">${ message }</p>
             <p class="red">${ messageErreur }</p>
-            <p class="red">${ messageErrPseudo }</p>
+            <p class="red">${ messageErrPseudo }</p>UTILISATEURS
             <p class="red">${ messageErrMail }</p>
             <p class="red">${ messageErreurConfirmation }</p>
             <div class="row">
@@ -65,7 +62,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="prenom" class="col-sm-3 col-form-label">Prénom
+                        <label for="prenom" class="col-sm-3 col-form-label">PrÃ©nom
                             :</label>
                         <div class="col-sm-8">
                             <input type="text" id="prenom" class="form-control"
@@ -73,7 +70,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="telephone" class="col-sm-3 col-form-label">Téléphone
+                        <label for="telephone" class="col-sm-3 col-form-label">TÃ©lÃ©phone
                             :</label>
                         <div class="col-sm-8">
                             <input type="tel" id="telephone" class="form-control"

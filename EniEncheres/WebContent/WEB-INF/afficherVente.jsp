@@ -5,7 +5,7 @@
   Time: 19:27
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -15,13 +15,43 @@
     <link rel="stylesheet" href="<c:url value="/css/afficherVente.css"/>">
 </head>
 <body>
-<a href="accueil">Accueil</a>
-<h1>Détail vente</h1>
-<p>${ message }</p>
-<p>${ messageVente }</p>
+<nav class="navbar navbar-expand-md navbar-dark linear-gradient">
+    <a class="navbar-brand col-sm-2" href="accueil"><img src="img/logoEni.png" alt="logo" width="170"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <c:if test="${ not empty utilisateurConnecte.pseudo }">
+            <ul class="navbar-nav">
+                <span class="navbar-text d-none d-md-block">Bonjour ${ utilisateurConnecte.pseudo } !</span>
+                <li class="nav-item"><a class="nav-link" href="deconnexion">Déconnexion</a></li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
+                    profil</a></li>
+                <c:if test="${ utilisateurConnecte.desactivation == false }">
+                    <li class="nav-item"><a class="nav-link" href="nouvelleVente">Vendre un article</a></li>
+                </c:if>
+                <c:if test="${ utilisateurConnecte.administrateur == true }">
+                    <li class="nav-item"><a class="nav-link" href="listeProfil">Lister les utilisateurs</a></li>
+                </c:if>
+            </ul>
+        </c:if>
+        <c:if test="${ empty utilisateurConnecte.pseudo }">
+
+            <a class="nav-link" href="connexion">S'inscrire - Se connecter</a>
+        </c:if>
+    </div>
+</nav>
+
+<p class="green">${ messageVenteModifiee }</p>
+<p class="red">${ messageVenteCommencee }</p>
+<p class="green">${ messageEnchereOk }</p>
+<p class="red">${ messageEchecEnchere }</p>
 
 <section class="container">
     <h3 class="text-center text-detail">Détail vente</h3>
+    <h4 class="text-center mb-4">${ messageVente }</h4>
     <div class="row">
         <div class="col-sm-2 offset-sm-2 photo-article">
             <img src="img/default-img.png" class="img-fluid"/>
@@ -29,7 +59,7 @@
         <div class="col-sm-6">
             <ul class="list-group">
                 <div class="row">
-                    <div class="col-sm-6 offset-sm-1"><h4>${ vente.nomArticle }</h4></div>
+                    <div class="col-sm-6 offset-sm-1 mt-3"><h4>${ vente.nomArticle }</h4></div>
                 </div>
                 <div class="row list-item">
                     <div class="col-sm-4 offset-sm-1">Description :</div>
@@ -46,6 +76,10 @@
                 <div class="row list-item">
                     <div class="col-sm-4 offset-sm-1">Mise à prix :</div>
                     <div class="col-sm-5">${ vente.prixInitial }</div>
+                </div>
+                <div class="row list-item">
+                    <div class="col-sm-4 offset-sm-1">Début de l'enchère :</div>
+                    <div class="col-sm-5">${ vente.dateDebut }</div>
                 </div>
                 <div class="row list-item">
                     <div class="col-sm-4 offset-sm-1">Fin de l'enchère :</div>
@@ -73,13 +107,13 @@
 
                             </div>
                         </form>
+                        <c:if test="${ utilisateurConnecte.noUtilisateur == acheteur.noUtilisateur && venteFinie }">
+                            <li>Téléphone : ${ vendeur.telephone }</li>
+                            <form action="accueil" method="get">
+                                <input id="btn-retour" class="btn btn-outline-info" type="submit" value="Retour">
+                            </form>
+                        </c:if>
                     </div>
-                </c:if>
-                <c:if test="${ not empty utilisateurConnecte.pseudo && venteRemporte }">
-                    <li>Téléphone : ${ vendeur.telephone }</li>
-                    <form action="accueil" method="get">
-                        <input class="btn btn-outline-info" type="submit" value="Retour">
-                    </form>
                 </c:if>
             </ul>
         </div>
@@ -94,7 +128,7 @@
 
         <div id="hidden_form">
             <h4 class="text-center modif-vente">Modifier vente</h4>
-            <form action="afficherVente" method="post" id="modifierVente" accept-charset="UTF-8">
+            <form action="afficherVente" method="post" id="modifierVente">
                 <input type="hidden" name="noArticle" value="${ vente.noArticle }">
                 <div class="row">
                     <div class="col-sm-2 offset-sm-1 photo-article"></div>

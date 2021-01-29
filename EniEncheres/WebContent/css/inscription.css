@@ -5,6 +5,10 @@
     justify-content: right;
 }
 
+.navbar-brand {
+    padding: 0 0 0 25px;
+}
+
 .navbar-dark .navbar-text {
     color: white;
 }
@@ -24,6 +28,14 @@
 .navbar-text {
     margin-right: 50px;
     font-size: 0.9em;
+}
+
+/******** Style messages ********/
+.green {
+    color: green;
+}
+.red {
+    color: red;
 }
 
 /******** Style formulaire ********/
@@ -47,6 +59,8 @@ form {
 input.btn-creer {
     float: right;
 }
+
+
 
 
 

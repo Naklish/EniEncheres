@@ -1,6 +1,7 @@
 package fr.eni.eniencheres.controllers;
 
 import fr.eni.eniencheres.bll.ArticleManager;
+import fr.eni.eniencheres.bll.CategorieManager;
 import fr.eni.eniencheres.bll.UtilisateurManager;
 import fr.eni.eniencheres.bo.Article;
 import fr.eni.eniencheres.bo.Utilisateur;
@@ -16,6 +17,7 @@ import java.util.List;
 @WebServlet("/supprimerCompte")
 public class SupprimerCompte extends HttpServlet {
 	private UtilisateurManager utilisateurManager = new UtilisateurManager();
+    CategorieManager categorieManager = new CategorieManager();
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         utilisateurManager = new UtilisateurManager();
@@ -29,6 +31,7 @@ public class SupprimerCompte extends HttpServlet {
         ArticleManager articleManager = new ArticleManager();
         List<Article> listArticles = articleManager.listerArticle();
         request.setAttribute("listArticles", listArticles);
+        request.setAttribute("listeCategories", categorieManager.listerCategories());
 
         request.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
     }
@@ -40,7 +43,7 @@ public class SupprimerCompte extends HttpServlet {
     	List<Utilisateur> listeUtilisateur =  this.utilisateurManager.listerUtilisateurs();
     	
     	request.setAttribute("listeUtilisateur", listeUtilisateur);
-    	request.setAttribute("message", "Compte utilisateur supprimer");
+    	request.setAttribute("messageOk", "Compte utilisateur supprimé");
     	request.getServletContext().getRequestDispatcher("/WEB-INF/listeProfil.jsp").forward(request, response);
     }
 }

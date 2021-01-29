@@ -1,13 +1,13 @@
 package fr.eni.eniencheres.controllers;
 
-import java.io.IOException;
+import fr.eni.eniencheres.bll.UtilisateurManager;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import fr.eni.eniencheres.bll.UtilisateurManager;
+import java.io.IOException;
 
 /**
  * Servlet implementation class NouveauMotDePasse
@@ -40,7 +40,7 @@ public class NouveauMotDePasse extends HttpServlet {
 		
 		if(request.getParameter("nouveauMotDePasse").equals(request.getParameter("confirmation"))) {
 			utilisateurManager.majMDP(request.getParameter("nouveauMotDePasse"), Integer.valueOf(request.getParameter("ID")));
-			request.setAttribute("message",	"Mot de passe réinitialisé");
+			request.setAttribute("messageOk",	"Mot de passe réinitialisé");
 		}
 		
 		request.getServletContext().getRequestDispatcher("/WEB-INF/nouveauMotDePasse.jsp").forward(request, response);

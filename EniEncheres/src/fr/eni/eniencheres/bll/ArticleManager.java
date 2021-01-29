@@ -382,6 +382,7 @@ public class ArticleManager {
 
 		// Si une enchère a été faite sur l'article à supprimer, on la supprime
 		if(enchereManager.meilleurEnchereByArticle(noArticle) != null) {
+
 			enchereManager.deleteEnchere(noArticle);
 		}
 

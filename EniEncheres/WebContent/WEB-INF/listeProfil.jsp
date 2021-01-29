@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -11,7 +11,7 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark linear-gradient">
-    <a class="navbar-brand col-sm-2" href="accueil">ENI-Encheres</a>
+    <a class="navbar-brand col-sm-2" href="accueil"><img src="img/logoEni.png" alt="logo" width="170"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -42,22 +42,25 @@
     </header>
 
     <!-- Section qui présente les différentes enchères disponnibles -->
-    <section>
-        <article>
+    <section class="container">
+        <article class="row">
+            <div class="col">
             <div class="titreArticle">
-                <h5>Liste des utilisateurs</h5>
-                <p>${ message }</p>
+                <h4>Liste des utilisateurs</h4>
+                <p class="green">${ messageOk }</p>
             </div>
             <div class="row">
-            <ul>
+            <ul class="list-group list-group-flush">
                 <c:forEach var="utilisateur" items="${ listeUtilisateur }">
                      <div>
-                       	<li>${ utilisateur.pseudo } 
-                       		<a href="afficherProfil?noUtilisateur=${ utilisateur.noUtilisateur }" >Voir profil</a>
+                       	<li class="list-group-item">
+                            ${ utilisateur.pseudo }
+                            <a href="afficherProfil?noUtilisateur=${ utilisateur.noUtilisateur }" >Voir profil</a>
                        	</li>
                      </div>
                 </c:forEach>
              </ul>
+            </div>
             </div>
         </article>
     </section>

@@ -1,14 +1,14 @@
 package fr.eni.eniencheres.controllers;
 
-import java.io.IOException;
+import fr.eni.eniencheres.bll.UtilisateurManager;
+import fr.eni.eniencheres.bo.Utilisateur;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import fr.eni.eniencheres.bll.UtilisateurManager;
-import fr.eni.eniencheres.bo.Utilisateur;
+import java.io.IOException;
 
 /**
  * Servlet implementation class DesactiverCompte
@@ -27,6 +27,7 @@ public class DesactiverCompte extends HttpServlet {
 		Utilisateur profil = utilisateurManager.recupererById(Integer.valueOf(request.getParameter("utilisateurDesactive")));
 		
 		request.setAttribute("profil", profil);
+		request.setAttribute("messageDesactive", "Le compte a bien été désactivé.");
 		request.getServletContext().getRequestDispatcher("/WEB-INF/afficherProfil.jsp").forward(request, response);
 	}
 

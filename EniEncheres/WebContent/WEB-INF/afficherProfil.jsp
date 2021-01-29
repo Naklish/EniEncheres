@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="ISO-8859-1" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
     <title>ENI Encheres</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -12,7 +10,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark linear-gradient">
-    <a class="navbar-brand col-sm-2" href="accueil">ENI-Encheres</a>
+    <a class="navbar-brand col-sm-2" href="accueil"><img src="img/logoEni.png" alt="logo" width="170"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -40,7 +38,7 @@
 
 <div class="container-fluid">
     <h1 class="text-center">Profil</h1>
-
+    <p class="green">${ messageDesactive }</p>
     <div class="page-content page-container" id="page-content">
         <div class="padding">
             <div class="row justify-content-center">
@@ -97,7 +95,7 @@
                                     	<c:if test="${ profil.desactivation == false }">
                                     		<form method="get" action="desactiverCompte">
                                     			<input type="hidden" name="utilisateurDesactive" value="${ profil.noUtilisateur }">
-                                    			<input class="btn btn-outline-primary" type="submit" value="D�sactiver compte">
+                                    			<input class="btn btn-outline-primary" type="submit" value="Désactiver compte">
                                     	</form>
                                     	</c:if>
                                     	<c:if test="${ profil.desactivation == true }">

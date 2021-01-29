@@ -46,10 +46,11 @@ public class AfficherVente extends HttpServlet {
 
             if (article.getDateFin().isBefore(LocalDate.now())) {
                 venteFinie = true;
-            }
-            if (utilisateurConnecte.getNoUtilisateur() == utilisateur.getNoUtilisateur()) {
-                if (article.getDateFin().isBefore(LocalDate.now())) {
+                if (utilisateurConnecte.getNoUtilisateur() == utilisateur.getNoUtilisateur()) {
                     request.setAttribute("messageVente", "Vous avez remporté la vente");
+                    venteRemporte = true;
+                } else {
+                    request.setAttribute("messageVente", "La vente a été remportée par " + utilisateur.getPseudo());
                     venteRemporte = true;
                 }
             }
@@ -78,26 +79,31 @@ public class AfficherVente extends HttpServlet {
         request.setAttribute("listeCategories", categorieManager.listerCategories());
 
         // Modification de l'article
-        article.setNomArticle(request.getParameter("nomArticle"));
-        article.setDescription(request.getParameter("description"));
-        article.setDateDebut(LocalDate.parse(request.getParameter("dateDebut")));
-        article.setDateFin(LocalDate.parse(request.getParameter("dateFin")));
-        article.setPrixInitial(Integer.parseInt(request.getParameter("prixInitial")));
-        article.setPrixVente(Integer.parseInt(request.getParameter("prixInitial")));
-        article.setNoCategorie(Integer.parseInt(request.getParameter("categorie")));
+        if (LocalDate.now().isBefore(article.getDateDebut())) {
+            article.setNomArticle(request.getParameter("nomArticle"));
+            article.setDescription(request.getParameter("description"));
+            article.setDateDebut(LocalDate.parse(request.getParameter("dateDebut")));
+            article.setDateFin(LocalDate.parse(request.getParameter("dateFin")));
+            article.setPrixInitial(Integer.parseInt(request.getParameter("prixInitial")));
+            article.setPrixVente(Integer.parseInt(request.getParameter("prixInitial")));
+            article.setNoCategorie(Integer.parseInt(request.getParameter("categorie")));
 
-        // Modification de l'adresse de retrait
-        retrait.setAdresse(request.getParameter("adresse"));
-        retrait.setCodePostal(request.getParameter("codePostal"));
-        retrait.setVille(request.getParameter("ville"));
+            // Modification de l'adresse de retrait
+            retrait.setAdresse(request.getParameter("adresse"));
+            retrait.setCodePostal(request.getParameter("codePostal"));
+            retrait.setVille(request.getParameter("ville"));
 
-        // On appelle les méthodes update pour mettre à jour l'article et son adresse de retrait
-        articleManager.updateVente(article);
-        retraitManager.updateRetrait(retrait);
+            // On appelle les méthodes update pour mettre à jour l'article et son adresse de retrait
+            articleManager.updateVente(article);
+            retraitManager.updateRetrait(retrait);
 
-        request.setAttribute("message", "L'article a bien été modifié");
-        request.setAttribute("retrait", retrait);
-        request.setAttribute("vente", article);
+            request.setAttribute("retrait", retrait);
+            request.setAttribute("vente", article);
+            request.setAttribute("messageVenteModifiee", "L'article a bien été modifié");
+        } else {
+            request.setAttribute("messageVenteCommencee", "La vente a débuté, vous ne pouvez plus la modifier.");
+        }
+
 
         request.getServletContext().getRequestDispatcher("/WEB-INF/afficherVente.jsp").forward(request, response);
     }

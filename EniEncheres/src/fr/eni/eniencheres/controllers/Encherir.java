@@ -1,21 +1,19 @@
 package fr.eni.eniencheres.controllers;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Calendar;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import fr.eni.eniencheres.bll.ArticleManager;
 import fr.eni.eniencheres.bll.EnchereManager;
 import fr.eni.eniencheres.bll.UtilisateurManager;
 import fr.eni.eniencheres.bo.Article;
 import fr.eni.eniencheres.bo.Enchere;
 import fr.eni.eniencheres.bo.Utilisateur;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * Servlet implementation class Encherir
@@ -52,9 +50,9 @@ public class Encherir extends HttpServlet {
 		
 		//Si l'utilisateur a assez de crédit, elle est insérée en BDD
 		if(enchereManager.encherir(enchere, utilisateurConnecte)) {
-			request.setAttribute("message", "Enchère effectuéé.");
+			request.setAttribute("messageEnchereOk", "Enchère effectuée.");
 		}else {
-			request.setAttribute("message", "Enchère impossible, vous n'avez pas assez de crédit;");
+			request.setAttribute("messageEchecEnchere", "Enchère impossible, vous n'avez pas assez de crédit;");
 		}
 		
 		

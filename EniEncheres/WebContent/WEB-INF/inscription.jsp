@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="ISO-8859-1" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
     <title>Inscription</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -13,7 +11,7 @@
 
 <body>
 <nav class="navbar navbar-expand-md navbar-dark linear-gradient">
-    <a class="navbar-brand col-sm-2" href="accueil">ENI-Encheres</a>
+    <a class="navbar-brand col-sm-2" href="accueil"><img src="img/logoEni.png" alt="logo" width="170"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,7 +20,7 @@
         <c:if test="${ not empty utilisateurConnecte.pseudo }">
             <ul class="navbar-nav">
                 <span class="navbar-text d-none d-md-block">Bonjour ${ utilisateurConnecte.pseudo } !</span>
-                <li class="nav-item"><a class="nav-link" href="deconnexion">Déconnexion</a></li>
+                <li class="nav-item"><a class="nav-link" href="deconnexion">DÃ©connexion</a></li>
                 <li class="nav-item"><a class="nav-link"
                                         href="afficherProfil?noUtilisateur=${ utilisateurConnecte.noUtilisateur }">Mon
                     profil</a></li>
@@ -42,8 +40,8 @@
 <div class="container">
     <section>
         <h3 class="text-center">Mon profil - Inscription</h3>
-        <p>${ message }</p>
-        <p>${messageErreur}</p>
+        <p class="red">${messageErreur}</p>
+        <p class="red">${messageMdp}</p>
 
         <form action=" inscription" method="post">
             <div class="row">
@@ -55,13 +53,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="prenom" class="col-sm-3 col-form-label">Prénom</label>
+                        <label for="prenom" class="col-sm-3 col-form-label">PrÃ©nom</label>
                         <div class="col-sm-8">
                             <input type="text" id="prenom" class="form-control" name="prenom" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="telephone" class="col-sm-3 col-form-label">Téléphone</label>
+                        <label for="telephone" class="col-sm-3 col-form-label">TÃ©lÃ©phone</label>
                         <div class="col-sm-8">
                             <input type="tel" id="telephone" class="form-control" name="telephone" pattern="[0-9]{10}"
                                    title="0102030405" required>
@@ -77,7 +75,7 @@
                         <label for="motDePasse" class="col-sm-3 col-form-label">Mot de passe</label>
                         <div class="col-sm-8">
                             <input type="password" id="motDePasse" class="form-control" name="motDePasse" required>
-                            <input class="btn btn-outline-info btn-creer" type="submit" value="Créer">
+                            <input class="btn btn-outline-info btn-creer" type="submit" value="CrÃ©er">
                         </div>
                     </div>
                 </div>

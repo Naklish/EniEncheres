@@ -5,7 +5,7 @@
   Time: 15:58
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -21,7 +21,7 @@
 <!-- Barre de navigation -->
 
 <nav class="navbar navbar-expand-md navbar-dark linear-gradient">
-    <a class="navbar-brand col-sm-2" href="accueil">ENI-Encheres</a>
+    <a class="navbar-brand col-sm-2" href="accueil"><img src="img/logoEni.png" alt="logo" width="170"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -50,8 +50,8 @@
 
 <section id="connexion">
     <div class="container">
+        <p class="red text-center">${messageIncorrect}</p>
         <div id="login-row" class="row justify-content-center align-items-center">
-            <p class="err">${message}</p>
             <div id="login-column" class="col-md-5">
                 <form id="login-form" class="form" action="connexion" method="post">
                     <h3 class="text-center text-info connexion">Connexion</h3>

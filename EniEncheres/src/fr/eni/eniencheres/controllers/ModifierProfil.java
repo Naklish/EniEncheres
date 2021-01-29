@@ -36,47 +36,47 @@ public class ModifierProfil extends HttpServlet {
             if (request.getParameter("pseudo") != "") {
                 if (!utilisateurManager.verifPseudoExistant(request.getParameter("pseudo"))) {
                     utilisateurManager.modifier("pseudo", request.getParameter("pseudo"), utilisateurConnecte.getNoUtilisateur());
-                    request.setAttribute("message", "Compte utilisateur modifiÈ");
+                    request.setAttribute("message", "Compte utilisateur modifi√©");
                 } else {
-                    System.out.println("Ce pseudo existe dÈj‡");
-                    request.setAttribute("messageErrPseudo", "Ce pseudo existe dÈj‡.");
+                    System.out.println("Ce pseudo existe d√©j√†");
+                    request.setAttribute("messageErrPseudo", "Ce pseudo existe d√©j√†.");
                 }
             }
             if (request.getParameter("nom") != "") {
                 utilisateurManager.modifier("nom", request.getParameter("nom"), utilisateurConnecte.getNoUtilisateur());
-                request.setAttribute("message", "Compte utilisateur modifiÈ");
+                request.setAttribute("message", "Compte utilisateur modifi√©");
             }
             if (request.getParameter("prenom") != "") {
                 utilisateurManager.modifier("prenom", request.getParameter("prenom"), utilisateurConnecte.getNoUtilisateur());
-                request.setAttribute("message", "Compte utilisateur modifiÈ");
+                request.setAttribute("message", "Compte utilisateur modifi√©");
             }
             if (request.getParameter("email") != "") {
                 if (!utilisateurManager.verifMailExistant(request.getParameter("email"))) {
                     utilisateurManager.modifier("email", request.getParameter("email"), utilisateurConnecte.getNoUtilisateur());
-                    request.setAttribute("message", "Compte utilisateur modifiÈ");
+                    request.setAttribute("message", "Compte utilisateur modifi√©");
                 } else {
-                    request.setAttribute("messageErrMail", "Cet e-mail est dÈj‡ utilisÈ.");
+                    request.setAttribute("messageErrMail", "Cet e-mail est d√©j√† utilis√©.");
                 }
             }
             if (request.getParameter("telephone") != "") {
                 utilisateurManager.modifier("telephone", request.getParameter("telephone"), utilisateurConnecte.getNoUtilisateur());
-                request.setAttribute("message", "Compte utilisateur modifiÈ");
+                request.setAttribute("message", "Compte utilisateur modifi√©");
             }
             if (request.getParameter("adresse") != "") {
                 utilisateurManager.modifier("rue", request.getParameter("adresse"), utilisateurConnecte.getNoUtilisateur());
-                request.setAttribute("message", "Compte utilisateur modifiÈ");
+                request.setAttribute("message", "Compte utilisateur modifi√©");
             }
             if (request.getParameter("codePostal") != "") {
                 utilisateurManager.modifier("code_postal", request.getParameter("codePostal"), utilisateurConnecte.getNoUtilisateur());
-                request.setAttribute("message", "Compte utilisateur modifiÈ");
+                request.setAttribute("message", "Compte utilisateur modifi√©");
             }
             if (request.getParameter("ville") != "") {
                 utilisateurManager.modifier("ville", request.getParameter("ville"), utilisateurConnecte.getNoUtilisateur());
-                request.setAttribute("message", "Compte utilisateur modifiÈ");
+                request.setAttribute("message", "Compte utilisateur modifi√©");
             }
             if (request.getParameter("nouveauMotDePasse") != "" && request.getParameter("confirmation").equals(request.getParameter("nouveauMotDePasse"))) {
                 utilisateurManager.modifier("mot_de_passe", request.getParameter("nouveauMotDePasse"), utilisateurConnecte.getNoUtilisateur());
-                request.setAttribute("message", "Compte utilisateur modifiÈ");
+                request.setAttribute("message", "Compte utilisateur modifi√©");
             } else if(request.getParameter("confirmation") != ""){
                 request.setAttribute("messageErreurConfirmation", "La confirmation n'est pas identique au nouveau mot de passe.");
             }

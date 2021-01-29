@@ -1,8 +1,11 @@
 package fr.eni.eniencheres.bll;
 
+import fr.eni.eniencheres.bo.Article;
 import fr.eni.eniencheres.bo.Utilisateur;
 import fr.eni.eniencheres.dal.DAOFactory;
 import fr.eni.eniencheres.dal.UtilisateurDAO;
+
+import java.util.List;
 
 public class UtilisateurManager {
     private UtilisateurDAO utilisateurDAO;

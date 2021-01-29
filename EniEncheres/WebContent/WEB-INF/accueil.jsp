@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -18,7 +18,7 @@
 
 <body>
 <nav class="navbar navbar-expand-md navbar-dark linear-gradient">
-    <a class="navbar-brand col-sm-2" href="accueil">ENI-Encheres</a>
+    <a class="navbar-brand col-sm-2" href="accueil"><img src="img/logoEni.png" alt="logo" width="170"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -51,9 +51,9 @@
         <h3><strong>Liste des enchères</strong></h3>
     </header>
 
-    <h4>${messageOk}</h4>
-    <h4>${messageSuppr}</h4>
-    <h4>${messageSupprArticle}</h4>
+    <p class="green">${messageOk}</p>
+    <p class="green">${messageSuppr}</p>
+    <p class="green">${messageSupprArticle}</p>
 
     <!-- recherche d'un article + catégorie + boutton rechercher -->
     <div class="row">
@@ -161,6 +161,7 @@
                                                 href="afficherVente?noArticle=${ article.noArticle }">${ article.nomArticle }</a>
                                         </h5>
                                         <p class="card-text">Prix : ${ article.prixVente } points</p>
+                                        <p class="card-text">Début de l'enchère : ${ article.dateDebut }</p>
                                         <p class="card-text">Fin de l'enchère : ${ article.dateFin }</p>
                                         <p class="card-text"> Vendeur : <a
                                                 href="afficherProfil?noUtilisateur=${ article.vendeur.noUtilisateur }">${ article.vendeur.pseudo }</a>
