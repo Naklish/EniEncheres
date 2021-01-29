@@ -26,6 +26,7 @@ public class DesactiverCompte extends HttpServlet {
 		utilisateurManager.desactiverCompte(Integer.valueOf(request.getParameter("utilisateurDesactive")));
 		Utilisateur profil = utilisateurManager.recupererById(Integer.valueOf(request.getParameter("utilisateurDesactive")));
 		
+		request.setAttribute("message", "Le compte a été désactivé");
 		request.setAttribute("profil", profil);
 		request.setAttribute("messageDesactive", "Le compte a bien été désactivé.");
 		request.getServletContext().getRequestDispatcher("/WEB-INF/afficherProfil.jsp").forward(request, response);
@@ -35,8 +36,13 @@ public class DesactiverCompte extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		utilisateurManager.reactiverCompte(Integer.valueOf(request.getParameter("utilisateurReactive")));
+		Utilisateur profil = utilisateurManager.recupererById(Integer.valueOf(request.getParameter("utilisateurReactive")));
+		
+		request.setAttribute("message", "Le compte a été réactivé");
+		
+		request.setAttribute("profil", profil);
+		request.getServletContext().getRequestDispatcher("/WEB-INF/afficherProfil.jsp").forward(request, response);
 	}
 
 }

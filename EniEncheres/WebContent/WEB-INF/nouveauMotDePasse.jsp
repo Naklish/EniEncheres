@@ -57,11 +57,11 @@
                 <form id="motDePasse-form" class="form" action="nouveauMotDePasse" method="post">
                     <div class="form-group row">
                         <label for="nouveauMotDePasse" class="col-sm-4 col-form-label">Nouveau mot de passe :</label>
-                        <input type="text" id="nouveauMotDePasse" class="col-sm-7 form-control" name="nouveauMotDePasse" required>
+                        <input type="password" id="nouveauMotDePasse" class="col-sm-7 form-control" name="nouveauMotDePasse" required>
                     </div>
                     <div class="form-group row">
                     	<label for="confirmation" class="col-sm-4 col-form-label">Confirmation :</label>
-                        <input type="text" id="confirmation" class="col-sm-7 form-control" name="confirmation" required>
+                        <input type="password" id="confirmation" class="col-sm-7 form-control" name="confirmation" required>
                     </div>
                     <div class="col-12">
                     	<input type="hidden" name="ID" value="${ ID }">

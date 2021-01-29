@@ -51,7 +51,6 @@
 
 <section class="container">
     <h3 class="text-center text-detail">Détail vente</h3>
-    <h4 class="text-center mb-4">${ messageVente }</h4>
     <div class="row">
         <div class="col-sm-2 offset-sm-2 photo-article">
             <img src="img/default-img.png" class="img-fluid"/>
@@ -59,7 +58,7 @@
         <div class="col-sm-6">
             <ul class="list-group">
                 <div class="row">
-                    <div class="col-sm-6 offset-sm-1 mt-3"><h4>${ vente.nomArticle }</h4></div>
+                    <div class="col-sm-6 offset-sm-1"><h4>${ vente.nomArticle }</h4></div>
                 </div>
                 <div class="row list-item">
                     <div class="col-sm-4 offset-sm-1">Description :</div>
@@ -76,10 +75,6 @@
                 <div class="row list-item">
                     <div class="col-sm-4 offset-sm-1">Mise à prix :</div>
                     <div class="col-sm-5">${ vente.prixInitial }</div>
-                </div>
-                <div class="row list-item">
-                    <div class="col-sm-4 offset-sm-1">Début de l'enchère :</div>
-                    <div class="col-sm-5">${ vente.dateDebut }</div>
                 </div>
                 <div class="row list-item">
                     <div class="col-sm-4 offset-sm-1">Fin de l'enchère :</div>

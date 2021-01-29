@@ -38,7 +38,7 @@ public class NouvelleVente extends HttpServlet {
 		Utilisateur utilisateurConnecte = (Utilisateur) request.getSession().getAttribute("utilisateurConnecte");
 		ArticleManager articleManager = new ArticleManager();
 		String message = null;
-		if(!LocalDate.parse(request.getParameter("dateDebut")).isBefore(LocalDate.now())) {
+		if(!LocalDate.parse(request.getParameter("dateDebut")).isBefore(LocalDate.now()) && LocalDate.parse(request.getParameter("dateDebut")).isBefore(LocalDate.parse(request.getParameter("dateFin")))) {
 			
 			Article article = new Article(request.getParameter("nomArticle"), request.getParameter("description"), 
 					LocalDate.parse(request.getParameter("dateDebut")), LocalDate.parse(request.getParameter("dateFin")), Integer.parseInt(request.getParameter("prixInitial")), 
@@ -53,7 +53,7 @@ public class NouvelleVente extends HttpServlet {
 			 message = "Votre article est mis en vente.";
 			request.setAttribute("messageOk", message);
 		}else {
-			message ="La date de début n'est pas valide.";
+			message = "Les dates ne sont pas valides";
 			request.setAttribute("messageEchec", message);
 		}
 		request.setAttribute("listeCategories", categorieManager.listerCategories());
