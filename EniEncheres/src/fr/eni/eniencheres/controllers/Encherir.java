@@ -39,22 +39,29 @@ public class Encherir extends HttpServlet {
 		EnchereManager enchereManager = new EnchereManager();
 		ArticleManager articleManager = new ArticleManager();
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
-
+		Enchere enchere = null;
 		//On récupère l'article à enchérir
 		Article article = articleManager.recupererById((Integer.parseInt(request.getParameter("noArticle")))); 
 		
 		//On récupère l'utilisateur en session
 		Utilisateur utilisateurConnecte = (Utilisateur) request.getSession().getAttribute("utilisateurConnecte");
 		
-		//On créé l'enchere à effectuer
-		Enchere enchere = new Enchere(utilisateurConnecte.getNoUtilisateur(), article.getNoArticle(), LocalDate.now(), Integer.valueOf(request.getParameter("enchere")));
-		
-		
-		//Si l'utilisateur a assez de crédit, elle est insérée en BDD
-		if(enchereManager.encherir(enchere, utilisateurConnecte)) {
-			request.setAttribute("message", "Enchère effectuéé.");
+		//On créé l'enchere à effectuer si la vente est en cours
+		if(LocalDate.now().isBefore(article.getDateDebut())) {
+			request.setAttribute("message", "Enchère impossible, la vente n'a pas débutée");
+		}else if(LocalDate.now().isAfter(article.getDateFin())){
+			request.setAttribute("message", "Enchère impossible, la vente est terminée");
 		}else {
-			request.setAttribute("message", "Enchère impossible, vous n'avez pas assez de crédit;");
+			enchere = new Enchere(utilisateurConnecte.getNoUtilisateur(), article.getNoArticle(), LocalDate.now(), Integer.valueOf(request.getParameter("enchere")));
+		}
+		
+		if(enchere != null) {
+			//Si l'utilisateur a assez de crédit, elle est insérée en BDD
+			if(enchereManager.encherir(enchere, utilisateurConnecte)) {
+				request.setAttribute("message", "Enchère effectuéé.");
+			}else {
+				request.setAttribute("message", "Enchère impossible, vous n'avez pas assez de crédit;");
+			}
 		}
 		
 		
@@ -62,7 +69,7 @@ public class Encherir extends HttpServlet {
 		Enchere meilleurEnchere = enchereManager.meilleurEnchereByArticle(article.getNoArticle());
 		
 		 //On récupère l'utilisateur de la meilleur Enchère
-        Utilisateur utilisateur = utilisateurManager.recupererById(enchere.getNoUtilisateur());
+        Utilisateur utilisateur = utilisateurManager.recupererById(meilleurEnchere.getNoUtilisateur());
         
         //On récupère l'utilisateur de la session en BDD
         Utilisateur newUtilisateurConnecte = utilisateurManager.recupererById(utilisateurConnecte.getNoUtilisateur());

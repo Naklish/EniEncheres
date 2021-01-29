@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="ISO-8859-1" %>
+         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -89,19 +89,22 @@
                                     <c:if test="${ profil.noUtilisateur == utilisateurConnecte.noUtilisateur }">
                                         <a href="modifierProfil" class="btn btn-outline-primary">Modifier</a>
                                     </c:if>
-                                    <c:if test="${ utilisateurConnecte.administrateur == true }">
+                                    <c:if test="${ utilisateurConnecte.administrateur == true && profil.administrateur == false}">
                                     	<form method="post" action="supprimerCompte">
                                     		<input type="hidden" name="utilisateurSuppr" value="${ profil.noUtilisateur }">
                                     		<input class="btn btn-outline-primary" type="submit" value="Supprimer compte">
                                     	</form>
-                                    	<c:if test="${ profil.desactivation == false }">
+                                    	<c:if test="${ profil.desactivation == false && profil.administrateur == false }">
                                     		<form method="get" action="desactiverCompte">
                                     			<input type="hidden" name="utilisateurDesactive" value="${ profil.noUtilisateur }">
-                                    			<input class="btn btn-outline-primary" type="submit" value="D�sactiver compte">
+                                    			<input class="btn btn-outline-primary" type="submit" value="Désactiver compte">
                                     	</form>
                                     	</c:if>
                                     	<c:if test="${ profil.desactivation == true }">
-                                    		<input class="btn btn-outline-primary" type="submit" value="Activer compte">
+                                    		<form method="post" action="desactiverCompte">
+                                    			<input type="hidden" name="utilisateurReactive" value="${ profil.noUtilisateur }">	
+                                    			<input class="btn btn-outline-primary" type="submit" value="Activer compte">
+                                    		</form>
                                     	</c:if>
                                     </c:if>
                                 </div>
